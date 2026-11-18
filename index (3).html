@@ -1,0 +1,2299 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#f9f1ea">
+<title>มงกุฎมาการอง · LA TOUR SUCRÉE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,600;0,700;1,600&family=IBM+Plex+Sans+Thai:wght@400;500;600;700&family=Plus+Jakarta+Sans:wght@600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-cream:#fbf5ef;
+  --bg-blush:#f4e6dc;
+  --surface:#ffffff;
+  --surface-warm:#fdf8f3;
+  --surface-glass:rgba(255,252,248,.88);
+  --line:rgba(154,110,82,.18);
+  --line2:rgba(176,122,74,.42);
+  --gold:#c59141;
+  --gold-light:#f3dc99;
+  --gold-deep:#8c5e1a;
+  --ink:#2e1d18;
+  --ink-soft:#5a4036;
+  --mut:#86695d;
+  --red:#d9385a;
+  --red2:#a81d3d;
+  --red-soft:#ffe6ec;
+  --blue:#2676b5;
+  --blue2:#175182;
+  --blue-soft:#e3f2ff;
+  --ok:#1f9d6a;
+  --warn:#d9821b;
+  --bad:#d63c44;
+  --card:linear-gradient(165deg,rgba(255,255,255,.95),rgba(251,241,232,.92));
+  --serif:"Cormorant Garamond",Georgia,serif;
+  --th:"IBM Plex Sans Thai","Plus Jakarta Sans",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+  --shadow-sm:0 4px 12px rgba(72,38,24,.07),0 1px 2px rgba(72,38,24,.06);
+  --shadow-md:0 10px 28px rgba(72,38,24,.10),0 3px 6px rgba(72,38,24,.06);
+  --shadow-lg:0 20px 48px rgba(64,32,18,.15),0 4px 12px rgba(64,32,18,.08);
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg-cream);overflow:hidden}
+body{color:var(--ink);font-family:var(--th);overscroll-behavior:none}
+button{font:inherit;color:inherit}
+svg{pointer-events:none}
+[hidden]{display:none!important}
+#app{
+  position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;-webkit-user-select:none;user-select:none;
+  background:
+    radial-gradient(85% 55% at 50% 0%,rgba(255,222,230,.55),transparent 65%),
+    radial-gradient(75% 50% at 50% 105%,rgba(232,193,142,.38),transparent 65%),
+    repeating-linear-gradient(90deg,rgba(218,185,164,.09) 0 28px,transparent 28px 56px),
+    linear-gradient(180deg,#fdf9f5 0%,#f7ece2 58%,#efe0d3 100%);
+}
+#app::before{
+  content:"";position:absolute;inset:10px;pointer-events:none;border-radius:24px;
+  border:1px solid rgba(197,145,65,.26);
+  box-shadow:inset 0 0 0 3px rgba(255,255,255,.55);
+  z-index:0;
+}
+#bgfx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+input{-webkit-user-select:text;user-select:text}
+@keyframes scrIn{from{opacity:0;transform:translateY(10px) scale(.99)}to{opacity:1;transform:none}}
+@keyframes blink{50%{opacity:.3}}
+@keyframes floaty{50%{transform:translateY(-4px) rotate(-1.5deg)}}
+@keyframes shine{0%{transform:translateX(-120%) skewX(-20deg)}60%,100%{transform:translateX(260%) skewX(-20deg)}}
+@keyframes ring{0%{transform:scale(.92);opacity:.85}100%{transform:scale(1.42);opacity:0}}
+
+.scr{position:absolute;inset:0;z-index:1;display:none;flex-direction:column;padding:env(safe-area-inset-top) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left)}
+.scr.active{display:flex}
+.scr.active>*{animation:scrIn .38s cubic-bezier(.2,.8,.3,1) both}
+.fit{
+  flex:1;min-height:0;width:min(520px,100%);margin:0 auto;
+  display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(6px,1.3vh,12px);padding:clamp(8px,1.6vh,18px) 16px;
+  overflow-y:auto;overflow-x:hidden;
+}
+.head{display:flex;align-items:center;gap:12px}
+.head h2{
+  margin:0;font-weight:700;font-size:clamp(1.22rem,4.8vw,1.55rem);
+  color:var(--ink);letter-spacing:-.01em;
+}
+.sub{margin:0;color:var(--ink-soft);font-size:.85rem;line-height:1.48}
+.hint{margin:5px 0 0;color:var(--mut);font-size:.73rem;line-height:1.42}
+.c{text-align:center}
+
+/* Tactile Patisserie Buttons */
+.btn{
+  position:relative;overflow:hidden;appearance:none;
+  border:1px solid rgba(176,122,74,.32);
+  background:linear-gradient(180deg,#ffffff,#f7ede3);
+  color:var(--ink);
+  min-height:clamp(42px,6.2vh,50px);padding:0 18px;border-radius:14px;
+  font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .12s,box-shadow .12s,filter .15s,border-color .15s;
+  box-shadow:0 3px 0 rgba(154,110,82,.28),0 6px 14px rgba(72,38,24,.08),inset 0 1px 0 #fff;
+}
+.btn:active{transform:translateY(2px);box-shadow:0 1px 0 rgba(154,110,82,.28),0 3px 8px rgba(72,38,24,.06),inset 0 1px 0 #fff}
+.btn:hover{border-color:var(--gold);filter:brightness(1.02)}
+.btn.primary{
+  border:1px solid #b52647;
+  color:#fff;
+  background:linear-gradient(180deg,#ee5475 0%,#d9385a 55%,#b82243 100%);
+  box-shadow:0 4px 0 #84142c,0 10px 22px rgba(217,56,90,.28),inset 0 1px 0 rgba(255,255,255,.45);
+}
+.btn.primary:active{transform:translateY(3px);box-shadow:0 1px 0 #84142c,0 4px 10px rgba(217,56,90,.22),inset 0 1px 0 rgba(255,255,255,.45)}
+.btn.primary::after{
+  content:"";position:absolute;top:0;bottom:0;left:0;width:35%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.35),transparent);
+  animation:shine 3.8s ease-in-out infinite;pointer-events:none;
+}
+.btn.big{min-height:clamp(48px,7.2vh,56px);font-size:1.06rem;border-radius:16px}
+.btn.ghost{background:transparent;border-color:transparent;box-shadow:none;color:var(--ink-soft)}
+.btn.ghost:hover{background:rgba(197,145,65,.08)}
+.btn.sm{min-height:38px;padding:0 12px;font-size:.8rem;border-radius:11px}
+.btn:disabled{opacity:.42;cursor:not-allowed;filter:grayscale(.35)}
+.btn:disabled::after{display:none}
+.w{width:100%}
+
+.iconbtn{
+  width:42px;height:42px;flex:none;border-radius:12px;
+  border:1px solid rgba(176,122,74,.32);
+  background:linear-gradient(180deg,#ffffff,#f6ebe0);
+  color:var(--ink);
+  display:grid;place-items:center;cursor:pointer;font-size:1.25rem;line-height:1;padding:0;
+  box-shadow:0 3px 0 rgba(154,110,82,.25),0 4px 10px rgba(72,38,24,.07),inset 0 1px 0 #fff;
+  transition:transform .1s,border-color .15s;
+}
+.iconbtn:hover{border-color:var(--gold)}
+.iconbtn:active{transform:translateY(2px)}
+.aud.off{opacity:.48;background:#efe5dc}
+
+.card{
+  background:var(--card);
+  border:1px solid var(--line2);
+  border-radius:20px;padding:clamp(10px,1.5vh,14px);
+  box-shadow:0 4px 0 rgba(176,122,74,.16),var(--shadow-md),inset 0 1px 0 #fff;
+}
+.lbl{font-size:.71rem;letter-spacing:.08em;color:var(--mut);font-weight:700;margin:0 0 6px;text-transform:uppercase}
+.row{display:flex;gap:8px}
+.row>*{flex:1;min-width:0}
+.inline{display:flex;align-items:center;gap:10px}
+.inline .lbl{margin:0;white-space:nowrap}
+
+.seg{display:flex;gap:4px;background:#efe3d7;padding:4px;border-radius:13px;box-shadow:inset 0 2px 5px rgba(72,38,24,.1)}
+.seg button{flex:1;min-height:clamp(34px,5vh,40px);border:0;border-radius:10px;background:transparent;font-weight:700;cursor:pointer;color:var(--ink-soft);transition:all .2s}
+.seg button.on{background:linear-gradient(180deg,#fff,#f9efe5);color:var(--red2);box-shadow:0 2px 0 rgba(154,110,82,.25),0 3px 8px rgba(72,38,24,.1)}
+
+.sw{position:relative;display:flex;align-items:center;gap:10px;min-height:34px;cursor:pointer;font-size:.84rem;color:var(--ink)}
+.sw input{position:absolute;opacity:0;width:1px;height:1px}
+.sw i{width:42px;height:24px;border-radius:12px;background:#dfd0c3;position:relative;flex:none;transition:background .2s;box-shadow:inset 0 2px 4px rgba(72,38,24,.16)}
+.sw i::after{content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;background:linear-gradient(#fff,#f5ebe2);transition:transform .2s;box-shadow:0 2px 4px rgba(0,0,0,.22)}
+.sw input:checked+i{background:var(--red)}
+.sw input:checked+i::after{transform:translateX(18px)}
+.sw input:disabled+i{opacity:.5}
+.sw small{display:block;color:var(--mut);font-size:.68rem}
+
+.inp{
+  width:100%;background:#fffdf9;border:1px solid rgba(176,122,74,.38);color:var(--ink);
+  border-radius:12px;padding:0 14px;min-height:clamp(40px,5.8vh,46px);font-size:16px;outline:none;font-family:inherit;
+  box-shadow:inset 0 2px 5px rgba(72,38,24,.06);
+}
+.inp:focus{border-color:var(--red);box-shadow:0 0 0 3px rgba(217,56,90,.16),inset 0 2px 5px rgba(72,38,24,.06)}
+.inp.code{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.35em;text-transform:uppercase;text-align:center;font-weight:800;font-size:1.2rem}
+
+/* Count stepper + macaron target chips */
+.cntrow{display:flex;align-items:center;gap:10px}
+.rbtn{
+  width:46px;height:46px;flex:none;border-radius:50%;
+  border:1px solid var(--line2);background:linear-gradient(180deg,#fff,#f4e4d4);
+  color:var(--ink);font-size:1.45rem;font-weight:800;cursor:pointer;
+  box-shadow:0 3px 0 rgba(154,110,82,.28),0 4px 10px rgba(72,38,24,.08),inset 0 1px 0 #fff;
+  line-height:1;padding:0;
+}
+.rbtn:active{transform:translateY(2px)}
+.rbtn:disabled{opacity:.35}
+.cntv{flex:1;text-align:center}
+.cntv b{display:block;font-family:var(--serif);font-size:2.2rem;line-height:1;color:var(--red2)}
+.cntv small{font-size:.73rem;color:var(--mut)}
+.tgts{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.tgts .tl{font-size:.68rem;color:var(--mut);margin-right:2px;font-weight:600}
+.tchip{
+  width:30px;height:30px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,#fff0f4,#f29bb0 55%,#d9385a);
+  border:2px solid #fff;
+  box-shadow:0 3px 6px rgba(217,56,90,.25),inset 0 -2px 3px rgba(132,20,44,.25);
+}
+.tchip span{font-weight:800;font-size:.78rem;color:#fff;text-shadow:0 1px 2px rgba(100,10,30,.5)}
+.tgts .sc{font-size:.65rem;color:var(--gold-deep);width:100%;text-align:center;font-weight:600}
+
+/* Title Menu */
+.hero{position:relative;flex:1 1 200px;min-height:95px;max-height:265px;width:100%}
+.logo{margin:0;text-align:center;line-height:1.05}
+.logo .jp{
+  display:block;font-family:var(--th);font-weight:700;
+  font-size:clamp(1.75rem,7.8vw,2.65rem);
+  background:linear-gradient(180deg,#591d2b 0%,#b82243 55%,#8c5e1a 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 2px 0 rgba(255,255,255,.9));
+}
+.logo .en{
+  display:block;margin-top:6px;font-family:var(--serif);
+  font-size:.88rem;letter-spacing:.36em;color:var(--gold-deep);font-weight:700;padding-left:.36em;
+}
+.tagline{margin:0;text-align:center;color:var(--ink-soft);font-size:.85rem;font-weight:500}
+.feats{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.feats span{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 11px 4px 5px;
+  border-radius:999px;background:rgba(255,255,255,.85);border:1px solid var(--line2);
+  font-size:.71rem;color:var(--ink);font-weight:600;box-shadow:var(--shadow-sm);
+}
+.feats b{
+  width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  font-size:.74rem;color:#fff;background:linear-gradient(160deg,#ee5475,#c59141);
+}
+.stack{display:flex;flex-direction:column;gap:9px}
+.credit{margin:0;text-align:center;font-size:.64rem;color:var(--mut);line-height:1.45}
+.fxc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}
+
+/* Mode Selection Cards */
+.mode{
+  display:flex;gap:14px;align-items:center;text-align:left;
+  padding:clamp(13px,2vh,18px);border-radius:20px;border:1px solid var(--line2);
+  cursor:pointer;background:var(--card);
+  box-shadow:0 5px 0 rgba(176,122,74,.2),var(--shadow-md),inset 0 1px 0 #fff;
+  transition:transform .12s,border-color .2s,box-shadow .2s;
+}
+.mode:active{transform:translateY(3px)}
+.mode:hover{border-color:var(--red);box-shadow:0 5px 0 rgba(217,56,90,.25),var(--shadow-lg)}
+.mode .ic{
+  width:58px;height:58px;flex:none;border-radius:18px;display:grid;place-items:center;
+  font-size:1.75rem;font-weight:800;color:#fff;
+  background:linear-gradient(160deg,#f57692,#d9385a);
+  box-shadow:0 4px 0 #961b37,0 8px 18px rgba(217,56,90,.3);
+  animation:floaty 3.2s ease-in-out infinite;
+}
+.mode .ic.b{
+  background:linear-gradient(160deg,#64b3f4,#2676b5);
+  color:#fff;box-shadow:0 4px 0 #15456e,0 8px 18px rgba(38,118,181,.28);
+  animation-delay:-1.6s;
+}
+.mode b{display:block;font-size:1.06rem;color:var(--ink);margin:4px 0 2px}
+.mode small{display:block;color:var(--ink-soft);font-size:.78rem;line-height:1.42}
+.pill{display:inline-block;font-size:.6rem;letter-spacing:.12em;font-weight:800;padding:3px 9px;border-radius:999px;background:var(--red-soft);color:var(--red2)}
+.pill.b{background:var(--blue-soft);color:var(--blue2)}
+
+.bots{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.bot{
+  display:flex;flex-direction:column;align-items:center;gap:3px;padding:6px 3px;
+  border-radius:12px;background:rgba(255,255,255,.72);border:1px solid var(--line);
+  min-width:0;text-align:center;
+}
+.bot b{font-size:.68rem;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+
+/* Chef Avatars */
+.av{
+  --hue:345;position:relative;width:32px;height:32px;flex:none;border-radius:50%;
+  display:grid;place-items:center;font-weight:800;font-size:.88rem;color:#fff;
+  background:radial-gradient(circle at 35% 30%,hsl(var(--hue) 72% 62%),hsl(var(--hue) 62% 38%));
+  border:2px solid #fff;
+  box-shadow:0 2px 6px rgba(72,38,24,.18),inset 0 1px 0 rgba(255,255,255,.45);
+}
+.av.sm{width:28px;height:28px;font-size:.78rem}
+.dot{position:absolute;right:-2px;bottom:-2px;width:11px;height:11px;border-radius:50%;border:2px solid #fff;background:#999}
+.dot.online,.dot.local{background:var(--ok)}
+.dot.host{background:var(--gold)}
+.dot.bot{background:#9b67e8}
+.dot.offline{background:var(--bad)}
+.dot.reconnecting{background:var(--warn);animation:blink 1s infinite}
+.status{margin:0;font-size:.86rem;min-height:1.2em;text-align:center;color:var(--ink-soft)}
+.status.err{color:var(--bad);font-weight:600}
+
+/* Lobby */
+.codebig{
+  font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:clamp(2.1rem,10.5vw,3rem);letter-spacing:.28em;padding-left:.28em;
+  font-weight:800;color:var(--red2);text-align:center;
+  text-shadow:0 2px 0 #fff,0 4px 16px rgba(217,56,90,.2);margin-bottom:6px;
+}
+.linktx{font-size:.66rem;color:var(--mut);word-break:break-all;text-align:center;margin:6px 0 0}
+.lgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:4px 10px}
+.lrow{display:flex;align-items:center;gap:8px;padding:4px 2px;border-bottom:1px dashed var(--line2);min-height:36px;min-width:0}
+.lname{flex:1;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.84rem}
+.tag{font-size:.6rem;padding:2px 7px;border-radius:999px;font-weight:700;flex:none}
+.tag.host{background:#fef3d6;color:var(--gold-deep);border:1px solid rgba(197,145,65,.3)}
+.tag.on{background:#e1f8ee;color:var(--ok)}
+.tag.off{background:#ffe5e7;color:var(--bad)}
+
+/* Gameplay Layout */
+.game{
+  flex:1;min-height:0;display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:auto auto minmax(0,1fr) auto;
+  grid-template-areas:"tb" "pl" "st" "hd";
+}
+.tb{grid-area:tb;display:flex;align-items:center;gap:6px;padding:8px 12px 4px}
+.tb-t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.15}
+.tb-t b{color:var(--red2);font-size:.98rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-t small{font-size:.69rem;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{
+  flex:none;padding:6px 11px;border-radius:999px;
+  border:1px solid var(--line2);background:rgba(255,255,255,.85);
+  font-size:.74rem;font-weight:700;white-space:nowrap;color:var(--ink);
+  box-shadow:var(--shadow-sm);
+}
+.chip.code{font-family:ui-monospace,Menlo,monospace;letter-spacing:.14em;color:var(--red2)}
+.tb .iconbtn{width:38px;height:38px}
+
+/* Player Chef Panels */
+.players{grid-area:pl;--cols:4;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:6px;padding:4px 12px 6px}
+.players[data-n="2"]{--cols:2}.players[data-n="3"]{--cols:3}.players[data-n="4"]{--cols:4}
+.players[data-n="5"],.players[data-n="6"]{--cols:3}.players[data-n="7"],.players[data-n="8"]{--cols:4}.players[data-n="9"],.players[data-n="10"]{--cols:5}
+.pc{
+  position:relative;min-width:0;padding:6px 8px;border-radius:15px;
+  background:rgba(255,255,255,.88);border:1px solid var(--line2);
+  box-shadow:0 3px 0 rgba(176,122,74,.14),var(--shadow-sm);
+  transition:box-shadow .25s,border-color .25s,transform .2s;
+}
+.pc.me{
+  border-color:var(--gold);
+  background:linear-gradient(165deg,#fffdf9,#fcf1e3);
+  box-shadow:0 3px 0 rgba(197,145,65,.28),0 6px 14px rgba(197,145,65,.14);
+}
+.pc.locked{
+  border-color:var(--ok);
+  box-shadow:0 3px 0 rgba(31,157,106,.22),0 0 14px rgba(31,157,106,.18);
+}
+.pc.off{opacity:.55}
+.pc .lk{
+  position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;
+  background:var(--ok);color:#fff;font-size:.7rem;font-weight:900;
+  display:grid;place-items:center;border:2px solid #fff;
+  box-shadow:0 2px 6px rgba(31,157,106,.4);
+  transform:scale(0);transition:transform .3s cubic-bezier(.3,1.7,.5,1);z-index:2;
+}
+.pc.locked .lk{transform:scale(1)}
+.pc.think .av::after{
+  content:"";position:absolute;inset:-4px;border-radius:50%;
+  border:2px solid var(--gold);animation:ring 1.4s ease-out infinite;
+}
+.pc-top{display:flex;align-items:center;gap:6px;min-width:0}
+.pc .av{width:26px;height:26px;font-size:.78rem}
+.pc-n{font-weight:700;font-size:.76rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0;color:var(--ink)}
+.pips{display:flex;flex-direction:column;gap:3px;margin-top:5px}
+.prow{display:flex;align-items:center;gap:2.5px}
+.prow i{width:6px;height:6px;border-radius:50%;background:currentColor;flex:none}
+.prow i.u{background:none;box-shadow:inset 0 0 0 1px rgba(134,105,93,.35)}
+.prow.r{color:var(--red)}.prow.b{color:var(--blue)}
+.prow em{font-style:normal;font-size:.66rem;font-weight:800;margin-left:4px}
+.cnts{display:none}
+.cnts span{font-size:.62rem;font-weight:800;padding:0 5px;border-radius:6px;line-height:1.5}
+.cnts .r{color:var(--red2);background:var(--red-soft)}.cnts .b{color:var(--blue2);background:var(--blue-soft)}
+.pc-s{font-size:.62rem;color:var(--mut);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc-s.ok{color:var(--ok);font-weight:700}
+.players.cmp{gap:5px}
+.players.cmp .pc{padding:5px 3px 4px;text-align:center}
+.players.cmp .pc-top{flex-direction:column;gap:2px}
+.players.cmp .pc .av{width:24px;height:24px;font-size:.72rem}
+.players.cmp .pc-n{font-size:.6rem;max-width:100%}
+.players.cmp .pips,.players.cmp .pc-s{display:none}
+.players.cmp .cnts{display:flex;justify-content:center;gap:3px;margin-top:2px}
+
+/* Center Stage & Recipe Medallion */
+.stage{grid-area:st;position:relative;min-height:0;display:flex;flex-direction:column;align-items:center;padding:4px 12px 2px;overflow:hidden}
+.tgrow{display:flex;align-items:center;gap:12px;z-index:5;max-width:100%;background:rgba(255,255,255,.78);padding:6px 14px 6px 8px;border-radius:999px;border:1px solid var(--line2);box-shadow:var(--shadow-sm)}
+.tgring{
+  --p:0;width:66px;height:66px;flex:none;border-radius:50%;padding:4px;
+  background:conic-gradient(var(--red) calc(var(--p) * 1%),rgba(197,145,65,.2) 0);
+  box-shadow:0 3px 10px rgba(217,56,90,.2);
+}
+.ext .tgring{
+  background:conic-gradient(var(--blue) calc(var(--p) * 1%),rgba(38,118,181,.18) 0);
+  box-shadow:0 3px 10px rgba(38,118,181,.2);
+}
+.tgbadge{
+  width:100%;height:100%;border-radius:50%;display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 40% 30%,#ffffff,#f9ece0);
+  border:1px solid rgba(197,145,65,.35);
+  box-shadow:inset 0 2px 5px rgba(72,38,24,.08);
+}
+.tgbadge small{font-size:.5rem;color:var(--mut);margin-bottom:-2px;font-weight:700}
+.tgbadge b{font-family:var(--serif);font-size:2rem;line-height:1;color:var(--red2);font-weight:700}
+.ext .tgbadge b{color:var(--blue2)}
+.tgring.bump{animation:bump .7s}
+@keyframes bump{40%{transform:scale(1.2)}}
+.tginfo{min-width:0}
+
+/* Macaron Tier Tokens */
+.tokens{display:flex;align-items:center;gap:7px;padding-left:2px}
+.tok{
+  width:var(--sz);height:var(--sz);border-radius:50%;
+  background:linear-gradient(145deg,#f3e7dc,#e2cfc0);
+  border:1.5px solid rgba(154,110,82,.35);
+  display:grid;place-items:center;transition:all .45s;
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.8);
+}
+.tok span{font-size:.6rem;font-weight:800;color:var(--mut)}
+.tok.lit{
+  background:radial-gradient(circle at 35% 30%,#ffeef2,#f27996 52%,#d9385a);
+  box-shadow:0 3px 8px rgba(217,56,90,.38),inset 0 1px 2px rgba(255,255,255,.65);
+  border-color:#fff;
+}
+.tok.lit span{color:#fff}
+.tok.out{
+  background:linear-gradient(145deg,#e3eef7,#c9dced);
+  border-color:rgba(38,118,181,.4);
+}
+.tok.out span{color:var(--blue2)}
+.tok.cur{outline:2px dashed var(--red);outline-offset:3px;animation:curP 1.4s infinite}
+@keyframes curP{50%{outline-color:rgba(217,56,90,.2)}}
+.tok.pop{animation:tokPop .8s}
+@keyframes tokPop{40%{transform:scale(1.55)}}
+
+.mission{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:5px}
+.mc{
+  display:inline-flex;align-items:center;gap:5px;padding:2px 9px 2px 4px;
+  border-radius:999px;font-size:.73rem;font-weight:800;border:1px solid;
+}
+.mc i{width:15px;height:15px;border-radius:50%;flex:none}
+.mc b{font-size:.96rem;line-height:1}
+.mc.r{background:var(--red-soft);border-color:rgba(217,56,90,.4);color:var(--red2)}
+.mc.r i{background:radial-gradient(circle at 35% 30%,#ff9ebb,#d9385a 65%,#8c1430)}
+.mc.b{background:var(--blue-soft);border-color:rgba(38,118,181,.4);color:var(--blue2)}
+.mc.b i{background:radial-gradient(circle at 35% 30%,#9fd4ff,#2676b5 65%,#113d63)}
+.mission em{font-style:normal;font-size:.68rem;color:var(--mut)}
+.lasthint{font-size:.66rem;color:var(--ink-soft);margin-top:3px;min-height:1em;font-weight:500}
+
+/* Porcelain Stand & 5-Tier Grand Macaron Tower */
+.pitbox{position:relative;flex:1 1 auto;min-height:60px;width:100%}
+.pitbox::before{
+  content:"";position:absolute;left:8%;right:8%;bottom:0%;height:34%;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 50%,rgba(197,145,65,.22),rgba(197,145,65,.06) 55%,transparent 74%);
+  pointer-events:none;
+}
+.sfoot{display:flex;align-items:center;gap:10px;width:min(100%,430px);font-size:.67rem;color:var(--ink-soft);z-index:5;padding:2px 0;font-weight:600}
+.prog{flex:1;height:7px;border-radius:4px;background:rgba(154,110,82,.16);overflow:hidden;box-shadow:inset 0 1px 2px rgba(72,38,24,.12)}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#d9385a,#f08ca2,#c59141);transition:width .8s;border-radius:4px}
+.ext .prog i{background:linear-gradient(90deg,#2676b5,#6bc1ff)}
+.flash{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:3;background:radial-gradient(circle at 50% 58%,rgba(255,190,210,.7),transparent 62%)}
+.flash.cool{background:radial-gradient(circle at 50% 58%,rgba(160,215,255,.65),transparent 62%)}
+.flash.go{animation:flash 1s ease-out}
+@keyframes flash{20%{opacity:1}100%{opacity:0}}
+
+/* Centerpiece Stand & Macaron Tower Architecture */
+.pitwrap{position:absolute;inset:0;container-type:size}
+.pit{--lv:0;position:absolute;left:50%;top:50%;height:100%;aspect-ratio:1/1;max-width:100%;transform:translate(-50%,-50%)}
+@supports (height:1cqh){.pit{width:min(100cqw,100cqh);height:min(100cqw,100cqh);aspect-ratio:auto;max-width:none}}
+.glow{
+  position:absolute;left:-20%;right:-20%;top:-10%;bottom:-15%;pointer-events:none;
+  background:radial-gradient(45% 42% at 50% 60%,rgba(244,162,184,.48),rgba(243,220,153,.22) 55%,transparent 75%);
+  opacity:calc(.35 + var(--lv) * .13);transition:opacity .9s;
+}
+/* Gilded Porcelain Platter */
+.plate{position:absolute;left:6%;right:6%;bottom:3%;height:86%;transform:perspective(720px) rotateX(60deg);transform-origin:50% 100%}
+.oct{
+  position:absolute;inset:0;border-radius:50%;
+}
+.oct.edge{
+  background:linear-gradient(180deg,#d8aa5b,#916320);
+  transform:translateY(6%);
+  box-shadow:0 14px 28px rgba(72,38,24,.26);
+}
+.oct.top{
+  background:radial-gradient(circle at 50% 45%,#ffffff 0%,#fcf4ec 62%,#eedac7 92%,#d8aa5b 100%);
+  border:3px solid #e5be75;
+}
+.oct.top::after{
+  content:"";position:absolute;inset:6%;border-radius:50%;
+  border:1.5px dashed rgba(197,145,65,.45);
+}
+.oct.inner{
+  inset:20%;border-radius:50%;
+  background:radial-gradient(circle,#fdf6ef 0%,#f4e3d3 72%,#e5ccb6 100%);
+  border:1px solid rgba(197,145,65,.35);z-index:1;
+}
+.sticks{position:absolute;inset:0;z-index:2}
+/* Piped Sugar Rosettes / Drops around the platter */
+.bs{
+  position:absolute;left:50%;top:50%;width:5.2%;height:5.2%;margin:-2.6% 0 0 -2.6%;
+  transform:rotate(var(--a)) translateY(var(--o));
+  border-radius:50%;
+  background:radial-gradient(circle at 35% 30%,#fff 0 14%,var(--tip) 55%,var(--tip-d) 100%);
+  box-shadow:0 2px 4px rgba(72,38,24,.28);
+}
+.bs.r{--tip:#eb4b6e;--tip-d:#9c1936}
+.bs.b{--tip:#3c95db;--tip-d:#164a78}
+
+/* Porcelain Pedestal Base */
+.logs{
+  position:absolute;left:50%;bottom:17%;width:42%;height:14%;transform:translateX(-50%);z-index:2;
+  pointer-events:none;
+}
+.log{
+  position:absolute;bottom:0;left:50%;transform:translateX(-50%);
+  border-radius:999px;
+  background:linear-gradient(90deg,#d9b166,#fff6e3 45%,#ebd09a 65%,#b88738);
+  box-shadow:0 3px 8px rgba(72,38,24,.22);
+}
+.log.l1{width:100%;height:42%;bottom:0}
+.log.l2{width:76%;height:36%;bottom:32%}
+.log.l3{width:54%;height:32%;bottom:58%}
+.log.l4{width:36%;height:26%;bottom:80%}
+
+.coals{
+  position:absolute;left:50%;bottom:19%;width:44%;height:11%;transform:translateX(-50%);
+  border-radius:50%;
+  background:radial-gradient(ellipse,#ffe4ec 0%,#f59cb4 42%,rgba(217,56,90,0) 72%);
+  filter:blur(2px);opacity:calc(.35 + var(--lv) * .13);
+  animation:coal 2.4s ease-in-out infinite alternate;z-index:1;
+}
+@keyframes coal{to{filter:blur(2px) brightness(1.18)}}
+
+/* 5-Tier Patisserie Macaron Tower (.fire) */
+.fire{
+  position:absolute;left:50%;bottom:23%;width:54%;height:70%;
+  transform:translateX(-50%) scale(var(--fs,.38));
+  transform-origin:50% 100%;
+  transition:transform .9s cubic-bezier(.3,1.5,.5,1);
+  pointer-events:none;z-index:3;
+}
+.fl{
+  position:absolute;left:50%;transform:translateX(-50%);
+  transition:opacity .65s,transform .65s cubic-bezier(.3,1.5,.5,1);
+}
+/* Tier 1: Golden Frangipane Tart Base */
+.f-out{
+  bottom:0;width:92%;height:22%;
+  border-radius:26px 26px 18px 18px;
+  background:
+    radial-gradient(circle at 20% 30%,#fff 0 4%,transparent 5%),
+    radial-gradient(circle at 50% 25%,#fff 0 4%,transparent 5%),
+    radial-gradient(circle at 80% 30%,#fff 0 4%,transparent 5%),
+    linear-gradient(180deg,#ffd6e0 0%,#f37d99 45%,#c92f53 100%);
+  border:2px solid #fff;
+  box-shadow:0 5px 12px rgba(132,20,44,.25),inset 0 3px 6px rgba(255,255,255,.65);
+}
+/* Tier 2: Sapphire Mint & Cream Choux Ring */
+.f-mid{
+  bottom:19%;width:76%;height:21%;
+  border-radius:24px 24px 16px 16px;
+  background:linear-gradient(180deg,#d8efff 0%,#6cb8f2 48%,#2676b5 100%);
+  border:2px solid #fff;
+  box-shadow:0 5px 12px rgba(23,81,130,.24),inset 0 3px 6px rgba(255,255,255,.7);
+}
+/* Tier 3: Rose Velvet & Gold Leaf Macaron Tier */
+.f-in{
+  bottom:37%;width:60%;height:20%;
+  border-radius:22px 22px 14px 14px;
+  background:linear-gradient(180deg,#fff3d1 0%,#f0c36e 48%,#c59141 100%);
+  border:2px solid #fff;
+  box-shadow:0 5px 12px rgba(140,94,26,.25),inset 0 3px 6px rgba(255,255,255,.75);
+}
+/* Tier 4: Berry Mille-Feuille Crown */
+.f-side.l{
+  bottom:54%;width:44%;height:19%;
+  border-radius:20px 20px 12px 12px;
+  background:linear-gradient(180deg,#ffe0e8 0%,#eb5577 52%,#b51f42 100%);
+  border:2px solid #fff;
+  box-shadow:0 4px 10px rgba(132,20,44,.25),inset 0 2px 5px rgba(255,255,255,.7);
+  opacity:0;
+}
+/* Tier 5: Royal Diamond Topper Macaron */
+.f-core{
+  bottom:70%;width:28%;height:22%;
+  border-radius:50% 50% 42% 42%;
+  background:radial-gradient(circle at 38% 32%,#ffffff 0%,#ffd768 45%,#d9385a 95%);
+  border:2px solid #fff;
+  box-shadow:0 0 18px rgba(217,56,90,.45),inset 0 2px 4px #fff;
+}
+/* Decorative Whipped Cream Swirls */
+.f-side.r{
+  bottom:88%;width:14%;height:13%;
+  border-radius:50% 50% 50% 0;
+  transform:translateX(-50%) rotate(-45deg);
+  background:radial-gradient(circle at 35% 35%,#ff9eb5,#d9385a 65%,#7d0d27);
+  box-shadow:0 2px 6px rgba(132,20,44,.35);
+  opacity:0;
+}
+/* Progressive Tier Visibility by Level (0 to 5) */
+.fire[data-lv="0"] .fl{opacity:0;transform:translateX(-50%) translateY(12px) scale(.8)}
+.fire[data-lv="1"] .f-out{opacity:1;transform:translateX(-50%)}
+.fire[data-lv="1"] .f-mid,.fire[data-lv="1"] .f-in,.fire[data-lv="1"] .f-side,.fire[data-lv="1"] .f-core{opacity:0}
+.fire[data-lv="2"] .f-out,.fire[data-lv="2"] .f-mid{opacity:1;transform:translateX(-50%)}
+.fire[data-lv="2"] .f-in,.fire[data-lv="2"] .f-side,.fire[data-lv="2"] .f-core{opacity:0}
+.fire[data-lv="3"] .f-out,.fire[data-lv="3"] .f-mid,.fire[data-lv="3"] .f-in{opacity:1;transform:translateX(-50%)}
+.fire[data-lv="3"] .f-side,.fire[data-lv="3"] .f-core{opacity:0}
+.fire[data-lv="4"] .f-out,.fire[data-lv="4"] .f-mid,.fire[data-lv="4"] .f-in,.fire[data-lv="4"] .f-side.l{opacity:1;transform:translateX(-50%)}
+.fire[data-lv="4"] .f-core,.fire[data-lv="4"] .f-side.r{opacity:0}
+.fire[data-lv="5"] .fl{opacity:1}
+.fire[data-lv="5"] .f-side.r{transform:translateX(-50%) rotate(-45deg)}
+
+/* Player Pastry Tray & Piping Bags */
+.hand{
+  grid-area:hd;margin:0 10px 8px;padding:9px 11px 10px;
+  border-radius:22px;
+  background:linear-gradient(180deg,rgba(255,255,255,.96),rgba(250,239,229,.98));
+  border:1px solid var(--line2);
+  box-shadow:0 -6px 24px rgba(72,38,24,.09),0 4px 0 rgba(176,122,74,.2),inset 0 1px 0 #fff;
+  position:relative;z-index:6;min-width:0;
+}
+.hhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0 2px 7px;min-width:0}
+.hhead b{font-size:.9rem;color:var(--ink);white-space:nowrap}
+.hhead span{font-size:.69rem;color:var(--mut);text-align:right;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-weight:500}
+.piles{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:8px}
+.pile{
+  min-width:0;border-radius:16px;padding:6px 7px 6px;
+  border:1px solid rgba(154,110,82,.2);
+  box-shadow:inset 0 2px 6px rgba(72,38,24,.05);
+}
+.pile.red{background:linear-gradient(180deg,rgba(255,228,235,.75),rgba(255,247,249,.9))}
+.pile.blue{background:linear-gradient(180deg,rgba(222,240,255,.75),rgba(246,251,255,.9))}
+.ptop{display:flex;align-items:baseline;justify-content:space-between;gap:4px;min-width:0;padding:0 2px}
+.pname{font-size:.78rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.pile.red .pname{color:var(--red2)}.pile.blue .pname{color:var(--blue2)}
+.pleft{font-size:.63rem;color:var(--ink-soft);white-space:nowrap;flex:none;font-weight:600}
+.psticks{display:flex;justify-content:center;align-items:flex-end;gap:4px;height:60px;padding:8px 2px 0;min-width:0}
+.pempty{font-size:.72rem;color:var(--mut);align-self:center;font-weight:600}
+
+/* Tactile 3D Pastry Piping Bags (.mstick) */
+.mstick{
+  position:relative;flex:0 1 24px;min-width:12px;height:50px;
+  border:0;background:none;padding:0;cursor:pointer;
+  transition:transform .22s cubic-bezier(.3,1.6,.5,1),filter .15s;
+  touch-action:manipulation;
+}
+/* Cream Piping Bag Cone */
+.mstick::before{
+  content:"";position:absolute;left:50%;bottom:0;width:14px;height:calc(100% - 12px);margin-left:-7px;
+  clip-path:polygon(12% 0,88% 0,62% 100%,38% 100%);
+  background:linear-gradient(90deg,var(--td),var(--tl) 45%,var(--tc) 85%);
+  box-shadow:0 3px 5px rgba(72,38,24,.25);
+}
+/* Whipped Cream Rosette Top */
+.mstick::after{
+  content:"";position:absolute;left:50%;top:1px;width:16px;height:14px;margin-left:-8px;
+  border-radius:50% 50% 40% 40%;
+  background:radial-gradient(circle at 35% 30%,#fff 0 18%,var(--tl) 35%,var(--tc) 75%,var(--td));
+  border:1.5px solid #fff;
+  box-shadow:0 2px 4px rgba(72,38,24,.22);
+}
+.mstick.red{--tc:#d9385a;--tl:#ff9db2;--td:#8f1631}
+.mstick.blue{--tc:#2676b5;--tl:#94d0ff;--td:#13426b}
+.mstick.sel{transform:translateY(-10px) rotate(-5deg) scale(1.06)}
+.mstick.sel::after{box-shadow:0 0 12px 3px var(--tc)}
+
+.step{display:flex;align-items:center;gap:4px;margin-top:5px}
+.step button{
+  flex:1;min-width:0;height:32px;border-radius:9px;
+  border:1px solid rgba(154,110,82,.28);
+  background:linear-gradient(180deg,#ffffff,#f5eae0);
+  color:var(--ink);font-weight:800;font-size:1.1rem;cursor:pointer;line-height:1;padding:0;
+  box-shadow:0 2px 0 rgba(154,110,82,.22);
+}
+.step button:active{transform:translateY(1px)}
+.step button:disabled{opacity:.32}
+.step output{flex:0 0 24px;text-align:center;font-weight:900;font-size:1.05rem;color:var(--ink)}
+.lockbtn{width:100%;margin-top:8px;min-height:50px;font-size:1rem}
+
+.lockedbox{
+  text-align:center;padding:14px 8px;border-radius:15px;
+  background:linear-gradient(180deg,#f3fbf7,#e6f6ee);
+  border:1.5px dashed rgba(31,157,106,.5);
+  min-height:118px;display:flex;flex-direction:column;justify-content:center;
+}
+.lockedbox .fist{font-size:.7rem;letter-spacing:.14em;color:var(--ok);font-weight:800}
+.lockedbox b{display:block;font-size:1rem;margin:5px 0;color:var(--ink)}
+.lockedbox span{font-size:.76rem;color:var(--ink-soft)}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* Overlays & Sheets */
+.ov{
+  position:absolute;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
+  padding:12px;background:rgba(46,29,24,.52);
+  -webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
+}
+.ov.show{display:flex;animation:scrIn .22s ease}
+.sheet{
+  width:min(480px,100%);max-height:100%;overflow:auto;
+  background:linear-gradient(180deg,#fffdfb,#f9eee3);
+  border:2px solid var(--line2);border-radius:24px;
+  padding:clamp(14px,2.4vh,20px);
+  box-shadow:0 8px 0 rgba(154,110,82,.25),0 24px 60px rgba(46,29,24,.32),inset 0 1px 0 #fff;
+}
+.sheet h3{margin:0;font-size:1.22rem;color:var(--red2);font-weight:700}
+.sheet .btns{display:flex;flex-direction:column;gap:8px;margin-top:12px}
+#ovCount{background:rgba(46,29,24,.38)}
+.count{
+  font-size:clamp(2.4rem,11vw,4.2rem);font-weight:800;color:#fff;
+  text-shadow:0 4px 0 var(--red2),0 8px 28px rgba(217,56,90,.65);
+  text-align:center;
+}
+.count.a{animation:popA .5s ease both}
+.count.b{animation:popB .45s ease both;color:#fff7d6}
+@keyframes popA{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes popB{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.18);opacity:1}100%{transform:none}}
+
+.rvsub{color:var(--ink-soft);font-size:.78rem;margin:2px 0 8px;font-weight:500}
+@keyframes rvIn{from{opacity:0;transform:perspective(400px) rotateX(60deg) translateY(8px)}to{opacity:1;transform:none}}
+.rvgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:5px}
+.rvgrid.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.rvr{
+  display:flex;justify-content:space-between;align-items:center;gap:6px;
+  padding:6px 10px;border-radius:12px;
+  background:rgba(255,255,255,.85);border:1px solid var(--line);
+  opacity:0;animation:rvIn .4s ease forwards;min-width:0;
+}
+.rvr .nm{font-weight:700;font-size:.84rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:var(--ink)}
+.rvr .ct{font-size:.68rem;color:var(--ink-soft)}
+.rvr>div:first-child{min-width:0}
+.rvs{display:flex;align-items:flex-end;gap:3px;padding-top:6px;flex:none}
+.ms{
+  display:inline-block;width:8px;height:22px;
+  clip-path:polygon(15% 0,85% 0,60% 100%,40% 100%);
+  background:var(--tc);position:relative;margin:0 1px;
+}
+.ms.red{--tc:var(--red)}.ms.blue{--tc:var(--blue)}
+.rvgrid.two .rvr{padding:5px 7px}.rvgrid.two .nm{font-size:.74rem}.rvgrid.two .ct{font-size:.6rem}
+.rvgrid.two .ms{width:6px;height:16px}
+.rvnone{font-size:.66rem;color:var(--mut)}
+
+.rvt{display:grid;grid-template-columns:72px 1fr auto;gap:10px;align-items:center;margin-top:7px;opacity:0;animation:rvIn .4s ease forwards}
+.rvt .lb{font-weight:800;font-size:.82rem}
+.rvt.red .lb{color:var(--red2)}.rvt.blue .lb{color:var(--blue2)}
+.bar{position:relative;height:14px;border-radius:7px;background:#eadcd0;overflow:hidden;box-shadow:inset 0 1px 3px rgba(72,38,24,.15)}
+.fill{height:100%;border-radius:7px}
+.rvt.red .fill{background:linear-gradient(90deg,#d9385a,#ff7592)}
+.rvt.blue .fill{background:linear-gradient(90deg,#2676b5,#6bc1ff)}
+.fill.over{background:repeating-linear-gradient(45deg,#b59b88,#b59b88 6px,#967d6b 6px,#967d6b 12px)!important}
+.tick{position:absolute;top:0;bottom:0;width:1px;background:rgba(255,255,255,.7)}
+.val{font-weight:800;font-variant-numeric:tabular-nums;min-width:58px;text-align:right;font-size:.9rem;color:var(--ink)}
+.rvt.hit .val{color:var(--ok)}
+.rvt.hit .bar{box-shadow:0 0 0 2px var(--ok)}
+
+.verdict{margin-top:12px;text-align:center;font-weight:800;font-size:1.15rem;opacity:0;animation:rvIn .45s ease forwards;line-height:1.3}
+.verdict small{display:block;font-size:.7rem;letter-spacing:.18em;font-weight:800;opacity:.85}
+.verdict.ok{color:var(--ok)}
+.verdict.no{color:var(--ink-soft)}
+.explain{text-align:center;font-size:.82rem;opacity:0;animation:rvIn .45s ease forwards;margin:6px 0 0;line-height:1.45;color:var(--ink-soft)}
+
+.endjp{font-size:clamp(1.35rem,6vw,1.9rem);font-weight:800;text-align:center;color:var(--red2)}
+#ovEnd:not(.win) .endjp{color:var(--ink-soft)}
+#ovEnd.win .sheet{box-shadow:0 0 60px rgba(217,56,90,.28),0 24px 60px rgba(46,29,24,.32)}
+.endtitle{text-align:center;font-weight:800;font-size:1.05rem;margin:4px 0;color:var(--ink)}
+.endtext{text-align:center;color:var(--ink-soft);font-size:.84rem;margin:4px 0;line-height:1.45}
+.stats{
+  display:grid;grid-template-columns:1fr auto;gap:4px 10px;font-size:.84rem;
+  margin-top:8px;padding:10px 12px;border-radius:14px;
+  background:rgba(255,255,255,.8);border:1px solid var(--line);
+}
+.stats .k{color:var(--ink-soft)}.stats .v{font-weight:700;text-align:right;color:var(--ink)}
+.hist{max-height:38vh;overflow:auto;margin-top:6px}
+.hrow{display:grid;grid-template-columns:34px 64px 1fr 20px;gap:6px;align-items:center;padding:6px 2px;border-bottom:1px dashed var(--line2);font-size:.78rem}
+.hrow .o{font-weight:800;text-align:center}
+.hrow.ok .o{color:var(--ok)}.hrow.no .o{color:var(--bad)}
+.hrow .pl{grid-column:1/-1;font-size:.66rem;color:var(--mut)}
+
+.how ul{padding-left:18px;margin:8px 0}
+.how li,.how p{font-size:.83rem;line-height:1.5;color:var(--ink)}
+.how li{margin-bottom:4px}
+.ttab{display:grid;grid-template-columns:auto 1fr;gap:3px 10px;font-size:.76rem;padding:8px 10px;border-radius:12px;background:rgba(255,255,255,.8);border:1px solid var(--line);margin-top:6px}
+.ttab b{color:var(--red2)}
+.note{font-size:.72rem;color:var(--ink-soft);border-left:3px solid var(--gold);padding-left:10px;margin:8px 0 0;line-height:1.45}
+
+#toasts{position:absolute;top:calc(10px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);z-index:90;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none;width:min(92%,420px)}
+.toast{
+  background:#fffdf9;border:1.5px solid var(--line2);color:var(--ink);
+  padding:9px 15px;border-radius:13px;font-size:.84rem;font-weight:600;
+  box-shadow:var(--shadow-md);animation:scrIn .2s;transition:opacity .4s;text-align:center;
+}
+.toast.err{border-color:var(--bad);color:var(--bad);background:#fff5f6}
+.toast.out{opacity:0}
+
+.nbar{position:absolute;left:8px;right:8px;z-index:95;padding:10px 12px;border-radius:12px;display:flex;gap:10px;align-items:center;font-size:.82rem;box-shadow:var(--shadow-lg)}
+.nbar span{flex:1}
+.nbar button{min-height:36px;padding:6px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.4);background:rgba(0,0,0,.15);color:#fff;cursor:pointer;font-weight:700}
+#errBar{bottom:calc(8px + env(safe-area-inset-bottom));background:#b82243;color:#fff;border:1px solid #ff8aa3}
+#netBar{top:calc(8px + env(safe-area-inset-top));background:#9c6316;color:#fff;border:1px solid #f3dc99}
+
+#flyLayer{position:absolute;inset:0;pointer-events:none;z-index:60;overflow:hidden}
+.fly{
+  position:absolute;left:0;top:0;width:12px;height:12px;margin:-6px 0 0 -6px;
+  border-radius:50%;background:var(--tc);border:2px solid #fff;
+  box-shadow:0 2px 6px rgba(72,38,24,.25);
+}
+.fly.red{--tc:var(--red)}.fly.blue{--tc:var(--blue)}
+
+/* Responsive Breakpoints */
+@media (max-width:420px){.players[data-n="4"]{--cols:2}.tb-t small{display:none}.bots{gap:4px}}
+@media (max-width:360px){.tb-t{display:none}.tb{justify-content:space-between}.mc{font-size:.68rem}}
+@media (orientation:portrait) and (max-height:700px){.tgring{width:56px;height:56px}.tgbadge b{font-size:1.55rem}.psticks{height:54px}.mstick{height:44px}.lockbtn{min-height:46px}.lockedbox{min-height:104px}.pc-s{display:none}.feats{display:none}.lasthint{display:none}}
+@media (orientation:landscape) and (max-height:560px),(min-width:960px) and (min-height:600px){
+ .game{grid-template-columns:minmax(0,1fr) minmax(310px,42%);grid-template-rows:auto auto minmax(0,1fr);grid-template-areas:"tb tb" "st pl" "st hd"}
+ .game .players[data-n]{--cols:2;align-content:start;padding:4px 12px 4px 0}
+ .game .players.cmp[data-n]{--cols:5}
+ .hand{margin:0 12px 10px 0;align-self:end}}
+@media (orientation:landscape) and (max-height:560px){.tb{padding:4px 10px 2px}.tgring{width:50px;height:50px}.tgbadge b{font-size:1.4rem}.tgbadge small{display:none}.psticks{height:46px;padding-top:6px}.mstick{height:38px}.step button{height:28px}.lockbtn{min-height:42px;margin-top:6px}.lockedbox{min-height:90px}.pc-s{display:none}.pips{flex-direction:row;gap:8px}.hhead{margin-bottom:4px}.hand{padding:8px}.hero{max-height:140px}.feats{display:none}.lasthint{display:none}}
+@media (prefers-reduced-motion:reduce){.fl,.coals,.tok.cur,.mode .ic,.btn.primary::after,.pc.think .av::after{animation:none!important}}
+</style>
+</head>
+<body>
+<noscript><p style="color:#2e1d18;padding:20px;font-family:sans-serif">เกมนี้ต้องเปิดใช้งาน JavaScript</p></noscript>
+<div id="app">
+<canvas id="bgfx"></canvas>
+
+<section class="scr active" id="s-menu"><div class="fit">
+ <div class="hero"><div class="pitwrap" id="menuPit"></div><canvas class="fxc" id="menuFx"></canvas></div>
+ <h1 class="logo"><span class="jp">มงกุฎมาการอง</span><span class="en">LA TOUR SUCRÉE</span></h1>
+ <p class="tagline">เกมร่วมมือของทีมเชฟขนมหวาน · อ่านใจกันสร้างหอคอยมาการอง 5 ชั้น · 2–10 คน</p>
+ <div class="feats"><span><b>♛</b>ร่วมมือทั้งทีมเชฟ</span><span><b>✦</b>บีบครีมลับ เปิดพร้อมกัน</span><span><b>❖</b>ประกอบหอคอย 5 ชั้น</span></div>
+ <div class="stack">
+  <button class="btn primary big" type="button" data-act="go" data-to="mode">เข้าสู่ครัวขนมหวาน</button>
+  <button class="btn" type="button" data-act="continue" id="btnContinue" hidden>เล่นต่อครัวที่บันทึกไว้</button>
+  <div class="row">
+   <button class="btn" type="button" data-act="how">ตำราวิธีเล่น</button>
+   <button class="btn aud" type="button" data-act="music" data-audio="music"><span class="audtx">เพลง</span></button>
+   <button class="btn aud" type="button" data-act="sfx" data-audio="sfx"><span class="audtx">เสียง</span></button>
+  </div>
+ </div>
+ <p class="credit">มงกุฎมาการอง · La Tour Sucrée — บอร์ดเกมดิจิทัลแนวร่วมมืออ่านใจในห้องเสื้อขนมหวานฝรั่งเศส</p>
+</div></section>
+
+<section class="scr" id="s-mode"><div class="fit">
+ <div class="head"><button class="iconbtn" type="button" data-act="go" data-to="menu" aria-label="ย้อนกลับ">‹</button><h2>เลือกโหมดครัวขนมหวาน</h2></div>
+ <p class="sub">ทีมเชฟทุกคนชนะหรือแพ้ไปด้วยกัน ห้ามส่งซิกบอกกันว่าจะบีบครีมกี่ถุงหรือรสอะไร!</p>
+ <button class="mode" type="button" data-act="solo-setup"><span class="ic">♛</span><span><span class="pill">SOLO ATELIER</span><b>ร่วมทีมกับเชฟบอท</b><small>คุณ + เชฟขนมหวาน AI 1–9 คน เอกลักษณ์ประจำตัวไม่ซ้ำกัน เล่นได้ทันทีไม่ต้องใช้อินเทอร์เน็ต</small></span></button>
+ <button class="mode" type="button" data-act="online-setup"><span class="ic b">✦</span><span><span class="pill b">REAL P2P · WebRTC</span><b>เปิดครัวออนไลน์กับเพื่อน</b><small>2–10 คน คนละเครื่อง เชื่อมต่อตรงผ่าน PeerJS เครื่องหัวหน้าเชฟเป็นผู้คุมโต๊ะ</small></span></button>
+</div></section>
+
+<section class="scr" id="s-solo"><div class="fit">
+ <div class="head"><button class="iconbtn" type="button" data-act="go" data-to="mode" aria-label="ย้อนกลับ">‹</button><h2>จัดทีมเชฟขนมหวาน (บอท)</h2></div>
+ <div class="card">
+  <div class="inline"><span class="lbl">ชื่อเชฟของคุณ</span><input class="inp" id="soloName" maxlength="16" autocomplete="off" placeholder="เชฟของคุณ"></div>
+ </div>
+ <div class="card">
+  <div class="lbl">จำนวนเชฟในทีมทั้งหมด (2–10)</div>
+  <div class="cntrow"><button class="rbtn" type="button" data-act="count" data-d="-1" id="cntMinus" aria-label="ลดผู้เล่น">−</button><div class="cntv"><b id="countVal">3</b><small id="countSub"></small></div><button class="rbtn" type="button" data-act="count" data-d="1" id="cntPlus" aria-label="เพิ่มผู้เล่น">+</button></div>
+  <div class="tgts" id="soloTargets"></div>
+ </div>
+ <div class="card">
+  <div class="lbl">ความชำนาญของเชฟบอท</div>
+  <div class="seg" id="segDiff"><button type="button" data-act="diff" data-v="easy">ฝึกหัด</button><button type="button" data-act="diff" data-v="normal">ชำนาญ</button><button type="button" data-act="diff" data-v="hard">เชฟใหญ่</button></div>
+  <p class="hint" id="diffDesc"></p>
+  <div class="bots" id="botList" style="margin-top:8px"></div>
+ </div>
+ <div class="card">
+  <label class="sw"><input type="checkbox" id="soloScale"><i></i><span>ปรับสูตรเป้าหมายตามจำนวนเชฟ<small>มีผลเมื่อ 5 คนขึ้นไป (2–4 คนใช้สูตร 1–5 เสมอ)</small></span></label>
+  <label class="sw"><input type="checkbox" id="soloZero"><i></i><span>อนุญาตให้บีบครีม 0 ถุงในรอบนั้น</span></label>
+  <label class="sw"><input type="checkbox" id="soloNoCap"><i></i><span>ไม่จำกัดสูงสุด 3 ถุงต่อรอบ</span></label>
+ </div>
+ <button class="btn primary big" type="button" data-act="solo-start">เปิดเตาอบ! เริ่มประกอบหอคอย</button>
+</div></section>
+
+<section class="scr" id="s-online"><div class="fit">
+ <div class="head"><button class="iconbtn" type="button" data-act="go" data-to="mode" aria-label="ย้อนกลับ">‹</button><h2>ครัวออนไลน์กับเพื่อน</h2></div>
+ <div class="card"><div class="lbl">ชื่อเชฟของคุณ (ใช้ชื่อเดิมเพื่อกลับเข้าโต๊ะเดิม)</div><input class="inp" id="onName" maxlength="16" autocomplete="off" placeholder="ชื่อเชฟ"></div>
+ <div class="card"><div class="lbl">เป็นหัวหน้าเชฟ (โฮสต์)</div>
+  <button class="btn primary w" type="button" data-act="create">เปิดห้องครัวใหม่</button>
+  <button class="btn w" type="button" data-act="resume-host" id="btnResumeHost" style="margin-top:8px" hidden>กลับไปเปิดห้องครัวเดิม</button>
+ </div>
+ <div class="card"><div class="lbl">เข้าร่วมครัวของเพื่อน</div>
+  <div class="row"><input class="inp code" id="joinCode" maxlength="5" autocomplete="off" autocapitalize="characters" placeholder="CODE"><button class="btn primary" type="button" data-act="join" style="flex:0 0 auto">เข้าครัว</button></div>
+  <p class="hint" id="rejoinHint" hidden></p>
+ </div>
+ <p class="status" id="onStatus" role="status"></p>
+ <p class="hint c">ใช้เซิร์ฟเวอร์สาธารณะของ PeerJS (0.peerjs.com) เพื่อจับคู่เครื่อง จากนั้นข้อมูลส่งตรงระหว่างเครื่องผ่าน WebRTC</p>
+</div></section>
+
+<section class="scr" id="s-lobby"><div class="fit">
+ <div class="head"><button class="iconbtn" type="button" data-act="leave" aria-label="ออกจากห้อง">‹</button><h2>ห้องเตรียมครัวขนมหวาน</h2></div>
+ <div class="card">
+  <div class="lbl c">รหัสห้องครัว</div>
+  <div class="codebig" id="lobbyCode">-----</div>
+  <div class="row"><button class="btn sm" type="button" data-act="copy-code">คัดลอกรหัส</button><button class="btn sm" type="button" data-act="copy-link">คัดลอกลิงก์</button><button class="btn sm" type="button" data-act="share" id="btnShare" hidden>แชร์</button></div>
+  <p class="linktx" id="lobbyLink"></p>
+ </div>
+ <div class="card"><div class="lbl" id="lobbyCount">ทีมเชฟ</div><div class="lgrid" id="lobbyList"></div><div class="tgts" id="lobbyTargets"></div></div>
+ <div class="card">
+  <div class="lbl">กติกาสูตรพิเศษ (หัวหน้าเชฟเป็นผู้เลือก)</div>
+  <label class="sw"><input type="checkbox" id="lobbyScale"><i></i><span>ปรับสูตรเป้าหมายตามจำนวนเชฟ (5 คนขึ้นไป)</span></label>
+  <label class="sw"><input type="checkbox" id="lobbyZero"><i></i><span>อนุญาตให้บีบครีม 0 ถุง</span></label>
+  <label class="sw"><input type="checkbox" id="lobbyNoCap"><i></i><span>ไม่จำกัด 3 ถุงต่อรอบ</span></label>
+ </div>
+ <p class="hint c" id="lobbyHint"></p>
+ <button class="btn primary big" type="button" data-act="lobby-start" id="btnLobbyStart">เริ่มประกอบหอคอย</button>
+</div></section>
+
+<section class="scr" id="s-game">
+ <div class="game">
+  <header class="tb">
+   <button class="iconbtn" type="button" data-act="game-menu" aria-label="เมนู">☰</button>
+   <div class="tb-t"><b>มงกุฎมาการอง · La Tour Sucrée</b><small id="tbMode">ประกอบหอคอยขนมหวาน</small></div>
+   <span class="chip" id="tbRound">รอบ 1</span>
+   <span class="chip code" id="tbRoom" hidden></span>
+   <button class="iconbtn aud" type="button" data-act="music" data-audio="music" aria-label="เพลง"><svg viewBox="0 0 24 24" width="19" height="19"><path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="17" cy="16" r="3" fill="currentColor"/></svg></button>
+   <button class="iconbtn aud" type="button" data-act="sfx" data-audio="sfx" aria-label="เสียงเอฟเฟกต์"><svg viewBox="0 0 24 24" width="19" height="19"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </header>
+  <div class="players" id="players"></div>
+  <div class="stage" id="stage">
+   <div class="tgrow">
+    <div class="tgring" id="tgRing"><div class="tgbadge"><small>สูตรชั้นนี้</small><b id="tgNum">1</b></div></div>
+    <div class="tginfo">
+     <div class="tokens" id="tokens"></div>
+     <div class="mission" id="mission"><span class="mc r"><i></i>ทับทิม <b id="mRed">1</b></span><em>หรือ</em><span class="mc b"><i></i>บลูเบอร์รี <b id="mBlue">1</b></span></div>
+     <div class="lasthint" id="lastHint"></div>
+    </div>
+   </div>
+   <div class="pitbox"><div class="pitwrap" id="gamePit"></div></div>
+   <div class="sfoot"><span id="progText"></span><div class="prog"><i id="progBar"></i></div><span id="pileInfo"></span></div>
+   <div class="flash" id="flash"></div>
+   <canvas class="fxc" id="gameFx"></canvas>
+  </div>
+  <div class="hand" id="hand">
+   <div class="hhead"><b id="handCount">เลือกแล้ว 0</b><span id="handRule"></span></div>
+   <div class="piles" id="piles">
+    <div class="pile red">
+     <div class="ptop"><span class="pname">ครีมทับทิม</span><span class="pleft" id="leftRed">เหลือ 5</span></div>
+     <div class="psticks" id="pileRed"></div>
+     <div class="step"><button type="button" data-act="step" data-c="red" data-d="-1" aria-label="ลดครีมทับทิม">−</button><output id="selRed">0</output><button type="button" data-act="step" data-c="red" data-d="1" aria-label="เพิ่มครีมทับทิม">+</button></div>
+    </div>
+    <div class="pile blue">
+     <div class="ptop"><span class="pname">ครีมบลูเบอร์รี</span><span class="pleft" id="leftBlue">เหลือ 5</span></div>
+     <div class="psticks" id="pileBlue"></div>
+     <div class="step"><button type="button" data-act="step" data-c="blue" data-d="-1" aria-label="ลดครีมบลูเบอร์รี">−</button><output id="selBlue">0</output><button type="button" data-act="step" data-c="blue" data-d="1" aria-label="เพิ่มครีมบลูเบอร์รี">+</button></div>
+    </div>
+   </div>
+   <div class="lockedbox" id="lockedBox" hidden><div class="fist">ซ่อนถาดไว้ใต้ฝาครอบ · เป็นความลับ</div><b id="lockedText">เตรียมเสิร์ฟแล้ว</b><span id="lockedWait"></span></div>
+   <button class="btn primary lockbtn" type="button" data-act="lock" id="btnLock">พร้อมเสิร์ฟ</button>
+  </div>
+ </div>
+</section>
+
+<div class="ov" id="ovCount"><div class="count" id="countText">พร้อมนะ…</div></div>
+
+<div class="ov" id="ovReveal"><div class="sheet">
+ <h3 id="rvTitle"></h3><p class="rvsub" id="rvSub"></p>
+ <div id="rvRows" class="rvgrid"></div><div id="rvTotals"></div>
+ <div class="verdict" id="rvVerdict"></div><p class="explain" id="rvExplain"></p>
+ <div class="btns"><button class="btn primary" type="button" data-act="rv-continue" id="rvBtn">ไปต่อ</button></div>
+</div></div>
+
+<div class="ov" id="ovEnd"><div class="sheet">
+ <div class="endjp" id="endJp"></div><div class="endtitle" id="endTitle"></div><p class="endtext" id="endText"></p>
+ <div class="stats" id="endStats"></div>
+ <div class="btns">
+  <button class="btn primary" type="button" data-act="end-ext" id="btnEndExt" hidden>งานเลี้ยงชิมหอคอยขนม (โหมดท้าทาย)</button>
+  <button class="btn" type="button" data-act="end-again" id="btnEndAgain">อบรอบใหม่อีกครั้ง</button>
+  <p class="hint c" id="endWait" hidden>รอหัวหน้าเชฟเลือกว่าจะทำเมนูต่อไปอย่างไร…</p>
+  <button class="btn ghost" type="button" data-act="leave" id="btnEndMenu">กลับเมนูหลัก</button>
+ </div>
+</div></div>
+
+<div class="ov" id="ovExt"><div class="sheet how">
+ <h3>Le Grand Banquet · งานเลี้ยงชิมหอคอยขนม</h3>
+ <p class="note">หลังจากสร้างหอคอยมาการองครบ 5 ชั้นแล้ว ขอเชิญทีมเชฟร่วมท้าทายโหมดพิเศษ <b>เสิร์ฟและชิมหอคอยขนมหวาน</b> ย้อนกลับจากชั้นยอดลงมาชั้นฐาน!</p>
+ <ul>
+  <li>เชฟทุกคนได้รับถุงบีบครีมชุดใหม่ ครีมทับทิม 5 + ครีมบลูเบอร์รี 5</li>
+  <li>สูตรเป้าหมายนับถอยหลัง จากชั้นที่ 5 ลงไปถึงชั้นที่ 1</li>
+  <li>กติกาเหมือนเดิม: เปิดฝาครอบพร้อมกัน สำเร็จเมื่อผลรวมครีมทับทิม หรือ ครีมบลูเบอร์รี เท่ากับสูตรเป้าหมายพอดี</li>
+  <li>สำเร็จแต่ละครั้งจะเสิร์ฟขนมออกได้ 1 ชั้น ถ้าใครครีมหมดมือเสียก่อน งานเลี้ยงจะยังไม่สมบูรณ์</li>
+ </ul>
+ <div class="btns"><button class="btn primary" type="button" data-act="ext-start">เริ่มงานเลี้ยงชิมขนม</button><button class="btn ghost" type="button" data-act="close" data-ov="ovExt">ไว้ทีหลัง</button></div>
+</div></div>
+
+<div class="ov" id="ovMenu"><div class="sheet">
+ <h3>สมุดบันทึกห้องครัว</h3>
+ <div class="lbl" style="margin-top:10px">ประวัติการบีบครีมแต่ละรอบ (ข้อมูลที่ทุกคนเห็น)</div>
+ <div class="hist" id="histList"></div>
+ <div class="btns">
+  <button class="btn primary" type="button" data-act="close" data-ov="ovMenu">กลับเข้าครัวต่อ</button>
+  <button class="btn" type="button" data-act="how">ตำราวิธีเล่น</button>
+  <button class="btn" type="button" data-act="restart" id="btnMRestart">เริ่มประกอบหอคอยใหม่</button>
+  <button class="btn ghost" type="button" data-act="leave" id="btnMLeave">บันทึกและออกไปเมนูหลัก</button>
+ </div>
+</div></div>
+
+<div class="ov" id="ovHow"><div class="sheet how">
+ <h3>ตำราวิธีเล่น · มงกุฎมาการอง</h3>
+ <p><b>เป้าหมายของทีมเชฟ:</b> ร่วมมือกันประกอบหอคอยมาการองให้ครบทั้ง 5 ชั้น</p>
+ <ul>
+  <li>เชฟทุกคนเริ่มต้นด้วยถุงบีบ<b>ครีมทับทิม 5 ถุง</b> และ<b>ครีมบลูเบอร์รี 5 ถุง</b></li>
+  <li>แต่ละรอบ แอบเลือกจำนวนถุงครีมที่จะบีบ (ค่าเริ่มต้น 1–3 ถุง ผสมรสได้) แล้วกดพร้อมเสิร์ฟ <b>ห้ามบอกกันเรื่องจำนวนหรือรสครีม!</b></li>
+  <li>เมื่อทุกคนล็อกครบ "1, 2, 3… Bon Appétit!" จะเปิดฝาครอบพร้อมกัน</li>
+  <li><b>สำเร็จ:</b> ผลรวม<b>ครีมทับทิม</b>ของทุกคนเท่ากับสูตรเป้าหมายพอดี <b>หรือ</b>ผลรวม<b>ครีมบลูเบอร์รี</b>เท่ากับสูตรเป้าหมายพอดี (รสเดียวถึงเป้าก็ผ่าน!) แล้วประกอบชั้นถัดไป</li>
+  <li><b>ยังไม่ตรงสูตร:</b> เป้าหมายชั้นเดิม ลองใหม่ · ถุงครีมที่ใช้ไปแล้วจะถูกบีบลงจาน<b>ทุกครั้ง</b></li>
+  <li><b>แพ้:</b> ถ้ามีเชฟคนใดครีมหมดมือทั้งสองรสก่อนหอคอยเสร็จ (แต่ถ้ารอบที่ประกอบชั้นที่ 5 สำเร็จทำให้ครีมหมดมือพอดี ทีมเชฟยังชนะ!)</li>
+ </ul>
+ <div class="lbl" style="margin-top:8px">สูตรเป้าหมายแต่ละชั้นตามจำนวนเชฟ</div>
+ <div class="ttab" id="howTargets"></div>
+ <p class="note">กรณี 2–4 คนใช้สูตร 1–5 ส่วน 5–10 คนจะปรับสูตรตามสัดส่วน ปัดเศษ(ชั้น × จำนวนเชฟ ÷ 4) เพื่อให้ทุกคนได้มีส่วนร่วมบีบครีมอย่างสมดุล (สามารถปิดได้ในหน้าตั้งค่า)</p>
+ <div class="btns"><button class="btn primary" type="button" data-act="close" data-ov="ovHow">เข้าใจแล้ว เริ่มทำขนมกัน!</button></div>
+</div></div>
+
+<div class="ov" id="ovConfirm"><div class="sheet"><p id="cfText" style="font-size:.98rem;line-height:1.5;margin:0"></p>
+ <div class="btns"><button class="btn primary" type="button" data-act="cf-yes" id="cfYes">ตกลง</button><button class="btn ghost" type="button" data-act="cf-no">ยกเลิก</button></div>
+</div></div>
+
+<div id="flyLayer"></div>
+<div id="toasts" aria-live="polite"></div>
+<div class="nbar" id="netBar" hidden><span id="netText"></span><button type="button" data-act="leave" id="btnNetLeave">ออก</button></div>
+<div class="nbar" id="errBar" hidden><span id="errText"></span><button type="button" data-act="err-close">ปิด</button></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* ================= UTILITIES ================= */
+var PROTO = 4, MAXP = 10;
+function E(id){ var e = document.getElementById(id); if (e && e.nodeType === 1) return e; return document.createElement('div'); }
+function qsa(sel, root){ try { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); } catch (e) { return []; } }
+function isEl(x){ return !!(x && x.nodeType === 1 && typeof x.appendChild === 'function'); }
+function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+function hueOf(i){ return (340 + i * 43) % 360; }
+function mk(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined && text !== null) e.textContent = String(text); return e; }
+function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+function clone(o){ return o == null ? o : JSON.parse(JSON.stringify(o)); }
+var ALPH = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+var CODE_RE = /^[A-HJ-NP-Z2-9]{5}$/;
+function randId(n){
+  var a = new Uint32Array(n), s = '', i;
+  try { window.crypto.getRandomValues(a); } catch (e) { for (i = 0; i < n; i++) a[i] = Math.floor(Math.random() * 4294967295); }
+  for (i = 0; i < n; i++) s += ALPH[a[i] % ALPH.length]; return s;
+}
+function cleanName(s){ return String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16); }
+var Store = {
+  get: function(k, d){ try { var v = window.localStorage.getItem('bp4_' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set: function(k, v){ try { window.localStorage.setItem('bp4_' + k, JSON.stringify(v)); } catch (e) {} },
+  del: function(k){ try { window.localStorage.removeItem('bp4_' + k); } catch (e) {} }
+};
+var reducedMotion = false;
+try { reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+function showError(err){
+  try {
+    if (err === 0) return;
+    var m = (err && err.message) || String(err); if (window.console) console.error(err);
+    var b = document.getElementById('errBar'); if (!b) return;
+    E('errText').textContent = 'เกิดข้อผิดพลาด: ' + m.slice(0, 160) + ' (เกมยังเล่นต่อได้)';
+    b.hidden = false;
+  } catch (e) {}
+}
+function safe(fn){ try { fn(); } catch (e) { showError(e); } }
+window.addEventListener('error', function(e){ if (!e || !e.message || e.message === 'Script error.' || /ResizeObserver/.test(e.message)) return; showError(e.error || e.message); });
+window.addEventListener('unhandledrejection', function(e){ showError(e && e.reason); });
+
+/* ================= RULES ================= */
+var Rules = (function(){
+  function targetsFor(n, scale){
+    if (n <= 4 || scale === false) return [1, 2, 3, 4, 5];
+    var out = [], prev = 0;
+    for (var k = 1; k <= 5; k++) { var t = Math.round(k * n / 4); if (t <= prev) t = prev + 1; out.push(t); prev = t; }
+    return out;
+  }
+  function norm(r){ r = r || {}; var z = !!r.allowZero, nc = !!r.noCap; return { allowZero: z, noCap: nc, scale: r.scale !== false, min: z ? 0 : 1, max: nc ? 10 : 3 }; }
+  function createGame(o){
+    var mode = o.mode === 'extinguish' ? 'extinguish' : 'build';
+    if (!Array.isArray(o.players) || o.players.length < 2 || o.players.length > MAXP) throw new Error('ต้องมีเชฟ 2–' + MAXP + ' คน');
+    var R = norm(o.rules), bt = targetsFor(o.players.length, R.scale);
+    return { v: 4, gameId: randId(8), mode: mode, buildTargets: bt.slice(), targets: mode === 'build' ? bt.slice() : bt.slice().reverse(), stage: 0, round: 1, roundId: 1, rules: R,
+      carry: { red: (o.carry && o.carry.red) | 0, blue: (o.carry && o.carry.blue) | 0 },
+      players: o.players.map(function(p, i){ return { seat: i, name: cleanName(p.name) || ('เชฟ ' + (i + 1)), bot: !!p.bot, persona: p.persona || null, red: 5, blue: 5, usedRed: 0, usedBlue: 0 }; }),
+      locked: o.players.map(function(){ return false; }), history: [], result: null, phase: 'select' };
+  }
+  function target(s){ return (s && s.stage < s.targets.length) ? s.targets[s.stage] : null; }
+  function legalOptions(p, R){ var out = [], r, b; for (r = 0; r <= p.red; r++) for (b = 0; b <= p.blue; b++) { var t = r + b; if (t >= R.min && t <= R.max) out.push({ red: r, blue: b }); } return out; }
+  function validate(s, seat, sel){
+    if (!s || s.phase !== 'select') return 'ตอนนี้ยังรับการเลือกไม่ได้';
+    if (!Number.isInteger(seat) || seat < 0 || seat >= s.players.length) return 'ที่นั่งไม่ถูกต้อง';
+    if (!sel || typeof sel !== 'object') return 'ข้อมูลไม่ถูกต้อง';
+    var r = sel.red, b = sel.blue;
+    if (!Number.isInteger(r) || !Number.isInteger(b) || r < 0 || b < 0) return 'จำนวนต้องเป็นจำนวนเต็ม';
+    var p = s.players[seat];
+    if (r > p.red) return 'ครีมทับทิมไม่พอ';
+    if (b > p.blue) return 'ครีมบลูเบอร์รีไม่พอ';
+    var t = r + b;
+    if (t < s.rules.min) return 'เลือกอย่างน้อย ' + s.rules.min + ' ถุง';
+    if (t > s.rules.max) return 'เลือกได้ไม่เกิน ' + s.rules.max + ' ถุงต่อรอบ';
+    return null;
+  }
+  function resolve(s, picks){
+    if (!s || s.phase !== 'select') throw new Error('รอบนี้ปิดไปแล้ว');
+    if (!Array.isArray(picks) || picks.length !== s.players.length) throw new Error('ยังได้ข้อมูลไม่ครบทุกคน');
+    for (var i = 0; i < picks.length; i++) { var e = validate(s, i, picks[i]); if (e) throw new Error('ที่นั่ง ' + (i + 1) + ': ' + e); }
+    var n = clone(s), T = target(n), tr = 0, tb = 0, plays = [];
+    n.players.forEach(function(p, i){ var k = picks[i]; p.red -= k.red; p.blue -= k.blue; p.usedRed += k.red; p.usedBlue += k.blue; tr += k.red; tb += k.blue; plays.push({ seat: i, red: k.red, blue: k.blue }); });
+    var hitRed = tr === T, hitBlue = tb === T, success = hitRed || hitBlue;
+    var res = { gameId: n.gameId, roundId: n.roundId, round: n.round, stage: n.stage, target: T, mode: n.mode, plays: plays, totalRed: tr, totalBlue: tb, hitRed: hitRed, hitBlue: hitBlue, success: success, outcome: 'retry', emptied: [] };
+    if (success) n.stage += 1;
+    var emptied = n.players.filter(function(p){ return p.red + p.blue === 0; }).map(function(p){ return p.seat; });
+    if (success && n.stage >= n.targets.length) { n.phase = 'won'; res.outcome = 'won'; }
+    else if (emptied.length) { n.phase = 'lost'; res.outcome = 'lost'; res.emptied = emptied; }
+    else { n.phase = 'select'; res.outcome = success ? 'advance' : 'retry'; }
+    n.history.push(res); if (n.history.length > 150) n.history.splice(0, n.history.length - 150);
+    n.result = res; n.roundId += 1; n.round += 1; n.locked = n.players.map(function(){ return false; });
+    return n;
+  }
+  function fireLevel(s){ if (!s) return 0; return s.mode === 'build' ? s.stage : (s.targets.length - s.stage); }
+  function sanityCheck(s){
+    return !!(s && typeof s === 'object' && Array.isArray(s.players) && s.players.length >= 2 && s.players.length <= MAXP && Array.isArray(s.targets) && s.targets.length === 5 &&
+      Array.isArray(s.buildTargets) && s.buildTargets.length === 5 &&
+      Number.isInteger(s.stage) && typeof s.phase === 'string' && Array.isArray(s.history) && s.rules && Number.isInteger(s.roundId) && Array.isArray(s.locked) &&
+      s.locked.length === s.players.length && s.players.every(function(p){ return p && typeof p.name === 'string' && Number.isInteger(p.red) && Number.isInteger(p.blue); }));
+  }
+  return { createGame: createGame, target: target, targetsFor: targetsFor, legalOptions: legalOptions, validate: validate, resolve: resolve, fireLevel: fireLevel, sanityCheck: sanityCheck, norm: norm };
+})();
+
+/* ================= AI (Pastry Chef Personas) ================= */
+var AI = (function(){
+  var PERSONAS = [
+    { key: 'hinata', name: 'เชฟโรเซ่', kanji: 'R', desc: 'รสมือจัดจ้าน บีบครีมเยอะ ชอบครีมทับทิม', size: 0.7, color: 0.6, conserve: 0.7, follow: 0.4 },
+    { key: 'shizuku', name: 'เชฟมิ้นต์', kanji: 'M', desc: 'ละเมียดละไม ประหยัดครีม ถนัดบลูเบอร์รี', size: -0.7, color: -0.6, conserve: 1.4, follow: 0.5 },
+    { key: 'kaede', name: 'เชฟเอแคลร์', kanji: 'E', desc: 'อ่านจังหวะโต๊ะเก่ง ตามรสครีมที่ใกล้สูตร', size: 0, color: 0, conserve: 1.0, follow: 1.4 },
+    { key: 'ren', name: 'เชฟมาการอง', kanji: 'C', desc: 'สายสมดุล เอนทางครีมบลูเบอร์รีนิด ๆ', size: 0.2, color: -0.3, conserve: 1.0, follow: 0.8 },
+    { key: 'sora', name: 'เชฟชูครีม', kanji: 'S', desc: 'ใจกว้าง ไหลตามกระแสทีมเชฟ', size: 0.4, color: 0, conserve: 0.8, follow: 1.1 },
+    { key: 'akari', name: 'เชฟทาร์ต', kanji: 'T', desc: 'รอบคอบ เอนทางครีมทับทิม', size: -0.3, color: 0.4, conserve: 1.2, follow: 0.6 },
+    { key: 'kai', name: 'เชฟซอร์เบต์', kanji: 'B', desc: 'กล้าได้กล้าเสีย รักครีมบลูเบอร์รี', size: 0.5, color: -0.7, conserve: 0.9, follow: 0.3 },
+    { key: 'yuki', name: 'เชฟเมอแรงก์', kanji: 'G', desc: 'ประหยัดสุด ๆ ค่อย ๆ หยอดทีละนิด', size: -0.9, color: 0, conserve: 1.6, follow: 0.9 },
+    { key: 'hotaru', name: 'เชฟฟองดองท์', kanji: 'F', desc: 'คำนวณสูตรแม่นยำ เอนทับทิมเล็กน้อย', size: 0, color: 0.2, conserve: 1.0, follow: 1.2 }
+  ];
+  function binom(n, k){ var r = 1; for (var i = 1; i <= k; i++) r = r * (n - k + i) / i; return r; }
+  function lastAtTarget(s){ var hs = s.history; if (!hs.length) return null; var l = hs[hs.length - 1]; return (l.gameId === s.gameId && l.stage === s.stage) ? l : null; }
+  function colorLean(s){ var l = lastAtTarget(s); if (!l) return 0; var T = l.target, dr = Math.abs(l.totalRed - T), db = Math.abs(l.totalBlue - T); if (dr === db) return 0; return dr < db ? 1 : -1; }
+  function modelPlayer(s, j, diff){
+    var p = s.players[j], R = s.rules, T = Rules.target(s), n = s.players.length;
+    var opts = Rules.legalOptions(p, R);
+    if (!opts.length) return [{ red: 0, blue: 0, w: 1 }];
+    if (diff === 'easy') return opts.map(function(o){ return { red: o.red, blue: o.blue, w: 1 / opts.length }; });
+    var mu = clamp(1.5 * T / n, R.min, R.max) + (diff === 'hard' ? 0.15 : 0);
+    var sig = diff === 'hard' ? 0.75 : 1.1;
+    var pr = (p.usedRed + 1) / (p.usedRed + p.usedBlue + 2);
+    if (diff === 'hard') pr = clamp(0.65 * pr + 0.35 * (0.5 + 0.3 * colorLean(s)), 0.08, 0.92);
+    var supplyR = (p.red + 0.5) / (p.red + p.blue + 1);
+    pr = clamp(0.5 * pr + 0.5 * supplyR, 0.05, 0.95);
+    var fin = s.stage === s.targets.length - 1, W = 0;
+    var out = opts.map(function(o){
+      var t = o.red + o.blue, w = Math.exp(-((t - mu) * (t - mu)) / (2 * sig * sig));
+      if (t > 0) w *= binom(t, o.red) * Math.pow(pr, o.red) * Math.pow(1 - pr, o.blue);
+      if (t === p.red + p.blue && !fin) w *= 0.05;
+      W += w; return { red: o.red, blue: o.blue, w: w };
+    });
+    out.forEach(function(o){ o.w /= (W || 1); });
+    return out;
+  }
+  function convolve(dist, opts, cap){
+    var m = new Map();
+    dist.forEach(function(pv, key){
+      var r = key >> 8, b = key & 255;
+      for (var i = 0; i < opts.length; i++) { var o = opts[i], nr = Math.min(cap, r + o.red), nb = Math.min(cap, b + o.blue), k = (nr << 8) | nb; m.set(k, (m.get(k) || 0) + pv * o.w); }
+    });
+    return m;
+  }
+  function fv(rem, left){ if (left <= 0) return 1; if (rem <= 0) return -2; return 0.7 * (1 - Math.exp(-rem / (left * 0.9))); }
+  function decide(s, seat, persona, diff){
+    var R = s.rules, T = Rules.target(s), me = s.players[seat], cap = T + 1;
+    var opts = Rules.legalOptions(me, R);
+    if (!opts.length) return { red: 0, blue: 0 };
+    var dist = new Map([[0, 1]]);
+    s.players.forEach(function(p, j){ if (j !== seat) dist = convolve(dist, modelPlayer(s, j, diff), cap); });
+    var entries = []; dist.forEach(function(v, k){ entries.push([k >> 8, k & 255, v]); });
+    var left = s.targets.length - s.stage, fin = left === 1, lean = colorLean(s), myTot = me.red + me.blue;
+    var mu = clamp(1.5 * T / s.players.length, R.min, R.max);
+    var P = persona || { size: 0, color: 0, conserve: 1, follow: 0.5 };
+    var scored = opts.map(function(o){
+      var p = 0; for (var q = 0; q < entries.length; q++) { var e = entries[q]; if (e[0] + o.red === T || e[1] + o.blue === T) p += e[2]; }
+      var t = o.red + o.blue, rem = myTot - t, u;
+      if (fin) u = p * 3 + (1 - p) * fv(rem, 1) * P.conserve;
+      else u = p * (1 + fv(rem, left - 1) * P.conserve) + (1 - p) * fv(rem, left) * P.conserve;
+      if (rem > 0 && (me.red - o.red === 0 || me.blue - o.blue === 0)) u -= 0.03 * P.conserve;
+      u += 0.035 * P.size * (t - mu);
+      if (t > 0) u += 0.035 * P.color * (o.red - o.blue) / t;
+      if (lean && t > 0) u += 0.04 * P.follow * lean * (o.red - o.blue) / t;
+      return { o: o, u: u };
+    });
+    if (diff === 'easy' && Math.random() < 0.3) {
+      var so = scored.filter(function(x){ return fin || x.o.red + x.o.blue < myTot; }); var pool = so.length ? so : scored;
+      var c = pool[Math.floor(Math.random() * pool.length)].o; return { red: c.red, blue: c.blue };
+    }
+    var temp = diff === 'easy' ? 0.22 : diff === 'hard' ? 0.03 : 0.08;
+    var mx = Math.max.apply(null, scored.map(function(x){ return x.u; }));
+    var ws = scored.map(function(x){ return Math.exp((x.u - mx) / temp); }), sum = ws.reduce(function(a, b){ return a + b; }, 0);
+    var r = Math.random() * sum;
+    for (var i = 0; i < ws.length; i++) { r -= ws[i]; if (r <= 0) return { red: scored[i].o.red, blue: scored[i].o.blue }; }
+    return { red: scored[0].o.red, blue: scored[0].o.blue };
+  }
+  return { PERSONAS: PERSONAS, decide: decide };
+})();
+
+/* ================= SOUND (Web Audio Music Box & Patisserie Chimes) ================= */
+var Sound = (function(){
+  var ctx = null, master, sfxBus, musicBus, ambBus, noise;
+  var sfxOn = Store.get('sfx', true) !== false, musicOn = Store.get('music', true) !== false;
+  var musicTimer = null, nextNote = 0, stepN = 0, idx = 6, crackTimer = null, level = 1, rumbleGain = null, pad = [];
+  var SCALE = [261.63,293.66,329.63,392.00,440.00,523.25,587.33,659.25,783.99,880.00,1046.50];
+  function ensure(){
+    if (!ctx) {
+      var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+      try { ctx = new AC(); } catch (e) { return null; }
+      master = ctx.createGain(); master.gain.value = 0.78; master.connect(ctx.destination);
+      sfxBus = ctx.createGain(); sfxBus.gain.value = sfxOn ? 1 : 0; sfxBus.connect(master);
+      ambBus = ctx.createGain(); ambBus.gain.value = sfxOn ? 1 : 0; ambBus.connect(master);
+      musicBus = ctx.createGain(); musicBus.gain.value = 0; musicBus.connect(master);
+      var len = ctx.sampleRate * 2; noise = ctx.createBuffer(1, len, ctx.sampleRate);
+      var d = noise.getChannelData(0); for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    }
+    if (ctx.state === 'suspended') { try { var p = ctx.resume(); if (p && p.catch) p.catch(function(){}); } catch (e) {} }
+    return ctx;
+  }
+  function env(g, t, a, peak, dec){ g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(Math.max(0.0002, peak), t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + dec); }
+  function tone(f, type, t, a, peak, dec, bus){ var o = ctx.createOscillator(); o.type = type; o.frequency.value = f; var g = ctx.createGain(); env(g, t, a, peak, dec); o.connect(g); g.connect(bus || sfxBus); o.start(t); o.stop(t + a + dec + 0.05); return o; }
+  function burst(t, dur, ft, freq, q, peak, bus){ var s = ctx.createBufferSource(); s.buffer = noise; s.loop = true; var f = ctx.createBiquadFilter(); f.type = ft; f.frequency.value = freq; f.Q.value = q || 1; var g = ctx.createGain(); env(g, t, 0.003, peak, dur); s.connect(f); f.connect(g); g.connect(bus || sfxBus); s.start(t, Math.random() * 1.5); s.stop(t + dur + 0.06); return { s: s, f: f, g: g }; }
+  var SND = {
+    tick: function(t){ tone(1318.5, 'sine', t, 0.002, 0.08, 0.06); burst(t, 0.02, 'highpass', 3200, 1, 0.04); },
+    untick: function(t){ tone(987.77, 'sine', t, 0.002, 0.06, 0.06); },
+    wood: function(t){ tone(659.25, 'triangle', t, 0.003, 0.14, 0.11); tone(1318.5, 'sine', t + 0.02, 0.002, 0.07, 0.09); },
+    lock: function(t){ SND.wood(t); SND.wood(t + 0.08); },
+    count: function(t){ tone(659.25, 'triangle', t, 0.005, 0.14, 0.3); },
+    reveal: function(t){ SND.wood(t); tone(987.77, 'triangle', t, 0.005, 0.12, 0.4); tone(1318.5, 'sine', t + 0.03, 0.005, 0.08, 0.5); },
+    whoosh: function(t){ var n = burst(t, 0.28, 'bandpass', 750, 1.2, 0.1); n.f.frequency.setValueAtTime(600, t); n.f.frequency.exponentialRampToValueAtTime(2400, t + 0.28); },
+    ignite: function(t){
+      [523.25, 659.25, 783.99, 1046.5].forEach(function(f, i){ tone(f, 'triangle', t + i * 0.06, 0.008, 0.12, 0.65); });
+      burst(t, 0.35, 'highpass', 2800, 0.8, 0.08);
+    },
+    douse: function(t){ [783.99, 659.25, 523.25].forEach(function(f, i){ tone(f, 'sine', t + i * 0.07, 0.01, 0.11, 0.6); }); },
+    fail: function(t){ tone(440, 'triangle', t, 0.01, 0.12, 0.35); tone(392, 'triangle', t + 0.18, 0.01, 0.1, 0.45); },
+    victory: function(t){
+      [523.25,587.33,659.25,783.99,880,1046.5,1174.66,1318.5].forEach(function(f, i){ tone(f, 'triangle', t + i * 0.08, 0.01, 0.13, 0.85); tone(f / 2, 'sine', t + i * 0.08, 0.01, 0.05, 1.1); });
+    },
+    defeat: function(t){ [523.25, 493.88, 440, 392].forEach(function(f, i){ tone(f, 'triangle', t + i * 0.22, 0.01, 0.09, 0.7); }); }
+  };
+  function play(name){ try { if (!ctx || !sfxOn || ctx.state !== 'running') return; var f = SND[name]; if (f) f(ctx.currentTime + 0.01); } catch (e) {} }
+  function pluck(f, t, peak, dec){
+    dec = dec || 1.3; var o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = f;
+    var o2 = ctx.createOscillator(); o2.type = 'triangle'; o2.frequency.value = f * 2;
+    var g = ctx.createGain(); env(g, t, 0.005, peak, dec); var g2 = ctx.createGain(); g2.gain.value = 0.22;
+    var lp = ctx.createBiquadFilter(); lp.type = 'lowpass'; lp.frequency.value = 2400;
+    o.connect(g); o2.connect(g2); g2.connect(g); g.connect(lp); lp.connect(musicBus);
+    o.start(t); o2.start(t); o.stop(t + dec + 0.1); o2.stop(t + dec + 0.1);
+  }
+  function schedule(){
+    try {
+      if (!ctx || ctx.state !== 'running') return; var spb = 60 / 84 / 2;
+      if (nextNote < ctx.currentTime - 1) nextNote = ctx.currentTime + 0.05;
+      while (nextNote < ctx.currentTime + 0.4) {
+        var bar = Math.floor(stepN / 6), pos = stepN % 6;
+        if ((pos % 2 === 0 || Math.random() < 0.25) && Math.random() < 0.78) { idx = clamp(idx + [-2, -1, -1, 0, 1, 1, 2][Math.floor(Math.random() * 7)], 2, SCALE.length - 1); pluck(SCALE[idx], nextNote, 0.065); }
+        if (pos === 0) pluck(SCALE[[0, 3, 4, 2][bar % 4]] / 2, nextNote, 0.055, 2.1);
+        nextNote += spb; stepN++;
+      }
+    } catch (e) {}
+  }
+  function startMusic(){
+    if (!ensure() || musicTimer) return;
+    musicBus.gain.cancelScheduledValues(ctx.currentTime); musicBus.gain.setTargetAtTime(0.5, ctx.currentTime, 0.6);
+    nextNote = ctx.currentTime + 0.15;
+    musicTimer = setInterval(schedule, 120);
+  }
+  function stopMusic(){
+    if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+    if (ctx) { try { musicBus.gain.setTargetAtTime(0, ctx.currentTime, 0.25); } catch (e) {} }
+    var old = pad; pad = []; setTimeout(function(){ old.forEach(function(o){ try { o.stop(); } catch (e) {} }); }, 900);
+  }
+  function startAmbience(){
+    if (!ctx || crackTimer) return;
+    setLevel(level);
+    crackTimer = setInterval(function(){
+      try {
+        if (!sfxOn || document.hidden || !ctx || ctx.state !== 'running') return;
+        if (Math.random() < 0.03 + level * 0.03) {
+          var t = ctx.currentTime + Math.random() * 0.05;
+          tone(1567.98 + Math.random() * 500, 'sine', t, 0.003, 0.012, 0.18, ambBus);
+        }
+      } catch (e) {}
+    }, 180);
+  }
+  function setLevel(l){ level = l; }
+  function unlock(){ try { if (!ensure()) return; startAmbience(); if (musicOn) startMusic(); } catch (e) {} }
+  function setSfx(on){ sfxOn = on; Store.set('sfx', on); if (ctx) { sfxBus.gain.value = on ? 1 : 0; ambBus.gain.value = on ? 1 : 0; } if (on) unlock(); }
+  function setMusic(on){ musicOn = on; Store.set('music', on); if (on) { unlock(); startMusic(); } else stopMusic(); }
+  return { unlock: unlock, play: play, setLevel: setLevel, setSfx: setSfx, setMusic: setMusic, isSfx: function(){ return sfxOn; }, isMusic: function(){ return musicOn; } };
+})();
+
+/* ================= FX (Sugar Sparkles, Confetti & Sugar Dust) ================= */
+function canvasCtx(c){ try { return (c && typeof c.getContext === 'function') ? c.getContext('2d') : null; } catch (e) { return null; } }
+function makeFX(canvas, anchorFn){
+  var cx = canvasCtx(canvas), W = 0, H = 0, parts = [], level = 0, raf = 0, on = false;
+  function resize(){ if (!cx) return; var r = canvas.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1); W = r.width; H = r.height; canvas.width = Math.max(1, Math.round(W * d)); canvas.height = Math.max(1, Math.round(H * d)); cx.setTransform(d, 0, 0, d, 0, 0); }
+  function origin(){ var a = anchorFn(); if (!isEl(a)) return { x: W / 2, y: H * 0.6, w: 40 }; var ar = a.getBoundingClientRect(), cr = canvas.getBoundingClientRect(); return { x: ar.left + ar.width / 2 - cr.left, y: ar.bottom - cr.top - ar.height * 0.35, w: Math.max(20, ar.width * 0.55) }; }
+  function ember(o, pw, hue){
+    var h = hue != null ? hue + Math.random() * 25 : (Math.random() < 0.55 ? 340 + Math.random() * 25 : 40 + Math.random() * 18);
+    parts.push({ k: 0, x: o.x + (Math.random() - 0.5) * o.w, y: o.y - Math.random() * o.w * 0.5, vx: (Math.random() - 0.5) * 0.85 * pw, vy: -(0.45 + Math.random() * 1.2) * pw, life: 1, dec: 0.009 + Math.random() * 0.014, r: 1.2 + Math.random() * 2.2, h: h });
+  }
+  function smokeP(o, cool){ parts.push({ k: 1, cool: cool, x: o.x + (Math.random() - 0.5) * o.w, y: o.y - 10, vx: (Math.random() - 0.5) * 0.5, vy: -(0.3 + Math.random() * 0.55), life: 1, dec: 0.007 + Math.random() * 0.006, r: 5 + Math.random() * 9 }); }
+  function frame(){
+    raf = 0; if (!on || !cx) return; raf = requestAnimationFrame(frame);
+    try {
+      if (!W || !H) { resize(); if (!W) return; }
+      cx.clearRect(0, 0, W, H);
+      var o = origin();
+      if (!reducedMotion && level > 0 && Math.random() < 0.07 + level * 0.08) ember(o, 0.55 + level * 0.12);
+      if (parts.length > 320) parts.splice(0, parts.length - 320);
+      for (var i = parts.length - 1; i >= 0; i--) {
+        var p = parts[i]; p.x += p.vx; p.y += p.vy; p.life -= p.dec;
+        if (p.k === 0) { p.vx += (Math.random() - 0.5) * 0.06; p.vy *= 0.994; } else { p.r += 0.2; p.vx *= 0.99; }
+        if (p.life <= 0) { parts.splice(i, 1); continue; }
+        if (p.k === 0) {
+          cx.fillStyle = 'hsla(' + p.h + ',85%,' + (52 + p.life * 20) + '%,' + (p.life * 0.9) + ')';
+        } else {
+          cx.fillStyle = (p.cool ? 'rgba(130,190,235,' : 'rgba(220,185,165,') + (p.life * 0.25) + ')';
+        }
+        cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.283); cx.fill();
+      }
+    } catch (e) {}
+  }
+  function start(){ if (on || !cx) return; on = true; resize(); setTimeout(function(){ if (on) resize(); }, 420); if (!raf) raf = requestAnimationFrame(frame); }
+  function stop(){ on = false; if (raf) cancelAnimationFrame(raf); raf = 0; parts = []; if (cx) cx.clearRect(0, 0, W, H); }
+  window.addEventListener('resize', function(){ if (on) resize(); });
+  return {
+    start: start, stop: stop, setLevel: function(l){ level = l; },
+    ignite: function(n, hue){ if (!on) return; var o = origin(); for (var i = 0; i < (n || 70); i++) ember(o, 2 + Math.random() * 1.5, hue); },
+    smoke: function(cool){ if (!on) return; var o = origin(); for (var i = 0; i < 16; i++) smokeP(o, cool); }
+  };
+}
+function makeAmbient(canvas){
+  var cx = canvasCtx(canvas), W = 0, H = 0, parts = [], cool = false;
+  function resize(){ if (!cx) return; var r = canvas.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1); W = r.width; H = r.height; canvas.width = Math.max(1, Math.round(W * d)); canvas.height = Math.max(1, Math.round(H * d)); cx.setTransform(d, 0, 0, d, 0, 0); }
+  function spawn(big, hue){
+    parts.push(big ? { x: W * (0.2 + Math.random() * 0.6), y: H * (0.55 + Math.random() * 0.3), vx: (Math.random() - 0.5) * 5, vy: -(3 + Math.random() * 5), g: 0.07, life: 1, dec: 0.007 + Math.random() * 0.008, r: 1.8 + Math.random() * 2.8, h: hue + Math.random() * 35 }
+      : { x: Math.random() * W, y: H + 4, vx: (Math.random() - 0.5) * 0.25, vy: -(0.2 + Math.random() * 0.5), g: 0, life: 1, dec: 0.0018 + Math.random() * 0.003, r: 1 + Math.random() * 1.8, h: (cool ? 200 : 340) + Math.random() * 35 });
+  }
+  function frame(){
+    requestAnimationFrame(frame);
+    try {
+      if (document.hidden) return;
+      if (!W) { resize(); if (!W) return; }
+      cx.clearRect(0, 0, W, H);
+      if (!reducedMotion && parts.length < 48 && Math.random() < 0.18) spawn(false);
+      for (var i = parts.length - 1; i >= 0; i--) {
+        var p = parts[i]; p.x += p.vx + Math.sin((p.y + i * 7) * 0.02) * 0.18; p.y += p.vy; p.vy += p.g; p.life -= p.dec;
+        if (p.life <= 0 || p.y < -10 || p.y > H + 20) { parts.splice(i, 1); continue; }
+        cx.fillStyle = 'hsla(' + p.h + ',75%,' + (58 + p.life * 18) + '%,' + (p.life * 0.55) + ')';
+        cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.283); cx.fill();
+      }
+    } catch (e) {}
+  }
+  if (cx) { resize(); window.addEventListener('resize', resize); requestAnimationFrame(frame); }
+  return { celebrate: function(isCool){ if (!cx || reducedMotion) return; for (var i = 0; i < 150; i++) spawn(true, isCool ? 195 : 335); }, setCool: function(v){ cool = !!v; } };
+}
+
+/* ================= CENTERPIECE CAKE STAND & MACARON TOWER ================= */
+var FS = [0.42, 0.58, 0.72, 0.84, 0.94, 1];
+function makePit(container){
+  var pit = mk('div', 'pit'), glow = mk('div', 'glow'), plate = mk('div', 'plate');
+  var edge = mk('div', 'oct edge'), top = mk('div', 'oct top'), inner = mk('div', 'oct inner'), sticks = mk('div', 'sticks');
+  top.appendChild(inner); plate.appendChild(edge); plate.appendChild(top); plate.appendChild(sticks);
+  var logs = mk('div', 'logs'); ['l1', 'l2', 'l3', 'l4'].forEach(function(c){ logs.appendChild(mk('div', 'log ' + c)); });
+  var coals = mk('div', 'coals'), fire = mk('div', 'fire');
+  ['f-out', 'f-mid', 'f-in', 'f-core', 'f-side l', 'f-side r'].forEach(function(c){ fire.appendChild(mk('div', 'fl ' + c)); });
+  pit.appendChild(glow); pit.appendChild(plate); pit.appendChild(coals); pit.appendChild(logs); pit.appendChild(fire);
+  if (isEl(container)) container.appendChild(pit);
+  return { pit: pit, fire: fire, sticks: sticks, key: '' };
+}
+function pitLevel(P, lv){ if (!P) return; lv = clamp(lv | 0, 0, 5); P.pit.style.setProperty('--lv', lv); P.fire.setAttribute('data-lv', String(lv)); P.fire.style.setProperty('--fs', FS[lv]); }
+function pitSticks(P, red, blue){
+  if (!P) return;
+  var key = red + ':' + blue; if (P.key === key) return; P.key = key;
+  var box = P.sticks; box.textContent = '';
+  var total = Math.min(80, red + blue), rr = red + blue > 0 ? Math.round(total * red / (red + blue)) : 0;
+  for (var i = 0; i < total; i++) {
+    var isRed = Math.floor((i + 1) * rr / total) > Math.floor(i * rr / total);
+    var s = mk('div', 'bs ' + (isRed ? 'r' : 'b'));
+    s.style.setProperty('--a', ((i * 137.508) % 360).toFixed(1) + 'deg');
+    s.style.setProperty('--o', (240 + ((i * 37) % 4) * 52) + '%');
+    box.appendChild(s);
+  }
+}
+
+/* ================= SESSION ================= */
+var S = { kind: null, state: null, mySeat: 0, code: null, myPick: null, locking: false, diff: 'normal', botPicks: [], botTimers: [], botKey: '', humanPick: null, lobby: null };
+function clearBots(){ S.botTimers.forEach(function(t){ clearTimeout(t); }); S.botTimers = []; }
+function resetS(){ clearBots(); S.kind = null; S.state = null; S.mySeat = 0; S.code = null; S.myPick = null; S.locking = false; S.botPicks = []; S.botKey = ''; S.humanPick = null; S.lobby = null; }
+
+/* ================= UI ================= */
+var UI = (function(){
+  var cur = 'menu';
+  var sel = { red: 0, blue: 0, key: '' };
+  var gamePit = null, menuPit = null;
+  var noFX = { start: function(){}, stop: function(){}, setLevel: function(){}, ignite: function(){}, smoke: function(){} };
+  var gameFX = noFX, menuFX = noFX, amb = { celebrate: function(){}, setCool: function(){} };
+  var seen = { g: null, r: 0 }, baselineNext = true;
+  var revealQ = [], revealing = false, epoch = 0, contResolve = null, cfResolve = null;
+  var raw = Store.get('settings', {});
+  var settings = { name: '', count: 3, diff: 'normal', allowZero: false, noCap: false, scale: true };
+  if (raw && typeof raw === 'object') Object.keys(settings).forEach(function(k){ if (raw[k] !== undefined) settings[k] = raw[k]; });
+  settings.count = clamp(parseInt(settings.count, 10) || 3, 2, MAXP);
+  if (['easy', 'normal', 'hard'].indexOf(settings.diff) < 0) settings.diff = 'normal';
+  settings.name = cleanName(settings.name); settings.allowZero = !!settings.allowZero; settings.noCap = !!settings.noCap; settings.scale = settings.scale !== false;
+  function saveSettings(){ Store.set('settings', settings); }
+
+  function show(name){
+    cur = name;
+    qsa('.scr').forEach(function(s){ s.classList.toggle('active', s.id === 's-' + name); });
+    safe(function(){ if (name === 'game') gameFX.start(); else gameFX.stop(); });
+    safe(function(){ if (name === 'menu') menuFX.start(); else menuFX.stop(); });
+    if (name === 'menu') { refreshMenu(); Sound.setLevel(3); amb.setCool(false); }
+  }
+  function toast(msg, kind){
+    var box = E('toasts'), t = mk('div', 'toast' + (kind ? ' ' + kind : ''), msg); box.appendChild(t);
+    while (box.children.length > 3) box.removeChild(box.firstChild);
+    setTimeout(function(){ t.classList.add('out'); setTimeout(function(){ if (t.parentNode) t.parentNode.removeChild(t); }, 400); }, 2600);
+  }
+  function netBar(msg, showLeave){ var b = E('netBar'); if (!msg) { b.hidden = true; return; } E('netText').textContent = msg; E('btnNetLeave').hidden = !showLeave; b.hidden = false; }
+  function openOv(id){ E(id).classList.add('show'); }
+  function closeOv(id){ E(id).classList.remove('show'); }
+  function confirmBox(text, yes){
+    return new Promise(function(res){ if (cfResolve) cfResolve(false); cfResolve = res; E('cfText').textContent = text; E('cfYes').textContent = yes || 'ตกลง'; openOv('ovConfirm'); });
+  }
+  function cfDone(v){ closeOv('ovConfirm'); var f = cfResolve; cfResolve = null; if (f) f(v); }
+  function refreshMenu(){ var sv = Store.get('solo', null); E('btnContinue').hidden = !(sv && sv.state && Rules.sanityCheck(sv.state) && sv.state.phase === 'select'); }
+  function syncAudio(){
+    qsa('[data-audio]').forEach(function(b){
+      var isM = b.getAttribute('data-audio') === 'music', on = isM ? Sound.isMusic() : Sound.isSfx();
+      b.classList.toggle('off', !on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var tx = b.querySelector('.audtx'); if (tx) tx.textContent = (isM ? 'เพลง: ' : 'เสียง: ') + (on ? 'เปิด' : 'ปิด');
+    });
+  }
+  function targetChips(box, n, scale){
+    box.textContent = '';
+    var arr = Rules.targetsFor(n, scale);
+    box.appendChild(mk('span', 'tl', 'สูตร 5 ชั้น'));
+    arr.forEach(function(t){ var c = mk('span', 'tchip'); c.appendChild(mk('span', null, t)); box.appendChild(c); });
+    box.appendChild(mk('span', 'sc', n <= 4 ? 'สูตรมาตรฐาน (2–4 คน)' : (scale ? 'ปรับตามทีมเชฟ ' + n + ' คน' : 'ใช้สูตร 1–5 (ท้าทายมากเมื่อคนเยอะ)')));
+  }
+  /* ---- solo setup ---- */
+  var DIFF_DESC = { easy: 'ฝึกหัด: เชฟบอทกะปริมาณคร่าว ๆ บางครั้งบีบครีมตามอารมณ์', normal: 'ชำนาญ: เชฟบอทสังเกตการบีบครีมของทุกคนในรอบก่อน ๆ และถุงครีมที่เหลือ', hard: 'เชฟใหญ่: คำนวณความน่าจะเป็นของทั้งทีม ตามกระแสรสครีม และประหยัดวัตถุดิบ' };
+  function refreshSolo(){
+    E('countVal').textContent = settings.count;
+    E('countSub').textContent = 'คุณ + เชฟบอท ' + (settings.count - 1) + ' คน';
+    E('cntMinus').disabled = settings.count <= 2; E('cntPlus').disabled = settings.count >= MAXP;
+    targetChips(E('soloTargets'), settings.count, settings.scale);
+    qsa('#segDiff button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-v') === settings.diff); });
+    E('diffDesc').textContent = DIFF_DESC[settings.diff] || '';
+    var box = E('botList'); box.textContent = '';
+    for (var i = 1; i < settings.count; i++) {
+      var P = AI.PERSONAS[i - 1], row = mk('div', 'bot'); row.title = P.name + ': ' + P.desc;
+      var av = mk('div', 'av sm', P.kanji); av.style.setProperty('--hue', hueOf(i));
+      row.appendChild(av); row.appendChild(mk('b', null, P.name)); box.appendChild(row);
+    }
+  }
+  function openSolo(){ E('soloName').value = settings.name || ''; E('soloZero').checked = settings.allowZero; E('soloNoCap').checked = settings.noCap; E('soloScale').checked = settings.scale; refreshSolo(); show('solo'); }
+  /* ---- online ---- */
+  function onlineStatus(msg, kind){ var e = E('onStatus'); e.textContent = msg || ''; e.className = 'status' + (kind ? ' ' + kind : ''); }
+  function openOnline(pre){
+    E('onName').value = settings.name || '';
+    var cs = Store.get('clientSave', null);
+    E('joinCode').value = pre || (cs && cs.code) || '';
+    var rh = E('rejoinHint');
+    if (cs && cs.code && cs.name) { rh.hidden = false; rh.textContent = 'ห้องครัวล่าสุด: ' + cs.code + ' ในชื่อ "' + cs.name + '" ใช้ชื่อเดิมเพื่อกลับเข้าที่นั่งเดิม'; } else rh.hidden = true;
+    var hs = Store.get('hostSave', null), rb = E('btnResumeHost');
+    if (hs && hs.code && Date.now() - (hs.savedAt || 0) < 12 * 3600 * 1000) { rb.hidden = false; rb.textContent = 'กลับไปเปิดห้องครัวเดิม ' + hs.code; } else rb.hidden = true;
+    onlineStatus(''); show('online');
+  }
+  function enterLobby(){ show('lobby'); renderLobby(); }
+  function renderLobby(){
+    var L = Net.lobbyInfo();
+    E('lobbyCode').textContent = L.code || '-----'; E('lobbyLink').textContent = Net.shareLink();
+    E('btnShare').hidden = !navigator.share;
+    var list = E('lobbyList'); list.textContent = '';
+    L.players.forEach(function(p, i){
+      var row = mk('div', 'lrow'), av = mk('div', 'av sm', (p.name.charAt(0) || '?').toUpperCase()); av.style.setProperty('--hue', hueOf(i));
+      var nm = mk('div', 'lname', p.name + (i === L.me ? ' (คุณ)' : ''));
+      var tag = mk('span', 'tag ' + (p.isHost ? 'host' : (p.connected ? 'on' : 'off')), p.isHost ? 'หัวหน้าเชฟ' : (p.connected ? 'พร้อม' : 'หลุด'));
+      row.appendChild(av); row.appendChild(nm); row.appendChild(tag); list.appendChild(row);
+    });
+    var conn = L.players.filter(function(p){ return p.connected; }).length;
+    E('lobbyCount').textContent = 'ทีมเชฟ ' + L.players.length + '/' + MAXP;
+    targetChips(E('lobbyTargets'), Math.max(2, conn), L.rules.scale !== false);
+    E('lobbyZero').checked = !!L.rules.allowZero; E('lobbyNoCap').checked = !!L.rules.noCap; E('lobbyScale').checked = L.rules.scale !== false;
+    E('lobbyZero').disabled = !L.isHost; E('lobbyNoCap').disabled = !L.isHost; E('lobbyScale').disabled = !L.isHost;
+    E('btnLobbyStart').hidden = !L.isHost; E('btnLobbyStart').disabled = conn < 2 || conn > MAXP;
+    E('lobbyHint').textContent = L.isHost ? (conn < 2 ? 'ส่งรหัสหรือลิงก์ให้เพื่อน ต้องมีเชฟอย่างน้อย 2 คนจึงเริ่มได้' : 'เชฟพร้อมแล้ว ' + conn + ' คน เริ่มประกอบหอคอยได้เลย!') : 'รอหัวหน้าเชฟกดเริ่มเกม…';
+  }
+  /* ---- game ---- */
+  function enterGame(){
+    show('game'); var c = App.ctx(); if (!c) return;
+    checkReveal(c.state); renderGame(c);
+    if (c.state.phase !== 'select' && !revealing) setTimeout(showEnd, 300);
+  }
+  function render(){
+    if (cur === 'lobby') renderLobby();
+    if (cur !== 'game') return;
+    var c = App.ctx(); if (!c) return;
+    checkReveal(c.state); renderGame(c);
+  }
+  function renderGame(c){
+    c = c || App.ctx(); if (!c) return; var s = c.state;
+    E('tbMode').textContent = (s.mode === 'build' ? 'ประกอบหอคอยขนมหวาน' : 'งานเลี้ยงชิมขนม · โหมดพิเศษ') + ' · ' + s.players.length + ' คน';
+    E('tbRound').textContent = 'รอบ ' + s.round;
+    var room = E('tbRoom'); room.hidden = !c.code; if (c.code) room.textContent = c.code;
+    renderPlayers(c); renderHand(c);
+    if (!revealing) renderStage(c);
+    if (s.phase === 'select') closeOv('ovEnd');
+  }
+  function usedTotals(s){ return s.players.reduce(function(a, p){ return { r: a.r + p.usedRed, b: a.b + p.usedBlue }; }, { r: 0, b: 0 }); }
+  function renderStage(c, popK){
+    var s = c.state, T = Rules.target(s), lv = Rules.fireLevel(s), ext = s.mode === 'extinguish';
+    pitLevel(gamePit, lv); gameFX.setLevel(lv); Sound.setLevel(lv); amb.setCool(ext);
+    E('s-game').classList.toggle('ext', ext);
+    var tot = usedTotals(s);
+    pitSticks(gamePit, tot.r + ((s.carry && s.carry.red) || 0), tot.b + ((s.carry && s.carry.blue) || 0));
+    E('tgNum').textContent = T == null ? '✓' : String(T);
+    E('tgRing').style.setProperty('--p', String(Math.round(s.stage / 5 * 100)));
+    E('mission').hidden = s.phase !== 'select';
+    E('mRed').textContent = T == null ? '-' : T; E('mBlue').textContent = T == null ? '-' : T;
+    var last = s.history.length ? s.history[s.history.length - 1] : null, lh = E('lastHint');
+    if (s.phase !== 'select') lh.textContent = s.phase === 'won' ? (ext ? 'เสิร์ฟงานเลี้ยงครบทุกชั้นแล้ว!' : 'ประกอบหอคอยครบทั้ง 5 ชั้นแล้ว!') : 'มีเชฟครีมหมดมือ';
+    else if (last && last.gameId === s.gameId && last.stage === s.stage && !last.success) lh.textContent = 'รอบที่แล้ว: ทับทิม ' + last.totalRed + ' · บลูเบอร์รี ' + last.totalBlue + ' (สูตร ' + last.target + ')';
+    else lh.textContent = 'ชั้นที่ ' + (s.stage + 1) + '/5 · ต้องบีบได้รสใดรสหนึ่งตรงสูตรพอดี';
+    renderTokens(s, popK);
+    E('pileInfo').textContent = 'บีบแล้ว ' + tot.r + ' ทับทิม · ' + tot.b + ' บลูเบอร์รี';
+    E('progBar').style.width = (s.stage / 5 * 100) + '%';
+    E('progText').textContent = (ext ? 'ชิมแล้ว ' : 'ประกอบแล้ว ') + s.stage + '/5 ชั้น';
+    if (popK) { var bd = E('tgRing'); bd.classList.remove('bump'); void bd.offsetWidth; bd.classList.add('bump'); }
+  }
+  function renderTokens(s, popK){
+    var box = E('tokens'); box.textContent = '';
+    var bt = s.buildTargets || [1, 2, 3, 4, 5];
+    for (var k = 1; k <= 5; k++) {
+      var lit, curr, out = false;
+      if (s.mode === 'build') { lit = s.stage >= k; curr = s.phase === 'select' && s.stage + 1 === k; }
+      else { var pos = 5 - k; out = s.stage > pos; lit = !out; curr = s.phase === 'select' && s.stage === pos; }
+      var t = mk('div', 'tok' + (lit ? ' lit' : '') + (curr ? ' cur' : '') + (out ? ' out' : '') + (popK === k ? ' pop' : ''));
+      t.style.setProperty('--sz', (16 + k * 3) + 'px'); t.title = 'ชั้นที่ ' + k + ' · สูตร ' + bt[k - 1]; t.appendChild(mk('span', null, bt[k - 1])); box.appendChild(t);
+    }
+  }
+  function renderPlayers(c){
+    var s = c.state, n = s.players.length, box = E('players'); box.textContent = '';
+    box.className = 'players' + (n > 4 ? ' cmp' : ''); box.setAttribute('data-n', String(n));
+    s.players.forEach(function(p, i){
+      var st = c.status(i), locked = !!s.locked[i];
+      var thinking = s.phase === 'select' && !locked && st !== 'offline' && st !== 'reconnecting';
+      var card = mk('div', 'pc' + (i === c.mySeat ? ' me' : '') + (locked ? ' locked' : '') + (st === 'offline' ? ' off' : '') + (thinking ? ' think' : ''));
+      card.setAttribute('data-seat', String(i));
+      card.appendChild(mk('span', 'lk', '✓'));
+      var P = null; if (p.bot) AI.PERSONAS.forEach(function(x){ if (x.key === p.persona) P = x; });
+      var top = mk('div', 'pc-top');
+      var av = mk('div', 'av', P ? P.kanji : (p.name.charAt(0) || '?').toUpperCase()); av.style.setProperty('--hue', hueOf(i));
+      av.appendChild(mk('span', 'dot ' + st));
+      top.appendChild(av); top.appendChild(mk('div', 'pc-n', p.name + (i === c.mySeat ? ' (คุณ)' : '')));
+      var pips = mk('div', 'pips');
+      [['r', p.red, p.usedRed], ['b', p.blue, p.usedBlue]].forEach(function(a){
+        var row = mk('div', 'prow ' + a[0]), tt = Math.max(5, a[1] + a[2]);
+        for (var k = 0; k < tt; k++) row.appendChild(mk('i', k < a[1] ? '' : 'u'));
+        row.appendChild(mk('em', null, a[1])); pips.appendChild(row);
+      });
+      var cn = mk('div', 'cnts'); cn.appendChild(mk('span', 'r', p.red)); cn.appendChild(mk('span', 'b', p.blue));
+      var txt;
+      if (s.phase !== 'select') txt = st === 'offline' ? 'ออฟไลน์' : (p.red + p.blue === 0 ? 'ครีมหมด' : 'จบรอบ');
+      else if (locked) txt = 'พร้อมเสิร์ฟ ✓';
+      else if (st === 'offline') txt = 'ออฟไลน์ · กันที่ไว้';
+      else if (st === 'reconnecting') txt = 'กำลังต่อใหม่…';
+      else txt = p.bot ? 'กำลังกะสูตร…' : (i === c.mySeat ? 'ตาคุณเลือกครีม' : 'กำลังเลือกครีม…');
+      card.title = p.name + ': เหลือทับทิม ' + p.red + ' บลูเบอร์รี ' + p.blue + ' · ใช้ไปทับทิม ' + p.usedRed + ' บลูเบอร์รี ' + p.usedBlue + ' · ' + txt;
+      card.setAttribute('aria-label', card.title);
+      card.appendChild(top); card.appendChild(pips); card.appendChild(cn); card.appendChild(mk('div', 'pc-s' + (locked ? ' ok' : ''), (st === 'host' ? 'หัวหน้าเชฟ · ' : '') + txt));
+      box.appendChild(card);
+    });
+  }
+  function renderHand(c){
+    var s = c.state, seat = c.mySeat, me = s.players[seat]; if (!me) return;
+    var key = s.gameId + ':' + s.roundId; if (sel.key !== key) { sel.key = key; sel.red = 0; sel.blue = 0; }
+    sel.red = Math.min(sel.red, me.red); sel.blue = Math.min(sel.blue, me.blue);
+    var open = s.phase === 'select', locked = !!s.locked[seat] || !!c.locking, R = s.rules;
+    E('handRule').textContent = 'เลือก ' + R.min + '–' + (R.noCap ? 'ไม่จำกัด' : R.max) + ' ถุง · ผสมรสได้';
+    var showPiles = open && !locked;
+    E('piles').hidden = !showPiles; E('lockedBox').hidden = showPiles;
+    if (!open) { E('lockedText').textContent = s.phase === 'won' ? 'เสร็จสมบูรณ์ · ชนะ!' : 'จบเกม'; E('lockedWait').textContent = ''; }
+    else if (locked) {
+      var pk = c.myPick;
+      E('lockedText').textContent = c.locking ? 'กำลังส่งถาด…' : pk ? ('สูตรลับของคุณ: ทับทิม ' + pk.red + ' · บลูเบอร์รี ' + pk.blue) : 'ปิดฝาครอบแล้ว';
+      var waiting = s.players.filter(function(p, i){ return !s.locked[i]; }).map(function(p){ return p.name; });
+      E('lockedWait').textContent = waiting.length ? 'รอเชฟอีก ' + waiting.length + ' คน: ' + waiting.slice(0, 4).join(', ') + (waiting.length > 4 ? '…' : '') : 'กำลังเปิดฝาครอบพร้อมกัน…';
+    } else { buildPile('red', me.red, sel.red); buildPile('blue', me.blue, sel.blue); }
+    E('selRed').textContent = sel.red; E('selBlue').textContent = sel.blue;
+    E('leftRed').textContent = 'เหลือ ' + me.red; E('leftBlue').textContent = 'เหลือ ' + me.blue;
+    var tot = sel.red + sel.blue;
+    E('handCount').textContent = showPiles ? ('เลือกแล้ว ' + tot + ' ถุง') : (open ? 'ปิดฝาครอบแล้ว' : 'รอบปิดแล้ว');
+    var err = showPiles ? Rules.validate(s, seat, sel) : 'closed';
+    var btn = E('btnLock'); btn.hidden = !showPiles; btn.disabled = !!err;
+    btn.textContent = err ? (tot < R.min ? ('เลือกอย่างน้อย ' + R.min + ' ถุง') : err) : ('พร้อมเสิร์ฟ ' + tot + ' ถุง · Bon Appétit!');
+    qsa('[data-act="step"]').forEach(function(b){ var col = b.getAttribute('data-c'), d = +b.getAttribute('data-d'); b.disabled = d < 0 ? sel[col] <= 0 : (sel[col] >= me[col] || tot >= R.max); });
+  }
+  function buildPile(color, count, selected){
+    var box = E(color === 'red' ? 'pileRed' : 'pileBlue'); box.textContent = '';
+    if (count === 0) { box.appendChild(mk('div', 'pempty', 'หมดแล้ว')); return; }
+    for (var i = 0; i < count; i++) {
+      var b = mk('button', 'mstick ' + color + (i < selected ? ' sel' : '')); b.type = 'button';
+      b.setAttribute('data-act', 'stick'); b.setAttribute('data-c', color); b.setAttribute('data-i', String(i));
+      b.setAttribute('aria-label', (color === 'red' ? 'ครีมทับทิม ' : 'ครีมบลูเบอร์รี ') + (i + 1) + (i < selected ? ' (เลือกแล้ว)' : ''));
+      box.appendChild(b);
+    }
+  }
+  function setSel(color, nv){
+    if (color !== 'red' && color !== 'blue') return;
+    var c = App.ctx(); if (!c) return; var s = c.state;
+    if (s.phase !== 'select' || s.locked[c.mySeat] || c.locking || revealing) return;
+    var me = s.players[c.mySeat], R = s.rules;
+    if (nv < 0 || nv === sel[color]) return;
+    if (nv > me[color]) { toast('ครีม' + (color === 'red' ? 'ทับทิม' : 'บลูเบอร์รี') + 'ในถาดไม่พอ'); return; }
+    var other = color === 'red' ? sel.blue : sel.red;
+    if (nv + other > R.max) { toast('เลือกได้สูงสุด ' + R.max + ' ถุงต่อรอบ'); var hd = E('hand'); hd.classList.remove('shake'); void hd.offsetWidth; hd.classList.add('shake'); return; }
+    var up = nv > sel[color]; sel[color] = nv; Sound.play(up ? 'tick' : 'untick'); renderHand(c);
+  }
+  function lockIn(){ var c = App.ctx(); if (!c || revealing) return; App.submit({ red: sel.red, blue: sel.blue }); }
+  /* ---- reveal ---- */
+  function baseline(){ baselineNext = true; }
+  function checkReveal(s){
+    if (!s) return;
+    if (baselineNext) { baselineNext = false; seen = { g: s.gameId, r: s.result ? s.result.roundId : 0 }; return; }
+    var r = s.result;
+    if (!r) { if (seen.g !== s.gameId) seen = { g: s.gameId, r: 0 }; return; }
+    if (r.gameId === seen.g && r.roundId <= seen.r) return;
+    seen = { g: r.gameId, r: r.roundId };
+    revealQ.push(r); if (!revealing) runQueue();
+  }
+  function runQueue(){
+    revealing = true; var my = epoch;
+    function loop(){
+      if (my !== epoch || !revealQ.length) return Promise.resolve();
+      var r = revealQ.shift();
+      return runReveal(r, my).catch(showError).then(loop);
+    }
+    loop().then(function(){
+      if (my !== epoch) return;
+      revealing = false;
+      var c = App.ctx();
+      if (c && cur === 'game') {
+        renderGame(c);
+        if (c.state.phase !== 'select') return sleep(800).then(function(){ if (my === epoch) showEnd(); });
+      }
+    }).then(function(){ if (my === epoch) App.afterReveal(); }).catch(showError);
+  }
+  function runReveal(r, my){
+    var c = App.ctx(); if (!c) return Promise.resolve();
+    closeOv('ovMenu'); closeOv('ovEnd'); closeOv('ovHow');
+    var tx = E('countText');
+    openOv('ovCount'); tx.textContent = '1, 2, 3…'; tx.className = 'count a'; Sound.play('count');
+    return sleep(560).then(function(){
+      if (my !== epoch) throw 0;
+      tx.textContent = 'Bon Appétit!'; tx.className = 'count b'; Sound.play('reveal');
+      return sleep(480);
+    }).then(function(){
+      closeOv('ovCount'); if (my !== epoch) throw 0;
+      fillReveal(r, c.state); openOv('ovReveal');
+      return new Promise(function(res){ contResolve = res; });
+    }).then(function(){
+      contResolve = null; closeOv('ovReveal'); if (my !== epoch) throw 0;
+      return flyMatches(r);
+    }).then(function(){
+      if (my !== epoch) throw 0;
+      var c2 = App.ctx(); if (!c2) throw 0;
+      var popK = 0;
+      if (r.success) popK = r.mode === 'build' ? r.stage + 1 : 5 - r.stage;
+      renderStage(c2, popK);
+      var fl = E('flash'); fl.classList.remove('go', 'cool'); void fl.offsetWidth;
+      if (r.success) {
+        if (r.mode === 'build') { gameFX.ignite(80); Sound.play('ignite'); }
+        else { gameFX.smoke(true); gameFX.ignite(30, 195); Sound.play('douse'); fl.classList.add('cool'); }
+        fl.classList.add('go');
+      } else { gameFX.smoke(false); Sound.play('fail'); }
+      if (r.outcome === 'won') return sleep(450).then(function(){ Sound.play('victory'); gameFX.ignite(120); amb.celebrate(r.mode === 'extinguish'); });
+      if (r.outcome === 'lost') return sleep(400).then(function(){ Sound.play('defeat'); });
+    }).catch(function(e){ if (e !== 0) throw e; });
+  }
+  function explain(r){
+    var T = r.target;
+    function d(x){ return x === T ? 'พอดีสูตร' : x < T ? 'ขาด ' + (T - x) : 'เกิน ' + (x - T); }
+    if (r.success) {
+      var col = r.hitRed && r.hitBlue ? 'ทั้งครีมทับทิมและบลูเบอร์รี' : r.hitRed ? 'ครีมทับทิม' : 'ครีมบลูเบอร์รี';
+      return col + 'รวมได้ ' + T + ' พอดีสูตร! ' + (r.mode === 'build' ? 'วางชั้นมาการองใหม่ขึ้นบนแท่นเสิร์ฟ' : 'เสิร์ฟขนมออกได้ 1 ชั้น');
+    }
+    return 'ทับทิมได้ ' + r.totalRed + ' (' + d(r.totalRed) + ') · บลูเบอร์รีได้ ' + r.totalBlue + ' (' + d(r.totalBlue) + ') ต้องมีรสใดรสหนึ่งรวมได้ ' + T + ' พอดี';
+  }
+  function fillReveal(r, s){
+    E('rvTitle').textContent = 'รอบ ' + r.round + ' · สูตรเป้าหมาย ' + r.target;
+    E('rvSub').textContent = r.mode === 'build' ? ('กำลังประกอบมาการองชั้นที่ ' + (r.stage + 1) + ' จาก 5') : ('งานเลี้ยงชิมขนม · ขั้นที่ ' + (r.stage + 1) + ' จาก 5');
+    var rows = E('rvRows'); rows.textContent = ''; rows.className = 'rvgrid' + (r.plays.length > 4 ? ' two' : '');
+    r.plays.forEach(function(pl, i){
+      var p = s.players[pl.seat] || { name: 'เชฟ' };
+      var row = mk('div', 'rvr'); row.style.animationDelay = (Math.min(i, 9) * 0.07) + 's';
+      var left = mk('div'); left.appendChild(mk('div', 'nm', p.name)); left.appendChild(mk('div', 'ct', 'ทับทิม ' + pl.red + ' · บลูเบอร์รี ' + pl.blue));
+      var st = mk('div', 'rvs'), k;
+      for (k = 0; k < Math.min(pl.red, 6); k++) st.appendChild(mk('span', 'ms red'));
+      for (k = 0; k < Math.min(pl.blue, 6); k++) st.appendChild(mk('span', 'ms blue'));
+      if (pl.red + pl.blue === 0) st.appendChild(mk('span', 'rvnone', 'ไม่บีบ'));
+      row.appendChild(left); row.appendChild(st); rows.appendChild(row);
+    });
+    var tots = E('rvTotals'); tots.textContent = ''; var base = Math.min(r.plays.length, 10) * 0.07 + 0.2;
+    [['red', 'ทับทิม', r.totalRed, r.hitRed], ['blue', 'บลูเบอร์รี', r.totalBlue, r.hitBlue]].forEach(function(a, j){
+      var row = mk('div', 'rvt ' + a[0] + (a[3] ? ' hit' : '')); row.style.animationDelay = (base + j * 0.15) + 's';
+      row.appendChild(mk('div', 'lb', a[1]));
+      var bar = mk('div', 'bar'), f = mk('div', 'fill'); f.style.width = Math.min(100, r.target ? a[2] / r.target * 100 : 0) + '%';
+      if (a[2] > r.target) f.classList.add('over'); bar.appendChild(f);
+      if (r.target <= 15) for (var m = 1; m < r.target; m++) { var tk = mk('span', 'tick'); tk.style.left = (m / r.target * 100) + '%'; bar.appendChild(tk); }
+      row.appendChild(bar); row.appendChild(mk('div', 'val', a[2] + ' / ' + r.target + (a[3] ? ' ✓' : ''))); tots.appendChild(row);
+    });
+    var vd = E('rvVerdict'); vd.className = 'verdict ' + (r.success ? 'ok' : 'no'); vd.style.animationDelay = (base + 0.4) + 's'; vd.textContent = '';
+    vd.appendChild(mk('small', null, r.success ? 'MAGNIFIQUE!' : 'TRY AGAIN'));
+    vd.appendChild(document.createTextNode(r.success ? (r.mode === 'build' ? 'สำเร็จ! หอคอยมาการองสูงขึ้นอีกชั้น' : 'สำเร็จ! เสิร์ฟชั้นขนมได้อย่างงดงาม') : 'ยังไม่ตรงสูตร ลองกะใจกันใหม่!'));
+    var ex = explain(r);
+    if (r.outcome === 'won') ex += r.mode === 'build' ? ' ประกอบครบทั้ง 5 ชั้น ทีมเชฟชนะอย่างงดงาม!' : ' เสิร์ฟขนมครบทุกชั้นแล้ว งานเลี้ยงสมบูรณ์แบบ!';
+    if (r.outcome === 'lost') { var names = r.emptied.map(function(i){ return (s.players[i] || {}).name || '?'; }).join(' และ '); ex += ' แต่ ' + names + ' ครีมหมดมือเสียก่อน เกมจึงจบลง'; }
+    var ee = E('rvExplain'); ee.textContent = ex; ee.style.animationDelay = (base + 0.5) + 's';
+    E('rvBtn').textContent = (r.outcome === 'won' || r.outcome === 'lost') ? 'ดูสรุปผลงาน' : 'ไปต่อ';
+  }
+  function flyMatches(r){
+    return new Promise(function(res){
+      try {
+        if (reducedMotion || !gamePit) { res(); return; }
+        var layer = E('flyLayer'), ar = E('app').getBoundingClientRect(), fr = gamePit.fire.getBoundingClientRect();
+        var tx = fr.left + fr.width / 2 - ar.left, ty = fr.bottom - ar.top - 8, n = 0, maxT = 0;
+        r.plays.forEach(function(pl, i){
+          var card = document.querySelector('.pc[data-seat="' + i + '"]');
+          var cr = card ? card.getBoundingClientRect() : { left: ar.left + ar.width / 2, top: ar.top + ar.height - 80, width: 0, height: 0 };
+          var list = [], k; for (k = 0; k < pl.red; k++) list.push('red'); for (k = 0; k < pl.blue; k++) list.push('blue');
+          list.forEach(function(col){
+            if (n > 36) return;
+            var st = mk('div', 'fly ' + col); layer.appendChild(st);
+            var sx = cr.left + cr.width / 2 - ar.left + (Math.random() - 0.5) * 16, sy = cr.top + cr.height / 2 - ar.top;
+            var delay = Math.min(n, 20) * 30, dur = 480; n++;
+            st.style.transform = 'translate(' + sx + 'px,' + sy + 'px)';
+            if (st.animate) {
+              st.animate([
+                { transform: 'translate(' + sx + 'px,' + sy + 'px) scale(1)', opacity: 1 },
+                { transform: 'translate(' + (tx + (Math.random() - 0.5) * 30) + 'px,' + ty + 'px) scale(.5)', opacity: 0.15 }
+              ], { duration: dur, delay: delay, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' });
+            }
+            maxT = Math.max(maxT, delay + dur); setTimeout(function(){ if (st.parentNode) st.parentNode.removeChild(st); }, delay + dur + 40);
+          });
+        });
+        if (n) Sound.play('whoosh');
+        setTimeout(function(){ if (n) Sound.play('wood'); res(); }, Math.min(maxT, 1300) + 20);
+      } catch (e) { res(); }
+    });
+  }
+  function abortReveal(){
+    epoch++; revealQ = []; revealing = false;
+    if (contResolve) { var f = contResolve; contResolve = null; f(); }
+    ['ovCount', 'ovReveal', 'ovEnd', 'ovMenu', 'ovExt'].forEach(closeOv);
+  }
+  function showEnd(){
+    var c = App.ctx(); if (!c || cur !== 'game') return; var s = c.state; if (s.phase === 'select') return;
+    var won = s.phase === 'won', build = s.mode === 'build';
+    E('ovEnd').classList.toggle('win', won);
+    E('endJp').textContent = won ? (build ? 'Chef-d’œuvre Sucré!' : 'Banquet Parfait!') : (build ? 'สูตรคลาดเคลื่อนเสียแล้ว…' : 'งานเลี้ยงยังไม่เสร็จสมบูรณ์…');
+    E('endTitle').textContent = won ? (build ? 'ชนะเลิศ! หอคอยมาการอง 5 ชั้นสมบูรณ์แบบ' : 'ชนะเลิศ! เสิร์ฟงานเลี้ยงครบทุกชั้น') : (build ? 'น่าเสียดาย… วัตถุดิบหมดก่อนหอคอยเสร็จ' : 'น่าเสียดาย… ครีมหมดก่อนเสิร์ฟครบ');
+    var r = s.result, rounds = s.history.filter(function(x){ return x.gameId === s.gameId; }).length, txt;
+    if (won) txt = build ? ('ทีมเชฟ ' + s.players.length + ' คนประกอบหอคอยครบ 5 ชั้นใน ' + rounds + ' รอบ รู้ใจกันระดับมิชลิน!') : ('เสิร์ฟหอคอยขนมครบ 5 ชั้นสำเร็จใน ' + rounds + ' รอบ');
+    else { var names = ((r && r.emptied) || []).map(function(i){ return (s.players[i] || {}).name; }).filter(Boolean).join(' และ ') || 'เชฟคนหนึ่ง'; txt = names + ' ครีมหมดมือขณะทำสูตรเป้าหมาย ' + (r ? r.target : '?') + ' · ' + (build ? 'ประกอบได้ ' : 'เสิร์ฟได้ ') + s.stage + '/5 ชั้น ลองอ่านใจกันใหม่อีกครั้ง!'; }
+    E('endText').textContent = txt;
+    var st = E('endStats'); st.textContent = '';
+    function add(k, v){ st.appendChild(mk('div', 'k', k)); st.appendChild(mk('div', 'v', v)); }
+    var tot = usedTotals(s);
+    add('ผลงานของทีมเชฟ', won ? 'ชนะเลิศ' : 'ยังไม่สำเร็จ'); add('จำนวนเชฟ', s.players.length + ' คน'); add('สูตรแต่ละชั้น', (s.buildTargets || []).join(' · ')); add('จำนวนรอบที่ใช้', rounds);
+    add('ครีมที่บีบไป', 'ทับทิม ' + tot.r + ' · บลูเบอร์รี ' + tot.b);
+    add('ถุงครีมที่ทีมเหลือ', s.players.reduce(function(a, p){ return a + p.red + p.blue; }, 0));
+    var control = !!c.isHost;
+    E('btnEndAgain').hidden = !control; E('btnEndExt').hidden = !(control && won && build); E('endWait').hidden = control;
+    E('btnEndMenu').textContent = c.kind === 'local' ? 'กลับเมนูหลัก' : 'ออกจากห้องครัว';
+    openOv('ovEnd');
+  }
+  function renderHistory(){
+    var c = App.ctx(), box = E('histList'); box.textContent = '';
+    if (!c) { box.appendChild(mk('p', 'hint', 'ยังไม่มีข้อมูลรอบการทำขนม')); return; }
+    var s = c.state, hs = s.history.filter(function(r){ return r.gameId === s.gameId; }).slice().reverse();
+    if (!hs.length) { box.appendChild(mk('p', 'hint', 'ยังไม่มีรอบที่เสิร์ฟ')); return; }
+    hs.forEach(function(r){
+      var row = mk('div', 'hrow ' + (r.success ? 'ok' : 'no'));
+      row.appendChild(mk('span', null, 'R' + r.round)); row.appendChild(mk('span', null, 'สูตร ' + r.target));
+      row.appendChild(mk('span', null, 'ทับทิม ' + r.totalRed + ' · บลู ' + r.totalBlue)); row.appendChild(mk('span', 'o', r.success ? '✓' : '✗'));
+      row.appendChild(mk('div', 'pl', r.plays.map(function(p){ return ((s.players[p.seat] || {}).name || '?') + ' ' + p.red + 'ท/' + p.blue + 'บ'; }).join(' · ')));
+      box.appendChild(row);
+    });
+  }
+  function fillHowTable(){
+    var box = E('howTargets'); box.textContent = '';
+    box.appendChild(mk('b', null, '2–4 คน')); box.appendChild(mk('span', null, '1 · 2 · 3 · 4 · 5 (สูตรมาตรฐาน)'));
+    for (var n = 5; n <= MAXP; n++) { box.appendChild(mk('b', null, n + ' คน')); box.appendChild(mk('span', null, Rules.targetsFor(n, true).join(' · '))); }
+  }
+  function copy(t){
+    if (!t) return;
+    function fallback(){ var ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast('คัดลอกแล้ว!'); } catch (e) { toast('คัดลอกไม่สำเร็จ กรุณาเลือกข้อความเอง', 'err'); } document.body.removeChild(ta); }
+    try { navigator.clipboard.writeText(t).then(function(){ toast('คัดลอกแล้ว!'); }, fallback); } catch (e) { fallback(); }
+  }
+  function nameFrom(id){ var n = cleanName(E(id).value); if (n) { settings.name = n; saveSettings(); } return n; }
+  var busy = false;
+  function runNet(fn){
+    if (busy) return; busy = true; qsa('#s-online button').forEach(function(b){ b.disabled = true; });
+    function done(){ busy = false; qsa('#s-online button').forEach(function(b){ b.disabled = false; }); }
+    Promise.resolve().then(fn).then(function(){ onlineStatus(''); done(); }, function(e){ onlineStatus(Net.friendly(e), 'err'); done(); });
+  }
+  function doJoin(){
+    var n = nameFrom('onName'); if (!n) { onlineStatus('กรุณาใส่ชื่อเชฟก่อน', 'err'); return; }
+    var code = String(E('joinCode').value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!CODE_RE.test(code)) { onlineStatus('รหัสห้องครัวต้องมี 5 ตัว (ตัวอักษร/ตัวเลข ไม่มี 0, O, 1, I)', 'err'); return; }
+    runNet(function(){ onlineStatus('กำลังเชื่อมต่อห้องครัว ' + code + '…'); return App.joinRoom(n, code); });
+  }
+  var ACT = {
+    'go': function(b){ show(b.getAttribute('data-to')); },
+    'continue': function(){ App.continueSolo(); },
+    'how': function(){ openOv('ovHow'); },
+    'close': function(b){ closeOv(b.getAttribute('data-ov')); },
+    'music': function(){ Sound.setMusic(!Sound.isMusic()); syncAudio(); },
+    'sfx': function(){ Sound.setSfx(!Sound.isSfx()); syncAudio(); },
+    'solo-setup': function(){ openSolo(); },
+    'online-setup': function(){ openOnline(); },
+    'count': function(b){ settings.count = clamp(settings.count + (+b.getAttribute('data-d') || 0), 2, MAXP); saveSettings(); refreshSolo(); Sound.play('tick'); },
+    'diff': function(b){ settings.diff = b.getAttribute('data-v'); saveSettings(); refreshSolo(); },
+    'solo-start': function(){ settings.name = cleanName(E('soloName').value) || 'คุณ'; settings.allowZero = !!E('soloZero').checked; settings.noCap = !!E('soloNoCap').checked; settings.scale = !!E('soloScale').checked; saveSettings(); App.startSolo(settings); },
+    'create': function(){ var n = nameFrom('onName'); if (!n) { onlineStatus('กรุณาใส่ชื่อเชฟก่อน', 'err'); return; } runNet(function(){ onlineStatus('กำลังเชื่อมต่อเซิร์ฟเวอร์…'); return App.hostRoom(n, false); }); },
+    'resume-host': function(){ var n = nameFrom('onName') || 'Host'; runNet(function(){ onlineStatus('กำลังเปิดห้องครัวเดิม…'); return App.hostRoom(n, true); }); },
+    'join': doJoin,
+    'copy-code': function(){ copy(Net.lobbyInfo().code || ''); },
+    'copy-link': function(){ copy(Net.shareLink()); },
+    'share': function(){ try { navigator.share({ title: 'มงกุฎมาการอง · La Tour Sucrée', text: 'มาช่วยกันทำหอคอยมาการองกัน! รหัสห้องครัว ' + Net.lobbyInfo().code, url: Net.shareLink() }).catch(function(){}); } catch (e) {} },
+    'lobby-start': function(){ Net.startGame(); },
+    'stick': function(b){ var col = b.getAttribute('data-c'), i = +b.getAttribute('data-i'); setSel(col, i < sel[col] ? i : i + 1); },
+    'step': function(b){ var col = b.getAttribute('data-c'); setSel(col, sel[col] + (+b.getAttribute('data-d'))); },
+    'lock': lockIn,
+    'rv-continue': function(){ if (contResolve) contResolve(); },
+    'game-menu': function(){ var c = App.ctx(); renderHistory(); E('btnMRestart').hidden = !(c && c.isHost); E('btnMLeave').textContent = c && c.kind === 'local' ? 'บันทึกและออกไปเมนูหลัก' : 'ออกจากห้องครัว'; openOv('ovMenu'); },
+    'restart': function(){ closeOv('ovMenu'); return confirmBox('เริ่มประกอบหอคอยใหม่จากชั้นแรก และแจกถุงครีมชุดใหม่ให้เชฟทุกคน?', 'เริ่มใหม่').then(function(ok){ if (ok) App.playAgain(); }); },
+    'leave': function(){ closeOv('ovMenu'); return App.exit(); },
+    'end-again': function(){ App.playAgain(); },
+    'end-ext': function(){ openOv('ovExt'); },
+    'ext-start': function(){ closeOv('ovExt'); App.startExtinguish(); },
+    'err-close': function(){ E('errBar').hidden = true; },
+    'cf-yes': function(){ cfDone(true); },
+    'cf-no': function(){ cfDone(false); }
+  };
+  function onClick(e){
+    Sound.unlock();
+    var t = e.target; if (t && t.nodeType !== 1) t = t.parentNode;
+    var b = t && t.closest ? t.closest('[data-act]') : null;
+    if (!b || b.disabled) return;
+    var fn = ACT[b.getAttribute('data-act')]; if (!fn) return;
+    try { var r = fn(b, e); if (r && typeof r.then === 'function') r.then(null, showError); } catch (err) { showError(err); }
+  }
+  function init(){
+    document.addEventListener('click', onClick);
+    ['pointerdown', 'touchend', 'keydown'].forEach(function(ev){ document.addEventListener(ev, function(){ Sound.unlock(); }, { passive: true }); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') ['ovHow', 'ovMenu', 'ovExt'].forEach(closeOv); });
+    safe(function(){
+      E('soloZero').addEventListener('change', function(e){ settings.allowZero = !!e.target.checked; saveSettings(); });
+      E('soloNoCap').addEventListener('change', function(e){ settings.noCap = !!e.target.checked; saveSettings(); });
+      E('soloScale').addEventListener('change', function(e){ settings.scale = !!e.target.checked; saveSettings(); refreshSolo(); });
+      var lr = function(){ Net.setRules({ allowZero: !!E('lobbyZero').checked, noCap: !!E('lobbyNoCap').checked, scale: !!E('lobbyScale').checked }); };
+      E('lobbyZero').addEventListener('change', lr); E('lobbyNoCap').addEventListener('change', lr); E('lobbyScale').addEventListener('change', lr);
+      E('joinCode').addEventListener('input', function(e){ var v = String(e.target.value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 5); if (v !== e.target.value) e.target.value = v; });
+      E('joinCode').addEventListener('keydown', function(e){ if (e.key === 'Enter') doJoin(); });
+    });
+    safe(function(){ gamePit = makePit(E('gamePit')); });
+    safe(function(){ menuPit = makePit(E('menuPit')); pitLevel(menuPit, 5); pitSticks(menuPit, 9, 8); });
+    safe(function(){ gameFX = makeFX(E('gameFx'), function(){ return gamePit && gamePit.fire; }); });
+    safe(function(){ menuFX = makeFX(E('menuFx'), function(){ return menuPit && menuPit.fire; }); menuFX.setLevel(4); });
+    safe(function(){ amb = makeAmbient(E('bgfx')); });
+    safe(fillHowTable);
+    safe(function(){ syncAudio(); show('menu'); });
+    safe(function(){
+      var code = null, q = null;
+      try { q = new URLSearchParams(location.search).get('room'); } catch (e) {}
+      if (!q) { var m = (location.hash || '').match(/room=([A-Za-z0-9]{5})/); if (m) q = m[1]; }
+      if (q && CODE_RE.test(q.toUpperCase())) code = q.toUpperCase();
+      if (code) openOnline(code);
+    });
+  }
+  return { init: init, show: show, toast: toast, netBar: netBar, render: render, enterGame: enterGame, enterLobby: enterLobby, baseline: baseline, abortReveal: abortReveal, onlineStatus: onlineStatus, confirmBox: confirmBox, current: function(){ return cur; } };
+})();
+
+/* ================= NETWORK (PeerJS, host-authoritative) ================= */
+var Net = (function(){
+  var PREFIX = 'bonfireparty-itten-v4-';
+  var sess = 0, peer = null, role = null, code = null, lobby = null, picks = [], hb = null;
+  var hostConn = null, hostLost = false, lastHostMsg = 0, retryT = null, retries = 0, myName = '', myToken = '';
+  var pending = new Map();
+  function PeerCls(){ return window.Peer || (window.peerjs && window.peerjs.Peer) || null; }
+  function loadPeer(){
+    if (PeerCls()) return Promise.resolve();
+    return new Promise(function(res, rej){
+      var urls = ['https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js', 'https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js'], i = 0;
+      function next(){
+        if (i >= urls.length) { rej(new Error('โหลดไลบรารี PeerJS ไม่ได้ อาจไม่มีอินเทอร์เน็ตหรือถูกบล็อก (โหมดเล่นกับเชฟบอทยังใช้ได้)')); return; }
+        var s = document.createElement('script'); s.src = urls[i++]; s.async = true;
+        s.onload = function(){ if (PeerCls()) res(); else next(); };
+        s.onerror = function(){ if (s.parentNode) s.parentNode.removeChild(s); next(); };
+        document.head.appendChild(s);
+      }
+      next();
+    });
+  }
+  function openPeer(id){
+    return new Promise(function(res, rej){
+      var P = PeerCls(); if (!P) { rej(new Error('PeerJS ไม่พร้อมใช้งาน')); return; }
+      var p; try { p = id ? new P(id, { debug: 1 }) : new P({ debug: 1 }); } catch (e) { rej(e); return; }
+      var t = setTimeout(function(){ cleanup(); try { p.destroy(); } catch (e) {} rej(new Error('เซิร์ฟเวอร์ไม่ตอบสนอง (หมดเวลา)')); }, 15000);
+      function onOpen(){ clearTimeout(t); cleanup(); res(p); }
+      function onErr(e){ clearTimeout(t); cleanup(); try { p.destroy(); } catch (_) {} rej(e); }
+      function cleanup(){ try { p.off('open', onOpen); p.off('error', onErr); } catch (e) {} }
+      p.on('open', onOpen); p.on('error', onErr);
+    });
+  }
+  function friendly(e){
+    var t = e && e.type;
+    if (t === 'browser-incompatible') return 'เบราว์เซอร์นี้ไม่รองรับ WebRTC';
+    if (t === 'network' || t === 'server-error' || t === 'socket-error' || t === 'socket-closed') return 'ติดต่อเซิร์ฟเวอร์ PeerJS ไม่ได้ ตรวจอินเทอร์เน็ตแล้วลองใหม่';
+    if (t === 'peer-unavailable') return 'ไม่พบห้องครัวนี้ ตรวจรหัสอีกครั้ง หรือหัวหน้าเชฟอาจออฟไลน์';
+    if (t === 'unavailable-id') return 'รหัสห้องครัวนี้ยังไม่ว่าง รอสักครู่แล้วลองใหม่';
+    return (e && e.message) || String(e);
+  }
+  function send(conn, o){ try { if (conn && conn.open) conn.send(o); } catch (e) {} }
+  function teardown(){
+    sess++; clearInterval(hb); hb = null; clearTimeout(retryT); retryT = null; pending.clear();
+    var old = peer; peer = null; hostConn = null; hostLost = false;
+    lobby = null; picks = []; role = null; code = null;
+    if (old) setTimeout(function(){ try { old.destroy(); } catch (e) {} }, 400);
+    UI.netBar(null);
+  }
+  function pubLobby(){ return { players: lobby.players.map(function(p){ return { name: p.name, connected: !!p.connected, isHost: !!p.isHost }; }), rules: { allowZero: !!lobby.rules.allowZero, noCap: !!lobby.rules.noCap, scale: lobby.rules.scale !== false } }; }
+  function saveHost(){
+    if (role !== 'host' || !lobby) return;
+    Store.set('hostSave', { code: code, lobby: { players: lobby.players.map(function(p){ return { name: p.name, token: p.token, isHost: p.isHost }; }), rules: lobby.rules }, state: S.state, picks: picks, savedAt: Date.now() });
+  }
+  function newP(name, token, isHost, conn){ return { name: name, token: token || '', isHost: !!isHost, connected: !!isHost || !!conn, conn: conn || null, lastSeen: Date.now(), nonces: [] }; }
+  function host(name, resume){
+    return loadPeer().then(function(){
+      teardown(); var my = sess; role = 'host';
+      var hs = resume ? Store.get('hostSave', null) : null;
+      if (resume && !(hs && CODE_RE.test(hs.code || '') && hs.lobby && Array.isArray(hs.lobby.players))) { role = null; throw new Error('ไม่พบห้องครัวที่บันทึกไว้'); }
+      code = hs ? hs.code : randId(5);
+      var attempt = 0;
+      function tryOpen(){
+        return openPeer(PREFIX + code).catch(function(e){
+          if (my !== sess) throw new Error('ยกเลิกแล้ว');
+          attempt++;
+          if (e && e.type === 'unavailable-id' && attempt < 6) {
+            if (resume) { UI.onlineStatus('รหัส ' + code + ' ยังค้างจากรอบก่อน กำลังลองใหม่ใน 5 วินาที (' + attempt + '/6)…'); return sleep(5000).then(tryOpen); }
+            code = randId(5); return tryOpen();
+          }
+          throw e;
+        });
+      }
+      return tryOpen().then(function(p){
+        if (my !== sess) { try { p.destroy(); } catch (e) {} throw new Error('ยกเลิกแล้ว'); }
+        peer = p;
+        peer.on('connection', function(conn){ if (my === sess) onConn(conn, my); });
+        peer.on('disconnected', function(){ if (my !== sess || !peer || peer.destroyed) return; UI.netBar('หลุดจากเซิร์ฟเวอร์จับคู่ เชฟที่ต่ออยู่แล้วยังเล่นได้ กำลังเชื่อมใหม่…'); setTimeout(function(){ try { if (my === sess && peer && !peer.destroyed) peer.reconnect(); } catch (e) {} }, 1500); });
+        peer.on('open', function(){ if (my === sess) UI.netBar(null); });
+        peer.on('error', function(e){ if (my !== sess || (e && e.type === 'peer-unavailable')) return; UI.toast(friendly(e), 'err'); });
+        var st = Store.get('settings', {}) || {};
+        if (hs) {
+          lobby = { players: hs.lobby.players.map(function(x){ return newP(cleanName(x.name) || 'Chef', String(x.token || ''), !!x.isHost, null); }), rules: Rules.norm(hs.lobby.rules) };
+          if (!lobby.players.length || !lobby.players[0].isHost) lobby.players.unshift(newP(cleanName(name) || 'Host', 'host', true, null));
+          S.state = hs.state && Rules.sanityCheck(hs.state) && hs.state.players.length === lobby.players.length ? hs.state : null;
+          if (!S.state) lobby.players = lobby.players.filter(function(x){ return x.isHost; });
+          picks = Array.isArray(hs.picks) ? hs.picks : [];
+          if (S.state) S.state.locked = S.state.locked.map(function(l, i){ return !!(l && picks[i] && !Rules.validate(S.state, i, picks[i])); });
+        } else {
+          lobby = { players: [newP(name, 'host', true, null)], rules: Rules.norm({ allowZero: !!st.allowZero, noCap: !!st.noCap, scale: st.scale !== false }) };
+          S.state = null; picks = [];
+        }
+        S.kind = 'host'; S.code = code; S.mySeat = 0; S.locking = false; S.myPick = (S.state && S.state.locked[0] && picks[0]) ? picks[0] : null;
+        hb = setInterval(function(){ if (my === sess) hostBeat(); }, 4000);
+        saveHost();
+        if (S.state) { UI.baseline(); UI.enterGame(); } else UI.enterLobby();
+      });
+    });
+  }
+  function onConn(conn, my){
+    var helloT = setTimeout(function(){ if (seatOf(conn) < 0) { try { conn.close(); } catch (e) {} } }, 15000);
+    conn.on('data', function(d){ if (my !== sess) return; try { hostMsg(conn, d); } catch (e) { if (window.console) console.error(e); } });
+    conn.on('close', function(){ clearTimeout(helloT); if (my === sess) hostDrop(conn); });
+    conn.on('error', function(){ if (my === sess) hostDrop(conn); });
+  }
+  function seatOf(conn){ if (!lobby) return -1; for (var i = 0; i < lobby.players.length; i++) if (lobby.players[i].conn === conn) return i; return -1; }
+  function reject(conn, msg){ send(conn, { t: 'reject', msg: msg }); setTimeout(function(){ try { conn.close(); } catch (e) {} }, 600); }
+  function hostMsg(conn, d){
+    if (!d || typeof d !== 'object' || typeof d.t !== 'string') return;
+    var i = seatOf(conn); if (i >= 0) lobby.players[i].lastSeen = Date.now();
+    if (d.t === 'hello') return hello(conn, d);
+    if (i < 0) return;
+    if (d.t === 'pick') return pickIn(i, conn, d);
+    if (d.t === 'leave') { hostDrop(conn); try { conn.close(); } catch (e) {} }
+  }
+  function hello(conn, d){
+    if (d.proto !== PROTO) return reject(conn, 'เวอร์ชันไม่ตรงกัน กรุณาใช้ไฟล์เดียวกันและรีเฟรชทุกเครื่อง');
+    var name = cleanName(d.name), token = typeof d.token === 'string' ? d.token.slice(0, 40) : '';
+    if (!name) return reject(conn, 'กรุณาใส่ชื่อเชฟ');
+    var i = -1, k;
+    if (token) for (k = 0; k < lobby.players.length; k++) if (!lobby.players[k].isHost && lobby.players[k].token === token) { i = k; break; }
+    if (i < 0) for (k = 0; k < lobby.players.length; k++) { var q = lobby.players[k]; if (!q.isHost && q.name.toLowerCase() === name.toLowerCase() && (S.state || !q.connected)) { i = k; break; } }
+    if (i >= 0) {
+      var p = lobby.players[i];
+      if (p.conn && p.conn !== conn) { var oc = p.conn; p.conn = null; try { oc.close(); } catch (e) {} }
+      p.conn = conn; p.connected = true; p.lastSeen = Date.now(); if (token) p.token = token; if (!S.state) p.name = name;
+      UI.toast(p.name + (S.state ? ' กลับเข้าห้องครัวแล้ว' : ' เข้าห้องครัวแล้ว'));
+    } else {
+      if (S.state) return reject(conn, 'เริ่มทำขนมไปแล้ว เฉพาะเชฟเดิมเท่านั้นที่กลับเข้าได้ (ใช้ชื่อเดิม)');
+      if (lobby.players.some(function(x){ return x.name.toLowerCase() === name.toLowerCase(); })) return reject(conn, 'ชื่อเชฟนี้มีคนใช้แล้วในครัว');
+      if (lobby.players.length >= MAXP) return reject(conn, 'ห้องครัวเต็มแล้ว (' + MAXP + ' คน)');
+      lobby.players.push(newP(name, token, false, conn));
+      i = lobby.players.length - 1; UI.toast(name + ' เข้าห้องครัวแล้ว');
+    }
+    send(conn, { t: 'welcome', seat: i, code: code });
+    broadcast(); saveHost(); UI.render();
+  }
+  function pickIn(i, conn, d){
+    function ack(ok, err){ send(conn, { t: 'ack', nonce: d.nonce, ok: ok, err: err || null }); }
+    if (typeof d.nonce !== 'string' || !d.nonce || d.nonce.length > 40) return ack(false, 'ข้อมูลไม่ถูกต้อง');
+    var p = lobby.players[i];
+    if (p.nonces.indexOf(d.nonce) >= 0) return ack(false, 'ส่งซ้ำ ระบบไม่นับ');
+    p.nonces.push(d.nonce); if (p.nonces.length > 60) p.nonces.shift();
+    var s = S.state; if (!s) return ack(false, 'ยังไม่มีเกม');
+    if (d.gameId !== s.gameId || d.roundId !== s.roundId) return ack(false, 'เป็นการเลือกของรอบเก่า');
+    if (s.locked[i]) return ack(false, 'คุณล็อกรอบนี้ไปแล้ว');
+    var selc = { red: d.red, blue: d.blue }, e = Rules.validate(s, i, selc); if (e) return ack(false, e);
+    picks[i] = { red: selc.red, blue: selc.blue }; s.locked[i] = true; ack(true); afterLock();
+  }
+  function hostPick(selc){
+    var s = S.state; if (!s) return;
+    if (s.locked[0]) { UI.toast('คุณพร้อมเสิร์ฟไปแล้ว'); return; }
+    var e = Rules.validate(s, 0, selc); if (e) { UI.toast(e, 'err'); return; }
+    picks[0] = { red: selc.red, blue: selc.blue }; S.myPick = picks[0]; s.locked[0] = true; Sound.play('lock'); afterLock();
+  }
+  function afterLock(){
+    var s = S.state;
+    if (s && s.phase === 'select' && s.locked.every(Boolean)) {
+      var all = s.players.map(function(p, i){ return picks[i]; });
+      try { S.state = Rules.resolve(s, all); picks = []; S.myPick = null; }
+      catch (e) { s.locked = s.players.map(function(){ return false; }); picks = []; S.myPick = null; UI.toast('รีเซ็ตรอบ: ' + e.message, 'err'); }
+    }
+    saveHost(); broadcast(); UI.render();
+  }
+  function hostDrop(conn){
+    if (!lobby) return; var i = seatOf(conn); if (i < 0) return;
+    var p = lobby.players[i]; p.conn = null; p.connected = false;
+    if (!S.state) lobby.players.splice(i, 1);
+    UI.toast(p.name + ' หลุดการเชื่อมต่อ' + (S.state ? ' (กันที่นั่งไว้)' : ''));
+    broadcast(); saveHost(); UI.render();
+  }
+  function hostBeat(){
+    if (!lobby) return; var now = Date.now();
+    lobby.players.slice().forEach(function(p){
+      if (p.isHost || !p.conn) return;
+      if (now - p.lastSeen > 16000) { var c = p.conn; hostDrop(c); try { c.close(); } catch (e) {} }
+      else send(p.conn, { t: 'ping' });
+    });
+  }
+  function broadcast(){
+    if (role !== 'host' || !lobby) return; var L = pubLobby();
+    lobby.players.forEach(function(p, i){
+      if (p.isHost || !p.conn || !p.connected) return;
+      send(p.conn, { t: 'state', lobby: L, state: S.state, seat: i, myPick: (S.state && S.state.locked[i] && picks[i]) ? picks[i] : null });
+    });
+  }
+  function startGame(){
+    if (role !== 'host' || S.state || !lobby) return;
+    lobby.players = lobby.players.filter(function(p){ return p.connected; });
+    if (lobby.players.length < 2) { UI.toast('ต้องมีเชฟที่เชื่อมต่ออย่างน้อย 2 คน', 'err'); UI.render(); return; }
+    S.state = Rules.createGame({ mode: 'build', players: lobby.players.map(function(p){ return { name: p.name }; }), rules: lobby.rules });
+    picks = []; S.myPick = null; UI.baseline(); UI.enterGame(); broadcast(); saveHost();
+  }
+  function newGame(mode){
+    if (role !== 'host' || !S.state) return; var old = S.state, carry = null;
+    if (mode === 'extinguish') carry = { red: old.players.reduce(function(a, p){ return a + p.usedRed; }, 0) + ((old.carry && old.carry.red) || 0), blue: old.players.reduce(function(a, p){ return a + p.usedBlue; }, 0) + ((old.carry && old.carry.blue) || 0) };
+    UI.abortReveal(); picks = []; S.myPick = null;
+    S.state = Rules.createGame({ mode: mode, players: old.players.map(function(p){ return { name: p.name }; }), rules: old.rules, carry: carry });
+    UI.baseline(); UI.enterGame(); broadcast(); saveHost();
+  }
+  function setRules(r){ if (role !== 'host' || S.state || !lobby) return; lobby.rules = Rules.norm(r); broadcast(); saveHost(); UI.render(); }
+  function hostSeatOnline(i){ return !!(lobby && lobby.players[i] && lobby.players[i].connected); }
+  function join(name, c){
+    return loadPeer().then(function(){
+      teardown(); var my = sess; role = 'client'; code = c; myName = name;
+      var cs = Store.get('clientSave', null);
+      myToken = (cs && cs.code === c && typeof cs.token === 'string') ? cs.token : randId(12);
+      Store.set('clientSave', { code: c, name: name, token: myToken });
+      S.kind = 'client'; S.code = c; S.state = null; S.lobby = null; S.mySeat = 0;
+      return openPeer(null).then(function(p){
+        if (my !== sess) { try { p.destroy(); } catch (e) {} throw new Error('ยกเลิกแล้ว'); }
+        peer = p; wireClientPeer(my);
+        return connectHost(my);
+      }).then(function(){
+        lastHostMsg = Date.now();
+        hb = setInterval(function(){ if (my === sess) clientBeat(my); }, 4000);
+        if (!S.state && UI.current() !== 'lobby') UI.enterLobby();
+      });
+    });
+  }
+  function wireClientPeer(my){
+    peer.on('disconnected', function(){ if (my !== sess || !peer || peer.destroyed) return; setTimeout(function(){ try { if (my === sess && peer && !peer.destroyed && peer.disconnected) peer.reconnect(); } catch (e) {} }, 1500); });
+    peer.on('error', function(){});
+  }
+  function connectHost(my){
+    return new Promise(function(res, rej){
+      if (!peer || peer.destroyed) { rej(new Error('ยังไม่ได้เชื่อมต่อเซิร์ฟเวอร์')); return; }
+      var done = false, conn;
+      function pe(e){ if (e && e.type === 'peer-unavailable') fin(new Error('ไม่พบห้องครัว ' + code + ' ตรวจรหัสอีกครั้ง หรือหัวหน้าเชฟอาจออฟไลน์')); }
+      function fin(err){
+        if (done) return; done = true; clearTimeout(t); try { if (peer) peer.off('error', pe); } catch (e) {}
+        if (err) { try { if (conn) conn.close(); } catch (e) {} rej(err); } else res();
+      }
+      var t = setTimeout(function(){ fin(new Error('ติดต่อห้องครัว ' + code + ' ไม่ได้ (หมดเวลา) หัวหน้าเชฟอาจออฟไลน์ หรือเครือข่ายบล็อก P2P')); }, 14000);
+      peer.on('error', pe);
+      try { conn = peer.connect(PREFIX + code, { reliable: true, serialization: 'json' }); } catch (e) { fin(e); return; }
+      if (!conn) { fin(new Error('เปิดการเชื่อมต่อไม่ได้')); return; }
+      conn.on('open', function(){ send(conn, { t: 'hello', proto: PROTO, name: myName, token: myToken }); });
+      conn.on('data', function(d){
+        if (my !== sess) return;
+        if (d && d.t === 'reject') { fin(new Error(String(d.msg || 'หัวหน้าเชฟปฏิเสธ'))); return; }
+        if (d && d.t === 'welcome' && !done) { hostConn = conn; hostLost = false; fin(null); }
+        try { clientMsg(conn, d); } catch (e) { showError(e); }
+      });
+      conn.on('close', function(){ if (!done) fin(new Error('หัวหน้าเชฟปิดการเชื่อมต่อ')); else if (my === sess && conn === hostConn) onHostLost(my); });
+      conn.on('error', function(){});
+    });
+  }
+  function clientMsg(conn, d){
+    if (conn !== hostConn || !d || typeof d !== 'object') return;
+    lastHostMsg = Date.now();
+    if (d.t === 'welcome') { if (Number.isInteger(d.seat)) S.mySeat = d.seat; return; }
+    if (d.t === 'ping') { send(conn, { t: 'pong' }); return; }
+    if (d.t === 'ack') { var f = pending.get(d.nonce); if (f) { pending.delete(d.nonce); f(d); } return; }
+    if (d.t === 'state') { onState(d); return; }
+    if (d.t === 'closed') { UI.toast('หัวหน้าเชฟปิดห้องครัวแล้ว'); App.forceMenu(); }
+  }
+  function onState(d){
+    S.lobby = d.lobby && Array.isArray(d.lobby.players) ? d.lobby : { players: [], rules: {} };
+    if (Number.isInteger(d.seat)) S.mySeat = d.seat;
+    var st = d.state && Rules.sanityCheck(d.state) ? d.state : null;
+    S.state = st;
+    S.myPick = d.myPick && Number.isInteger(d.myPick.red) && Number.isInteger(d.myPick.blue) ? { red: d.myPick.red, blue: d.myPick.blue } : null;
+    if (st) { if (UI.current() !== 'game') { UI.baseline(); UI.enterGame(); } else UI.render(); }
+    else { if (UI.current() !== 'lobby') UI.enterLobby(); else UI.render(); }
+  }
+  function clientBeat(my){ if (hostConn && Date.now() - lastHostMsg > 16000) { var c = hostConn; hostConn = null; try { c.close(); } catch (e) {} onHostLost(my); } }
+  function onHostLost(my){
+    if (my !== sess || retryT) return;
+    hostConn = null; hostLost = true; retries = 0;
+    UI.netBar('ขาดการเชื่อมต่อกับหัวหน้าเชฟ กำลังต่อห้องครัว ' + code + ' ใหม่…', true); UI.render();
+    retryT = setTimeout(function(){ retry(my); }, 2000);
+  }
+  function retry(my){
+    retryT = null; if (my !== sess || role !== 'client') return; retries++;
+    var stepP = Promise.resolve();
+    if (!peer || peer.destroyed) stepP = openPeer(null).then(function(p){ if (my !== sess) { try { p.destroy(); } catch (e) {} throw new Error('x'); } peer = p; wireClientPeer(my); });
+    else if (peer.disconnected) { try { peer.reconnect(); } catch (e) {} stepP = sleep(1500); }
+    stepP.then(function(){ return connectHost(my); }).then(function(){
+      if (my !== sess) return;
+      hostLost = false; lastHostMsg = Date.now(); UI.netBar(null); UI.toast('เชื่อมต่อกลับเข้าห้องครัวแล้ว'); UI.render();
+    }, function(){
+      if (my !== sess) return;
+      if (retries >= 30) { UI.netBar('ติดต่อหัวหน้าเชฟไม่ได้ ถ้าหัวหน้าเชฟเปิดห้องครัวเดิมอีกครั้ง ให้เข้าร่วมใหม่ด้วยรหัสและชื่อเดิม', true); return; }
+      UI.netBar('ติดต่อหัวหน้าเชฟไม่ได้ กำลังลองใหม่ (' + retries + '/30)…', true);
+      retryT = setTimeout(function(){ retry(my); }, 4000);
+    });
+  }
+  function clientPick(selc){
+    var s = S.state; if (!s) return;
+    if (!hostConn || hostLost) { UI.toast('ตอนนี้ไม่ได้เชื่อมต่อกับหัวหน้าเชฟ', 'err'); return; }
+    var e = Rules.validate(s, S.mySeat, selc); if (e) { UI.toast(e, 'err'); return; }
+    if (S.locking) return;
+    var nonce = randId(12), pk = { red: selc.red, blue: selc.blue };
+    S.locking = true; Sound.play('lock'); UI.render();
+    var t = setTimeout(function(){ if (pending.has(nonce)) { pending.delete(nonce); S.locking = false; UI.toast('หัวหน้าเชฟไม่ตอบ ลองใหม่อีกครั้ง', 'err'); UI.render(); } }, 8000);
+    pending.set(nonce, function(a){ clearTimeout(t); S.locking = false; if (!a.ok) UI.toast(a.err || 'ถูกปฏิเสธ', 'err'); else S.myPick = pk; UI.render(); });
+    send(hostConn, { t: 'pick', gameId: s.gameId, roundId: s.roundId, nonce: nonce, red: pk.red, blue: pk.blue });
+  }
+  function leave(){
+    if (role === 'host' && lobby) { lobby.players.forEach(function(p){ if (p.conn) send(p.conn, { t: 'closed' }); }); Store.del('hostSave'); }
+    else if (role === 'client' && hostConn) send(hostConn, { t: 'leave' });
+    teardown();
+  }
+  function lobbyInfo(){
+    if (role === 'host' && lobby) { var L = pubLobby(); return { code: code, players: L.players, me: 0, isHost: true, rules: L.rules }; }
+    var M = S.lobby || { players: [], rules: {} };
+    return { code: code, players: M.players || [], me: S.mySeat, isHost: false, rules: M.rules || {} };
+  }
+  function shareLink(){ if (!code) return ''; var base = String(location.href).split('#')[0].split('?')[0]; return base + '?room=' + code; }
+  return { host: host, join: join, leave: leave, teardown: teardown, startGame: startGame, newGame: newGame, setRules: setRules, hostPick: hostPick, clientPick: clientPick, lobbyInfo: lobbyInfo, shareLink: shareLink, friendly: friendly, hostSeatOnline: hostSeatOnline, isHostLost: function(){ return hostLost; } };
+})();
+
+/* ================= APP ================= */
+var App = (function(){
+  function statusOf(i){
+    if (S.kind === 'local') return i === 0 ? 'local' : 'bot';
+    if (S.kind === 'host') return i === 0 ? 'host' : (Net.hostSeatOnline(i) ? 'online' : 'offline');
+    var L = S.lobby, p = L && L.players && L.players[i];
+    if (!p) return 'offline';
+    if (Net.isHostLost() && (p.isHost || i === S.mySeat)) return 'reconnecting';
+    if (p.isHost) return 'host';
+    return p.connected ? 'online' : 'offline';
+  }
+  function ctx(){
+    if (!S.state) return null;
+    return { kind: S.kind, state: S.state, mySeat: S.mySeat, code: S.kind === 'local' ? null : S.code, isHost: S.kind === 'local' || S.kind === 'host',
+      myPick: S.state.locked[S.mySeat] ? S.myPick : null, locking: S.locking, status: statusOf };
+  }
+  function saveSolo(){ if (S.kind !== 'local' || !S.state) return; var c = clone(S.state); c.locked = c.players.map(function(){ return false; }); Store.set('solo', { state: c, diff: S.diff }); }
+  function startBots(){
+    var s = S.state; if (S.kind !== 'local' || !s || s.phase !== 'select') return;
+    var key = s.gameId + ':' + s.roundId; if (S.botKey === key) return; S.botKey = key; clearBots(); S.botPicks = [];
+    var snap = clone(s);
+    s.players.forEach(function(p, i){
+      if (!p.bot) return;
+      var P = null; AI.PERSONAS.forEach(function(x){ if (x.key === p.persona) P = x; });
+      var pick = null; try { pick = AI.decide(snap, i, P, S.diff); } catch (e) {}
+      if (!pick || Rules.validate(s, i, pick)) { var o = Rules.legalOptions(p, s.rules); pick = o[Math.floor(Math.random() * o.length)] || { red: 0, blue: 0 }; }
+      S.botPicks[i] = pick;
+      var delay = 600 + Math.random() * 1500 + (S.diff === 'hard' ? 400 : 0) + i * 120;
+      S.botTimers.push(setTimeout(function(){
+        if (S.state !== s || s.phase !== 'select') return;
+        s.locked[i] = true; Sound.play('wood'); UI.render(); tryResolveLocal();
+      }, delay));
+    });
+  }
+  function tryResolveLocal(){
+    var s = S.state; if (S.kind !== 'local' || !s || s.phase !== 'select' || !s.locked.every(Boolean)) return;
+    var picks = s.players.map(function(p, i){ return i === S.mySeat ? S.humanPick : S.botPicks[i]; });
+    if (picks.some(function(x){ return !x; })) return;
+    try { S.state = Rules.resolve(s, picks); }
+    catch (e) { UI.toast('รีเซ็ตรอบ: ' + e.message, 'err'); s.locked = s.players.map(function(){ return false; }); S.botKey = ''; S.humanPick = null; S.myPick = null; UI.render(); startBots(); return; }
+    S.humanPick = null; S.myPick = null; S.botPicks = []; saveSolo(); UI.render();
+  }
+  function newLocal(mode, players, rules, carry){
+    UI.abortReveal(); clearBots();
+    S.state = Rules.createGame({ mode: mode, players: players, rules: rules, carry: carry });
+    S.botKey = ''; S.humanPick = null; S.myPick = null; S.botPicks = [];
+    UI.baseline(); UI.enterGame(); saveSolo(); startBots();
+  }
+  function startSolo(o){
+    resetS(); S.kind = 'local'; S.mySeat = 0; S.diff = o.diff || 'normal';
+    var players = [{ name: o.name || 'คุณ' }];
+    for (var i = 1; i < o.count; i++) { var P = AI.PERSONAS[(i - 1) % AI.PERSONAS.length]; players.push({ name: P.name, bot: true, persona: P.key }); }
+    newLocal('build', players, { allowZero: o.allowZero, noCap: o.noCap, scale: o.scale }, null);
+  }
+  function continueSolo(){
+    var sv = Store.get('solo', null);
+    if (!sv || !Rules.sanityCheck(sv.state) || sv.state.phase !== 'select') { UI.toast('ไม่พบครัวที่บันทึกไว้'); UI.show('menu'); return; }
+    resetS(); S.kind = 'local'; S.mySeat = 0; S.diff = ['easy', 'normal', 'hard'].indexOf(sv.diff) >= 0 ? sv.diff : 'normal';
+    S.state = sv.state; S.state.locked = S.state.players.map(function(){ return false; });
+    UI.baseline(); UI.enterGame(); startBots();
+  }
+  function localPlayers(){ return S.state.players.map(function(p){ return { name: p.name, bot: p.bot, persona: p.persona }; }); }
+  function playAgain(){
+    if (S.kind === 'local' && S.state) newLocal('build', localPlayers(), S.state.rules, null);
+    else if (S.kind === 'host') Net.newGame('build');
+  }
+  function startExtinguish(){
+    if (S.kind === 'local' && S.state) {
+      var o = S.state;
+      var carry = { red: o.players.reduce(function(a, p){ return a + p.usedRed; }, 0) + ((o.carry && o.carry.red) || 0), blue: o.players.reduce(function(a, p){ return a + p.usedBlue; }, 0) + ((o.carry && o.carry.blue) || 0) };
+      newLocal('extinguish', localPlayers(), o.rules, carry);
+    } else if (S.kind === 'host') Net.newGame('extinguish');
+  }
+  function submit(selc){
+    var s = S.state; if (!s || s.phase !== 'select') return;
+    if (S.kind === 'local') {
+      if (s.locked[S.mySeat]) return;
+      var e = Rules.validate(s, S.mySeat, selc); if (e) { UI.toast(e, 'err'); return; }
+      S.humanPick = { red: selc.red, blue: selc.blue }; S.myPick = S.humanPick; s.locked[S.mySeat] = true;
+      Sound.play('lock'); UI.render(); setTimeout(tryResolveLocal, 350);
+    } else if (S.kind === 'host') Net.hostPick(selc);
+    else if (S.kind === 'client') Net.clientPick(selc);
+  }
+  function afterReveal(){ if (S.kind === 'local') { saveSolo(); startBots(); } }
+  function exit(){
+    if (S.kind === 'local') { saveSolo(); clearBots(); UI.abortReveal(); resetS(); UI.show('menu'); return Promise.resolve(); }
+    if (S.kind === 'host' || S.kind === 'client') {
+      return UI.confirmBox(S.kind === 'host' ? 'ปิดห้องครัวสำหรับทุกคน? เกมจะเล่นต่อไม่ได้ถ้าไม่มีหัวหน้าเชฟ' : 'ออกจากห้องครัว? คุณกลับเข้ามาได้ภายหลังด้วยรหัสและชื่อเดิม', 'ออก').then(function(ok){
+        if (!ok) return; UI.abortReveal(); Net.leave(); resetS(); UI.show('menu');
+      });
+    }
+    UI.abortReveal(); Net.teardown(); resetS(); UI.show('menu'); return Promise.resolve();
+  }
+  function forceMenu(){ UI.abortReveal(); Net.teardown(); resetS(); UI.show('menu'); }
+  function hostRoom(name, resume){ return Net.host(name, resume).catch(function(e){ Net.teardown(); resetS(); throw e; }); }
+  function joinRoom(name, code){ return Net.join(name, code).catch(function(e){ Net.teardown(); resetS(); throw e; }); }
+  return { ctx: ctx, submit: submit, afterReveal: afterReveal, startSolo: startSolo, continueSolo: continueSolo, playAgain: playAgain, startExtinguish: startExtinguish, exit: exit, forceMenu: forceMenu, hostRoom: hostRoom, joinRoom: joinRoom };
+})();
+
+/* ================= BOOT ================= */
+function boot(){ try { UI.init(); } catch (e) { showError(e); } }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+function persistSolo(){ try { if (S.kind === 'local' && S.state) { var c = clone(S.state); c.locked = c.players.map(function(){ return false; }); Store.set('solo', { state: c, diff: S.diff }); } } catch (e) {} }
+window.addEventListener('pagehide', persistSolo);
+window.addEventListener('beforeunload', persistSolo);
+})();
+</script>
+</body>
+</html>
