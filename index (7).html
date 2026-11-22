@@ -1,0 +1,2471 @@
+<!DOCTYPE html>
+<html lang="th">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width,initial-scale=1,viewport-fit=cover">
+<meta name="theme-color" content="#231420">
+<title>หอคอยขนมหวานสื่อใจ · LA GRANDE PATISSERIE</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+<link href="https://fonts.googleapis.com/css2?family=Fraunces:opsz,wght@9..144,700;9..144,800;9..144,900&family=Prompt:wght@400;500;600;700;800&display=swap" rel="stylesheet">
+<style>
+:root{
+  --bg-deep:#1b1019;
+  --bg-mid:#2b1927;
+  --bg-top:#382133;
+  --cream:#fff8ef;
+  --cream-soft:#f5e6d5;
+  --parchment:linear-gradient(165deg,rgba(71,43,62,.92),rgba(40,23,36,.96));
+  --card-surface:linear-gradient(165deg,rgba(82,50,71,.9),rgba(44,26,39,.95));
+  --card-me:linear-gradient(165deg,rgba(116,67,87,.95),rgba(58,32,48,.96));
+  --line:rgba(248,214,178,.18);
+  --line-strong:rgba(248,214,178,.42);
+  --gold:#f5c469;
+  --gold-deep:#b87c24;
+  --gold-light:#fff0c7;
+  --ink:#fff7ee;
+  --mut:#d3b8c4;
+  --ruby:#e83e68;
+  --ruby-light:#ff9db6;
+  --ruby-dark:#7d1531;
+  --berry:#3886f2;
+  --berry-light:#a3ccff;
+  --berry-dark:#123978;
+  --pistachio:#4ad695;
+  --pistachio-dark:#145c3b;
+  --warn:#f8be56;
+  --bad:#ff6270;
+  --display:"Fraunces","Georgia",serif;
+  --th:"Prompt",-apple-system,BlinkMacSystemFont,"Segoe UI",Roboto,sans-serif;
+}
+*{box-sizing:border-box;-webkit-tap-highlight-color:transparent}
+html,body{margin:0;height:100%;background:var(--bg-deep);overflow:hidden}
+body{color:var(--ink);font-family:var(--th);overscroll-behavior:none;line-height:1.45}
+button{font:inherit;color:inherit}
+svg{pointer-events:none}
+[hidden]{display:none!important}
+input{-webkit-user-select:text;user-select:text}
+
+#app{
+  position:relative;width:100%;height:100vh;height:100dvh;overflow:hidden;
+  -webkit-user-select:none;user-select:none;
+  background:
+    radial-gradient(95% 58% at 50% 108%,rgba(232,126,154,.24),transparent 62%),
+    radial-gradient(80% 48% at 50% -6%,rgba(245,196,105,.18),transparent 66%),
+    repeating-linear-gradient(90deg,rgba(255,240,225,.022) 0 28px,transparent 28px 56px),
+    linear-gradient(180deg,var(--bg-top) 0%,var(--bg-mid) 52%,var(--bg-deep) 100%);
+}
+/* Scalloped French patisserie awning trim at very top */
+#app::before{
+  content:"";position:absolute;top:0;left:0;right:0;height:10px;z-index:2;pointer-events:none;
+  background:repeating-linear-gradient(90deg,#e84c72 0 22px,#fff3e4 22px 44px);
+  opacity:.82;box-shadow:0 3px 12px rgba(0,0,0,.45);
+}
+#app::after{
+  content:"";position:absolute;inset:0;pointer-events:none;
+  background:radial-gradient(125% 95% at 50% 50%,transparent 58%,rgba(15,7,13,.55));
+}
+#bgfx{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:0}
+
+@keyframes scrIn{from{opacity:0;transform:translateY(12px) scale(.985)}to{opacity:1;transform:none}}
+@keyframes blink{50%{opacity:.32}}
+@keyframes floaty{50%{transform:translateY(-5px) rotate(-1.5deg)}}
+@keyframes shine{0%{transform:translateX(-130%) skewX(-22deg)}58%,100%{transform:translateX(280%) skewX(-22deg)}}
+@keyframes ring{0%{transform:scale(.92);opacity:.9}100%{transform:scale(1.42);opacity:0}}
+@keyframes tierDrop{0%{transform:translateY(-22px) scale(.88,1.12);opacity:0}65%{transform:translateY(2px) scale(1.04,.96);opacity:1}100%{transform:none;opacity:1}}
+@keyframes bobCrown{50%{transform:translateX(-50%) translateY(-4px)}}
+
+.scr{
+  position:absolute;inset:0;z-index:1;display:none;flex-direction:column;
+  padding:calc(10px + env(safe-area-inset-top)) env(safe-area-inset-right) env(safe-area-inset-bottom) env(safe-area-inset-left);
+}
+.scr.active{display:flex}
+.scr.active>*{animation:scrIn .38s cubic-bezier(.2,.8,.3,1) both}
+
+.fit{
+  flex:1;min-height:0;width:min(500px,100%);margin:0 auto;
+  display:flex;flex-direction:column;justify-content:center;
+  gap:clamp(7px,1.35vh,13px);padding:clamp(8px,1.5vh,18px) 15px;
+  overflow-y:auto;overflow-x:hidden;
+}
+.head{display:flex;align-items:center;gap:12px}
+.head h2{
+  margin:0;font-weight:800;font-size:clamp(1.22rem,4.8vw,1.55rem);
+  background:linear-gradient(180deg,#fff9ec,#f5c469);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+}
+.sub{margin:0;color:var(--mut);font-size:.85rem;line-height:1.48}
+.hint{margin:5px 0 0;color:var(--mut);font-size:.73rem;line-height:1.42}
+.c{text-align:center}
+
+/* Tactile 3D Patisserie Buttons */
+.btn{
+  position:relative;overflow:hidden;appearance:none;
+  border:1px solid var(--line-strong);
+  background:linear-gradient(180deg,rgba(255,244,232,.16),rgba(255,244,232,.05));
+  min-height:clamp(42px,6.2vh,50px);padding:0 16px;border-radius:15px;
+  font-weight:700;cursor:pointer;display:inline-flex;align-items:center;justify-content:center;gap:8px;
+  transition:transform .1s,box-shadow .12s,filter .15s,border-color .18s;
+  box-shadow:0 4px 0 rgba(16,7,14,.65),0 10px 20px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.2);
+}
+.btn:hover{filter:brightness(1.1);border-color:rgba(255,230,190,.6)}
+.btn:active{transform:translateY(3px);box-shadow:0 1px 0 rgba(16,7,14,.65),0 4px 10px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.15)}
+.btn:focus-visible,.iconbtn:focus-visible,.rbtn:focus-visible,.mode:focus-visible,.mstick:focus-visible{
+  outline:2px solid var(--gold);outline-offset:2px;
+}
+.btn.primary{
+  border:1px solid #ffe6a8;color:#341522;
+  background:linear-gradient(180deg,#ffefb9 0%,#f7c364 46%,#df8d35 100%);
+  box-shadow:0 4px 0 #8c4d14,0 12px 26px rgba(245,172,72,.36),inset 0 2px 0 rgba(255,255,255,.78);
+}
+.btn.primary:active{
+  transform:translateY(3px);
+  box-shadow:0 1px 0 #8c4d14,0 5px 12px rgba(245,172,72,.3),inset 0 2px 0 rgba(255,255,255,.75);
+}
+.btn.primary::after{
+  content:"";position:absolute;top:0;bottom:0;left:0;width:36%;
+  background:linear-gradient(90deg,transparent,rgba(255,255,255,.55),transparent);
+  animation:shine 3.8s ease-in-out infinite;pointer-events:none;
+}
+.btn.big{min-height:clamp(48px,7.2vh,58px);font-size:1.06rem;letter-spacing:.01em}
+.btn.ghost{background:transparent;border-color:transparent;box-shadow:none;color:var(--mut)}
+.btn.ghost:hover{color:var(--ink);background:rgba(255,255,255,.05)}
+.btn.sm{min-height:40px;padding:0 11px;font-size:.8rem}
+.btn:disabled{opacity:.42;cursor:not-allowed;filter:grayscale(.35)}
+.btn:disabled::after{display:none}
+.w{width:100%}
+
+.iconbtn{
+  width:42px;height:42px;flex:none;border-radius:13px;
+  border:1px solid var(--line-strong);
+  background:linear-gradient(180deg,rgba(255,244,232,.15),rgba(255,244,232,.04));
+  display:grid;place-items:center;cursor:pointer;font-size:1.25rem;line-height:1;padding:0;
+  box-shadow:0 3px 0 rgba(14,6,12,.6),inset 0 1px 0 rgba(255,255,255,.16);
+  transition:transform .1s,filter .15s;
+}
+.iconbtn:hover{filter:brightness(1.12)}
+.iconbtn:active{transform:translateY(2px)}
+.aud.off{opacity:.42}
+
+.card{
+  background:var(--card-surface);border:1px solid var(--line);border-radius:20px;
+  padding:clamp(10px,1.5vh,15px);
+  box-shadow:0 5px 0 rgba(15,7,13,.48),0 16px 32px rgba(0,0,0,.32),inset 0 1px 0 rgba(255,255,255,.1);
+}
+.lbl{font-size:.71rem;letter-spacing:.08em;color:var(--gold-light);font-weight:700;margin:0 0 6px;text-transform:uppercase}
+.row{display:flex;gap:8px}
+.row>*{flex:1;min-width:0}
+.inline{display:flex;align-items:center;gap:10px}
+.inline .lbl{margin:0;white-space:nowrap}
+
+.seg{display:flex;gap:5px;background:rgba(16,8,14,.48);padding:4px;border-radius:14px;box-shadow:inset 0 2px 6px rgba(0,0,0,.45)}
+.seg button{
+  flex:1;min-height:clamp(34px,5vh,40px);border:0;border-radius:10px;
+  background:transparent;font-weight:700;cursor:pointer;color:var(--mut);transition:all .2s;
+}
+.seg button.on{
+  background:linear-gradient(180deg,#ffebb3,#eaa645);color:#331521;
+  box-shadow:0 3px 0 #834912,0 4px 12px rgba(245,180,75,.35);
+}
+
+.sw{position:relative;display:flex;align-items:center;gap:10px;min-height:36px;cursor:pointer;font-size:.84rem}
+.sw+.sw{margin-top:4px}
+.sw input{position:absolute;opacity:0;width:1px;height:1px}
+.sw i{
+  width:44px;height:24px;border-radius:12px;background:rgba(255,255,255,.15);
+  position:relative;flex:none;transition:background .2s;box-shadow:inset 0 2px 4px rgba(0,0,0,.45);
+}
+.sw i::after{
+  content:"";position:absolute;left:3px;top:3px;width:18px;height:18px;border-radius:50%;
+  background:linear-gradient(#fff,#ead8df);transition:transform .22s cubic-bezier(.3,1.5,.5,1);
+  box-shadow:0 2px 4px rgba(0,0,0,.45);
+}
+.sw input:checked+i{background:linear-gradient(90deg,#e84c72,#f5a94c)}
+.sw input:checked+i::after{transform:translateX(20px)}
+.sw input:disabled+i{opacity:.48}
+.sw small{display:block;color:var(--mut);font-size:.69rem}
+
+.inp{
+  width:100%;background:rgba(16,7,14,.48);border:1px solid var(--line-strong);color:var(--ink);
+  border-radius:13px;padding:0 14px;min-height:clamp(40px,5.8vh,46px);font-size:16px;
+  outline:none;font-family:inherit;box-shadow:inset 0 2px 6px rgba(0,0,0,.45);
+}
+.inp:focus{border-color:var(--gold);box-shadow:0 0 0 3px rgba(245,196,105,.22),inset 0 2px 6px rgba(0,0,0,.45)}
+.inp.code{font-family:ui-monospace,Menlo,Consolas,monospace;letter-spacing:.35em;text-transform:uppercase;text-align:center;font-weight:800;font-size:1.22rem}
+
+/* Stepper + Recipe Target Medals */
+.cntrow{display:flex;align-items:center;gap:10px}
+.rbtn{
+  width:46px;height:46px;flex:none;border-radius:50%;border:1px solid var(--line-strong);
+  background:linear-gradient(180deg,#6c415c,#391f31);font-size:1.45rem;font-weight:800;cursor:pointer;
+  box-shadow:0 3px 0 rgba(12,5,10,.65),inset 0 1px 0 rgba(255,255,255,.2);line-height:1;padding:0;
+}
+.rbtn:active{transform:translateY(2px)}
+.rbtn:disabled{opacity:.35}
+.cntv{flex:1;text-align:center}
+.cntv b{display:block;font-family:var(--display);font-size:2.1rem;line-height:1;color:var(--gold-light);text-shadow:0 2px 12px rgba(245,196,105,.45)}
+.cntv small{font-size:.73rem;color:var(--mut)}
+
+.tgts{display:flex;align-items:center;justify-content:center;gap:6px;margin-top:8px;flex-wrap:wrap}
+.tgts .tl{font-size:.69rem;color:var(--mut);margin-right:2px}
+.tchip{
+  width:29px;height:29px;border-radius:50%;display:grid;place-items:center;
+  background:radial-gradient(circle at 35% 30%,#fff5d6,#f4ba58 58%,#b9731b);
+  border:1.5px solid #ffefc2;
+  box-shadow:0 2px 0 #6e3f09,0 4px 10px rgba(245,180,75,.35);
+}
+.tchip span{font-family:var(--display);font-weight:900;font-size:.82rem;color:#381822}
+.tgts .sc{font-size:.65rem;color:var(--gold-light);width:100%;text-align:center;opacity:.9}
+
+/* Title / Main Menu */
+.hero{position:relative;flex:1 1 195px;min-height:105px;max-height:255px;width:100%}
+.logo{margin:0;text-align:center;line-height:1.08}
+.logo .th-title{
+  display:block;font-weight:800;font-size:clamp(1.65rem,7.2vw,2.45rem);
+  background:linear-gradient(180deg,#fffdf7 0%,#ffe3a3 48%,#f29f67 100%);
+  -webkit-background-clip:text;background-clip:text;color:transparent;
+  filter:drop-shadow(0 3px 0 #3f1829) drop-shadow(0 8px 20px rgba(232,96,132,.38));
+}
+.logo .en-title{
+  display:inline-block;margin-top:6px;padding:3px 12px;border-radius:999px;
+  font-family:var(--display);font-size:.76rem;letter-spacing:.26em;color:#ffeac2;font-weight:800;
+  background:rgba(245,196,105,.13);border:1px solid rgba(245,196,105,.34);
+}
+.tagline{margin:0;text-align:center;color:var(--mut);font-size:.84rem}
+.feats{display:flex;justify-content:center;gap:6px;flex-wrap:wrap}
+.feats span{
+  display:inline-flex;align-items:center;gap:6px;padding:4px 11px 4px 5px;border-radius:999px;
+  background:rgba(20,9,17,.45);border:1px solid var(--line);font-size:.71rem;color:#fcebd9;
+}
+.feats b{
+  width:22px;height:22px;border-radius:50%;display:grid;place-items:center;
+  font-size:.74rem;color:#361523;background:linear-gradient(160deg,#fff0c2,#f2a950);
+  box-shadow:0 2px 4px rgba(0,0,0,.35);
+}
+.stack{display:flex;flex-direction:column;gap:9px}
+.credit{margin:0;text-align:center;font-size:.64rem;color:rgba(218,190,204,.65);line-height:1.45}
+.fxc{position:absolute;inset:0;width:100%;height:100%;pointer-events:none;z-index:4}
+
+/* Mode Selection Cards */
+.mode{
+  display:flex;gap:14px;align-items:center;text-align:left;
+  padding:clamp(13px,2vh,18px);border-radius:22px;border:1px solid var(--line-strong);
+  cursor:pointer;background:var(--card-surface);
+  box-shadow:0 5px 0 rgba(14,6,12,.55),0 16px 34px rgba(0,0,0,.4),inset 0 1px 0 rgba(255,255,255,.12);
+  transition:transform .12s,border-color .2s,filter .15s;
+}
+.mode:hover{border-color:var(--gold);filter:brightness(1.06)}
+.mode:active{transform:translateY(3px)}
+.mode .ic{
+  width:58px;height:58px;flex:none;border-radius:18px;display:grid;place-items:center;
+  background:linear-gradient(155deg,#ffdfec,#e84874);color:#fff;
+  box-shadow:0 4px 0 #7c1836,0 10px 20px rgba(232,72,116,.38),inset 0 1px 0 rgba(255,255,255,.55);
+  animation:floaty 3.2s ease-in-out infinite;
+}
+.mode .ic.b{
+  background:linear-gradient(155deg,#d8ecff,#3582ee);color:#fff;
+  box-shadow:0 4px 0 #143d7d,0 10px 20px rgba(53,130,238,.38),inset 0 1px 0 rgba(255,255,255,.55);
+  animation-delay:-1.6s;
+}
+.mode b{display:block;font-size:1.06rem;color:#fff4df;margin:4px 0 2px}
+.mode small{display:block;color:var(--mut);font-size:.78rem;line-height:1.42}
+.pill{display:inline-block;font-size:.6rem;letter-spacing:.12em;font-weight:800;padding:3px 9px;border-radius:999px;background:rgba(232,72,116,.22);color:#ffb3c7;border:1px solid rgba(232,72,116,.4)}
+.pill.b{background:rgba(56,134,242,.22);color:#add0ff;border:1px solid rgba(56,134,242,.4)}
+
+/* Chef Bot Roster & Avatars */
+.bots{display:grid;grid-template-columns:repeat(5,minmax(0,1fr));gap:6px}
+.bot{
+  display:flex;flex-direction:column;align-items:center;gap:4px;padding:7px 3px;
+  border-radius:13px;background:rgba(16,7,14,.35);border:1px solid rgba(255,255,255,.06);
+  min-width:0;text-align:center;
+}
+.bot b{font-size:.68rem;max-width:100%;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;color:#fdecd8}
+
+.av{
+  --hue:340;position:relative;width:34px;height:34px;flex:none;border-radius:50%;
+  display:grid;place-items:center;font-weight:800;font-size:.86rem;color:#fff;
+  background:radial-gradient(circle at 32% 28%,hsl(var(--hue) 78% 70%),hsl(var(--hue) 58% 32%));
+  border:1.5px solid rgba(255,244,225,.55);
+  box-shadow:0 3px 0 rgba(12,5,10,.55),0 5px 10px rgba(0,0,0,.35),inset 0 1px 0 rgba(255,255,255,.45);
+}
+.av svg{width:78%;height:78%;display:block}
+.av.sm{width:30px;height:30px;font-size:.78rem}
+.dot{position:absolute;right:-2px;bottom:-2px;width:11px;height:11px;border-radius:50%;border:2px solid #281624;background:#888}
+.dot.online,.dot.local{background:var(--pistachio)}
+.dot.host{background:var(--gold)}
+.dot.bot{background:#d49eff}
+.dot.offline{background:var(--bad)}
+.dot.reconnecting{background:var(--warn);animation:blink 1s infinite}
+
+.status{margin:0;font-size:.86rem;min-height:1.2em;text-align:center}
+.status.err{color:#ff94a0}
+
+/* Multiplayer Kitchen Lobby */
+.codebig{
+  font-family:ui-monospace,Menlo,Consolas,monospace;
+  font-size:clamp(2.1rem,10.5vw,3.1rem);letter-spacing:.3em;padding-left:.3em;
+  font-weight:800;color:var(--gold-light);text-align:center;
+  text-shadow:0 3px 0 #5b3216,0 0 24px rgba(245,196,105,.45);margin-bottom:6px;
+}
+.linktx{font-size:.66rem;color:var(--mut);word-break:break-all;text-align:center;margin:6px 0 0}
+.lgrid{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:5px 10px}
+.lrow{display:flex;align-items:center;gap:8px;padding:5px 3px;border-bottom:1px dashed var(--line);min-height:38px;min-width:0}
+.lname{flex:1;font-weight:600;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap;font-size:.84rem}
+.tag{font-size:.6rem;padding:2px 8px;border-radius:999px;font-weight:700;flex:none}
+.tag.host{background:rgba(245,196,105,.2);color:#ffdf96}
+.tag.on{background:rgba(74,214,149,.18);color:var(--pistachio)}
+.tag.off{background:rgba(255,98,112,.18);color:var(--bad)}
+
+/* Gameplay Layout */
+.game{
+  flex:1;min-height:0;display:grid;
+  grid-template-columns:minmax(0,1fr);
+  grid-template-rows:auto auto minmax(0,1fr) auto;
+  grid-template-areas:"tb" "pl" "st" "hd";
+}
+.tb{grid-area:tb;display:flex;align-items:center;gap:7px;padding:6px 10px 4px}
+.tb-t{flex:1;min-width:0;display:flex;flex-direction:column;line-height:1.18}
+.tb-t b{color:var(--gold-light);font-size:.95rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.tb-t small{font-size:.68rem;color:var(--mut);white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.chip{
+  flex:none;padding:5px 11px;border-radius:999px;border:1px solid var(--line-strong);
+  background:rgba(18,8,15,.48);font-size:.74rem;font-weight:700;white-space:nowrap;color:#ffefd4;
+}
+.chip.code{font-family:ui-monospace,Menlo,monospace;letter-spacing:.14em;color:var(--gold)}
+.tb .iconbtn{width:38px;height:38px}
+
+/* Chef Player Panels */
+.players{grid-area:pl;--cols:4;display:grid;grid-template-columns:repeat(var(--cols),minmax(0,1fr));gap:6px;padding:4px 10px 6px}
+.players[data-n="2"]{--cols:2}.players[data-n="3"]{--cols:3}.players[data-n="4"]{--cols:4}
+.players[data-n="5"],.players[data-n="6"]{--cols:3}.players[data-n="7"],.players[data-n="8"]{--cols:4}.players[data-n="9"],.players[data-n="10"]{--cols:5}
+
+.pc{
+  position:relative;min-width:0;padding:6px 8px;border-radius:15px;
+  background:var(--card-surface);border:1px solid var(--line);
+  box-shadow:0 3px 0 rgba(14,6,12,.5),0 8px 16px rgba(0,0,0,.28),inset 0 1px 0 rgba(255,255,255,.09);
+  transition:box-shadow .28s,border-color .28s,transform .2s;
+}
+.pc.me{border-color:rgba(245,196,105,.72);background:var(--card-me)}
+.pc.locked{border-color:rgba(74,214,149,.78);box-shadow:0 3px 0 rgba(14,6,12,.5),0 0 16px rgba(74,214,149,.26)}
+.pc.off{opacity:.55}
+.pc .lk{
+  position:absolute;top:-6px;right:-6px;width:20px;height:20px;border-radius:50%;
+  background:var(--pistachio);color:#09301d;font-size:.7rem;font-weight:900;
+  display:grid;place-items:center;box-shadow:0 2px 0 var(--pistachio-dark),0 0 10px rgba(74,214,149,.6);
+  transform:scale(0);transition:transform .3s cubic-bezier(.3,1.7,.5,1);z-index:2;
+}
+.pc.locked .lk{transform:scale(1)}
+.pc.think .av::after{
+  content:"";position:absolute;inset:-4px;border-radius:50%;
+  border:2px solid rgba(245,196,105,.8);animation:ring 1.5s ease-out infinite;
+}
+.pc-top{display:flex;align-items:center;gap:6px;min-width:0}
+.pc .av{width:27px;height:27px;font-size:.76rem}
+.pc-n{font-weight:700;font-size:.75rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+
+.pips{display:flex;flex-direction:column;gap:3px;margin-top:5px}
+.prow{display:flex;align-items:center;gap:2.5px}
+.prow i{width:6.5px;height:6.5px;border-radius:50%;background:currentColor;box-shadow:0 0 4px currentColor;flex:none}
+.prow i.u{background:none;box-shadow:inset 0 0 0 1px rgba(255,255,255,.24)}
+.prow.r{color:var(--ruby-light)}.prow.b{color:var(--berry-light)}
+.prow em{font-style:normal;font-size:.66rem;font-weight:800;margin-left:4px}
+
+.cnts{display:none}
+.cnts span{font-size:.62rem;font-weight:800;padding:0 5px;border-radius:6px;line-height:1.5}
+.cnts .r{color:#ffc2d2;background:rgba(232,62,104,.28)}
+.cnts .b{color:#c6dfff;background:rgba(56,134,242,.28)}
+.pc-s{font-size:.62rem;color:var(--mut);margin-top:3px;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.pc-s.ok{color:var(--pistachio);font-weight:700}
+
+.players.cmp{gap:5px}
+.players.cmp .pc{padding:5px 4px 4px;text-align:center}
+.players.cmp .pc-top{flex-direction:column;gap:2px}
+.players.cmp .pc .av{width:24px;height:24px;font-size:.7rem}
+.players.cmp .pc-n{font-size:.6rem;max-width:100%}
+.players.cmp .pips,.players.cmp .pc-s{display:none}
+.players.cmp .cnts{display:flex;justify-content:center;gap:3px;margin-top:2px}
+
+/* Center Stage & Recipe Medallion */
+.stage{grid-area:st;position:relative;min-height:0;display:flex;flex-direction:column;align-items:center;padding:4px 10px 2px;overflow:hidden}
+.tgrow{display:flex;align-items:center;gap:12px;z-index:5;max-width:100%}
+.tgring{
+  --p:0;width:72px;height:72px;flex:none;border-radius:50%;padding:4px;
+  background:conic-gradient(#f5c469 calc(var(--p) * 1%),rgba(255,255,255,.1) 0);
+  box-shadow:0 4px 0 rgba(12,5,10,.55),0 0 26px rgba(245,196,105,.35);
+}
+.ext .tgring{
+  background:conic-gradient(#74d8ff calc(var(--p) * 1%),rgba(255,255,255,.1) 0);
+  box-shadow:0 4px 0 rgba(12,5,10,.55),0 0 26px rgba(116,216,255,.35);
+}
+.tgbadge{
+  width:100%;height:100%;border-radius:50%;
+  display:flex;flex-direction:column;align-items:center;justify-content:center;
+  background:radial-gradient(circle at 38% 28%,#633751,#261320);
+  border:1px solid rgba(255,235,195,.35);
+  box-shadow:inset 0 3px 8px rgba(0,0,0,.55);
+}
+.tgbadge small{font-size:.5rem;color:var(--gold-light);margin-bottom:-2px;letter-spacing:.04em}
+.tgbadge b{font-family:var(--display);font-size:2rem;line-height:1;color:#fff2cc;text-shadow:0 2px 10px rgba(245,196,105,.6)}
+.tgring.bump{animation:bump .7s}
+@keyframes bump{40%{transform:scale(1.2)}}
+
+.tginfo{min-width:0}
+.tokens{display:flex;align-items:center;gap:7px;padding-left:2px}
+.tok{
+  width:var(--sz);height:var(--sz);border-radius:50%;
+  background:linear-gradient(145deg,#4f2f43,#2b1725);
+  border:1.5px solid rgba(255,225,190,.24);
+  display:grid;place-items:center;transition:all .45s;
+  box-shadow:inset 0 1px 2px rgba(255,255,255,.12);
+}
+.tok span{font-family:var(--display);font-size:.62rem;font-weight:900;color:rgba(255,235,215,.55)}
+.tok.lit{
+  background:radial-gradient(circle at 35% 30%,#fff6d6,#f5b855 58%,#c96480);
+  box-shadow:0 0 14px rgba(245,190,95,.75);border-color:#fff0c4;
+}
+.tok.lit span{color:#3c1424}
+.tok.out{background:linear-gradient(145deg,#2a3b4d,#182430);border-color:rgba(145,210,255,.42)}
+.tok.cur{outline:2px dashed var(--gold);outline-offset:3px;animation:curP 1.4s infinite}
+@keyframes curP{50%{outline-color:rgba(245,196,105,.22)}}
+.tok.pop{animation:tokPop .8s}
+@keyframes tokPop{40%{transform:scale(1.65)}}
+
+.mission{display:flex;align-items:center;gap:5px;flex-wrap:wrap;margin-top:6px}
+.mc{
+  display:inline-flex;align-items:center;gap:5px;padding:3px 10px 3px 5px;
+  border-radius:999px;font-size:.74rem;font-weight:800;border:1px solid;
+  box-shadow:0 2px 0 rgba(0,0,0,.38);
+}
+.mc i{width:15px;height:15px;border-radius:50%;flex:none;box-shadow:inset 0 1px 2px rgba(255,255,255,.6)}
+.mc b{font-family:var(--display);font-size:.98rem;line-height:1}
+.mc.r{background:rgba(232,62,104,.2);border-color:rgba(232,62,104,.55);color:#ffc4d4}
+.mc.r i{background:radial-gradient(circle at 35% 30%,#ffc2d2,#e83e68 60%,#801330)}
+.mc.b{background:rgba(56,134,242,.2);border-color:rgba(56,134,242,.55);color:#c4deff}
+.mc.b i{background:radial-gradient(circle at 35% 30%,#cce4ff,#3886f2 60%,#123978)}
+.mission em{font-style:normal;font-size:.68rem;color:var(--mut)}
+.lasthint{font-size:.67rem;color:var(--mut);margin-top:4px;min-height:1em}
+
+/* 3D Royal Cake Pedestal & 5-Tier Confectionery Tower */
+.pitbox{position:relative;flex:1 1 auto;min-height:70px;width:100%}
+.pitbox::before{
+  content:"";position:absolute;left:8%;right:8%;bottom:-3%;height:38%;border-radius:50%;
+  background:radial-gradient(ellipse at 50% 50%,rgba(245,196,105,.22),rgba(120,55,85,.18) 52%,transparent 74%);
+  pointer-events:none;
+}
+.pitwrap{position:absolute;inset:0;container-type:size}
+.stand{
+  --lv:0;position:absolute;left:50%;top:50%;height:100%;aspect-ratio:1/1;max-width:100%;
+  transform:translate(-50%,-50%);
+}
+@supports (height:1cqh){
+  .stand{width:min(100cqw,100cqh);height:min(100cqw,100cqh);aspect-ratio:auto;max-width:none}
+}
+.aura{
+  position:absolute;left:-20%;right:-20%;top:-12%;bottom:-15%;pointer-events:none;
+  background:radial-gradient(46% 42% at 50% 62%,rgba(255,198,128,.45),rgba(232,88,136,.18) 55%,transparent 76%);
+  opacity:calc(.25 + var(--lv) * .14);transition:opacity .9s;
+}
+/* Pedestal Foot */
+.ped-foot{
+  position:absolute;left:35%;right:35%;bottom:3%;height:12%;
+  border-radius:50% 50% 14px 14px;
+  background:linear-gradient(90deg,#9c6a25,#ffe6a6 45%,#d69b3c 65%,#7d5016);
+  box-shadow:0 6px 14px rgba(0,0,0,.6),inset 0 2px 3px rgba(255,255,255,.55);
+}
+.ped-stem{
+  position:absolute;left:45%;right:45%;bottom:11%;height:13%;
+  background:linear-gradient(90deg,#8f5f1e,#ffebb5 46%,#be842c 80%);
+  box-shadow:inset 0 -3px 6px rgba(0,0,0,.35);
+}
+/* Marble & Gold Platter */
+.platter{
+  position:absolute;left:8%;right:8%;bottom:17%;height:26%;
+  border-radius:50%;
+  background:
+    radial-gradient(ellipse at 45% 38%,#ffffff 0%,#f7efe6 56%,#decab8 88%,#b89d86 100%);
+  border:3px solid #f2c265;
+  box-shadow:
+    0 7px 0 #9e6c20,
+    0 14px 26px rgba(0,0,0,.55),
+    inset 0 3px 10px rgba(255,255,255,.9),
+    inset 0 -4px 10px rgba(155,115,85,.35);
+}
+.platter-doily{
+  position:absolute;inset:12%;border-radius:50%;
+  border:1.5px dashed rgba(196,148,92,.55);
+  background:radial-gradient(ellipse at 50% 50%,rgba(255,244,230,.8),rgba(242,222,202,.35));
+}
+.piped-ring{position:absolute;inset:0;pointer-events:none}
+.pdot{
+  position:absolute;left:50%;top:50%;width:4.4%;height:9.5%;margin:-4.75% 0 0 -2.2%;
+  border-radius:50% 50% 42% 42%;
+  transform:rotate(var(--a)) translateY(var(--o));
+  box-shadow:0 2px 3px rgba(0,0,0,.35),inset 0 1px 2px rgba(255,255,255,.65);
+}
+.pdot.r{background:radial-gradient(circle at 35% 30%,#ffb5c8,#e83e68 65%,#8c1635)}
+.pdot.b{background:radial-gradient(circle at 35% 30%,#c2deff,#3886f2 65%,#143c7d)}
+
+/* 5 Cake Tiers stacked from bottom to top */
+.cake-stack{position:absolute;left:14%;right:14%;bottom:28%;top:6%;pointer-events:none;z-index:2}
+.tier{
+  position:absolute;left:50%;transform:translateX(-50%) scale(.75);
+  border-radius:14px 14px 50% 50% / 10px 10px 16px 16px;
+  opacity:0;transition:opacity .45s ease,transform .55s cubic-bezier(.25,1.5,.45,1);
+  box-shadow:0 6px 12px rgba(25,8,18,.42),inset 0 -4px 8px rgba(0,0,0,.18),inset 0 2px 4px rgba(255,255,255,.55);
+}
+.tier.on{opacity:1;transform:translateX(-50%) scale(1);animation:tierDrop .55s cubic-bezier(.25,1.45,.45,1)}
+/* Frosting drip top rim on every tier */
+.tier::before{
+  content:"";position:absolute;left:-2%;right:-2%;top:-3px;height:42%;
+  border-radius:14px 14px 10px 10px;
+  background:var(--icing,linear-gradient(180deg,#fffdf9,#ffe6ee));
+  box-shadow:0 3px 5px rgba(0,0,0,.14),inset 0 2px 2px rgba(255,255,255,.9);
+}
+/* Decorative pearl band along bottom of each tier */
+.tier::after{
+  content:"";position:absolute;left:4%;right:4%;bottom:14%;height:4px;border-radius:4px;
+  background:repeating-linear-gradient(90deg,var(--pearl,#ffe8a3) 0 6px,transparent 6px 10px);
+  opacity:.85;
+}
+/* Tier 1: Golden Vanilla Biscuit Base */
+.tier.t1{
+  bottom:0;width:82%;height:21%;z-index:1;
+  background:linear-gradient(90deg,#d89452,#f8cba0 38%,#f2ba82 66%,#bd7637);
+  --icing:linear-gradient(180deg,#fffaf2,#fde2c8);--pearl:#fff4d2;
+}
+/* Tier 2: Ruby Strawberry Velour */
+.tier.t2{
+  bottom:17%;width:68%;height:20%;z-index:2;
+  background:linear-gradient(90deg,#b82b52,#f4648a 38%,#e54872 68%,#961d3e);
+  --icing:linear-gradient(180deg,#fff7fa,#ffc6d9);--pearl:#ffe69e;
+}
+/* Tier 3: Blueberry Lavender Mousse */
+.tier.t3{
+  bottom:33%;width:55%;height:19%;z-index:3;
+  background:linear-gradient(90deg,#2c63ba,#6ca8ff 38%,#4b8be8 68%,#1e4991);
+  --icing:linear-gradient(180deg,#f7fbff,#c9e2ff);--pearl:#fff5d6;
+}
+/* Tier 4: Pistachio Rose Entremet */
+.tier.t4{
+  bottom:48%;width:42%;height:18%;z-index:4;
+  background:linear-gradient(90deg,#2f9668,#7ae2b0 38%,#56c792 68%,#21734d);
+  --icing:linear-gradient(180deg,#fff9fc,#ffd9e6);--pearl:#ffe596;
+}
+/* Tier 5: Royal Chocolate & Gold Leaf Summit */
+.tier.t5{
+  bottom:62%;width:30%;height:17%;z-index:5;
+  background:linear-gradient(90deg,#4c243b,#8c486c 40%,#6e3353 70%,#38172a);
+  --icing:linear-gradient(180deg,#fff6d1,#f5c469);--pearl:#ffffff;
+}
+/* Crown Strawberry + Gold Star Topper when Tier 5 is lit */
+.cake-crown{
+  position:absolute;left:50%;bottom:78%;width:16%;height:18%;
+  transform:translateX(-50%) scale(0);opacity:0;z-index:6;
+  transition:transform .5s cubic-bezier(.3,1.7,.5,1),opacity .4s;
+}
+.cake-crown.on{
+  opacity:1;transform:translateX(-50%) scale(1);
+  animation:bobCrown 2.6s ease-in-out infinite;
+}
+/* Placeholder subtle ghost silhouette when 0 tiers built */
+.cake-ghost{
+  position:absolute;left:50%;bottom:4%;width:58%;height:34%;transform:translateX(-50%);
+  border:2px dashed rgba(245,196,105,.5);border-radius:18px 18px 24px 24px;
+  background:radial-gradient(ellipse at 50% 65%,rgba(58,28,44,.52),rgba(38,18,30,.22));
+  display:grid;place-items:center;color:#ffeac2;font-size:.68rem;font-weight:700;
+  text-shadow:0 1px 4px rgba(0,0,0,.65);transition:opacity .35s;
+}
+.stand:not([data-lv="0"]) .cake-ghost{opacity:0}
+
+.sfoot{display:flex;align-items:center;gap:10px;width:min(100%,430px);font-size:.67rem;color:var(--mut);z-index:5;padding:2px 0}
+.prog{flex:1;height:7px;border-radius:4px;background:rgba(255,255,255,.1);overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.5)}
+.prog i{display:block;height:100%;width:0;background:linear-gradient(90deg,#e84874,#f5c469);transition:width .75s;border-radius:4px}
+.ext .prog i{background:linear-gradient(90deg,#3886f2,#8be8ff)}
+
+.flash{position:absolute;inset:0;pointer-events:none;opacity:0;z-index:3;background:radial-gradient(circle at 50% 58%,rgba(255,220,150,.55),transparent 62%)}
+.flash.cool{background:radial-gradient(circle at 50% 58%,rgba(145,215,255,.52),transparent 62%)}
+.flash.go{animation:flash .95s ease-out}
+@keyframes flash{20%{opacity:1}100%{opacity:0}}
+
+/* Chef's Pastry Piping Tray (Player Hand) */
+.hand{
+  grid-area:hd;margin:0 8px 8px;padding:9px 11px 11px;border-radius:22px;
+  background:linear-gradient(180deg,rgba(78,46,67,.97),rgba(38,21,34,.99));
+  border:1px solid var(--line-strong);
+  box-shadow:0 -8px 28px rgba(0,0,0,.42),inset 0 1px 0 rgba(255,255,255,.15),inset 0 -3px 0 rgba(0,0,0,.35);
+  position:relative;z-index:6;min-width:0;
+}
+.hhead{display:flex;justify-content:space-between;align-items:baseline;gap:8px;margin:0 2px 7px;min-width:0}
+.hhead b{font-size:.9rem;color:var(--gold-light);white-space:nowrap}
+.hhead span{font-size:.68rem;color:var(--mut);text-align:right;min-width:0;overflow:hidden;text-overflow:ellipsis;white-space:nowrap}
+
+.piles{display:grid;grid-template-columns:minmax(0,1fr) minmax(0,1fr);gap:9px}
+.pile{
+  min-width:0;border-radius:16px;padding:7px 7px 7px;
+  border:1px solid rgba(255,255,255,.09);
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.42);
+}
+.pile.red{background:linear-gradient(180deg,rgba(232,62,104,.22),rgba(18,8,15,.36));border-color:rgba(232,62,104,.3)}
+.pile.blue{background:linear-gradient(180deg,rgba(56,134,242,.22),rgba(18,8,15,.36));border-color:rgba(56,134,242,.3)}
+.ptop{display:flex;align-items:baseline;justify-content:space-between;gap:4px;min-width:0;padding:0 2px}
+.pname{font-size:.77rem;font-weight:800;white-space:nowrap;overflow:hidden;text-overflow:ellipsis;min-width:0}
+.pile.red .pname{color:var(--ruby-light)}
+.pile.blue .pname{color:var(--berry-light)}
+.pleft{font-size:.63rem;color:var(--mut);white-space:nowrap;flex:none}
+
+.psticks{display:flex;justify-content:center;align-items:flex-end;gap:5px;height:62px;padding:8px 2px 0;min-width:0}
+.pempty{font-size:.72rem;color:var(--mut);align-self:center}
+
+/* 3D Pastry Piping Bag / Confectionery Tube */
+.mstick{
+  position:relative;flex:0 1 24px;min-width:12px;height:52px;border:0;background:none;padding:0;
+  cursor:pointer;transition:transform .22s cubic-bezier(.3,1.6,.5,1),filter .15s;touch-action:manipulation;
+}
+.mstick:hover{filter:brightness(1.1)}
+/* Piping cone body */
+.mstick::before{
+  content:"";position:absolute;left:50%;bottom:2px;width:14px;height:calc(100% - 14px);margin-left:-7px;
+  clip-path:polygon(12% 0%,88% 0%,68% 100%,32% 100%);
+  background:linear-gradient(90deg,#e5d0bd,#fff9f2 46%,#eddac8 75%,#cbb099);
+  box-shadow:0 3px 4px rgba(0,0,0,.5);
+}
+/* Swirled Berry Cream Puff Top */
+.mstick::after{
+  content:"";position:absolute;left:50%;top:0;width:16px;height:17px;margin-left:-8px;
+  border-radius:50% 50% 38% 38%;
+  background:radial-gradient(circle at 32% 28%,#fff 0 10%,var(--tl) 22%,var(--tc) 62%,var(--td));
+  box-shadow:0 2px 4px rgba(0,0,0,.48);
+}
+.mstick.red{--tc:#e83e68;--tl:#ffabc0;--td:#7d132e}
+.mstick.blue{--tc:#3886f2;--tl:#b0d4ff;--td:#123978}
+.mstick.sel{transform:translateY(-10px) rotate(-5deg) scale(1.06)}
+.mstick.sel::after{box-shadow:0 0 13px 3px var(--tc)}
+
+.step{display:flex;align-items:center;gap:4px;margin-top:6px}
+.step button{
+  flex:1;min-width:0;height:32px;border-radius:9px;border:1px solid var(--line-strong);
+  background:linear-gradient(180deg,rgba(255,255,255,.15),rgba(255,255,255,.04));
+  font-weight:800;font-size:1.1rem;cursor:pointer;line-height:1;padding:0;
+  box-shadow:0 2px 0 rgba(0,0,0,.45);
+}
+.step button:active{transform:translateY(1px)}
+.step button:disabled{opacity:.3}
+.step output{flex:0 0 26px;text-align:center;font-weight:900;font-size:1.05rem;font-family:var(--display)}
+
+.lockbtn{width:100%;margin-top:8px;min-height:50px;font-size:1rem}
+.lockedbox{
+  text-align:center;padding:14px 10px;border-radius:16px;
+  background:rgba(16,7,14,.38);border:1.5px dashed rgba(74,214,149,.55);
+  min-height:120px;display:flex;flex-direction:column;justify-content:center;
+  box-shadow:inset 0 2px 8px rgba(0,0,0,.4);
+}
+.lockedbox .fist{font-size:.71rem;letter-spacing:.14em;color:var(--pistachio);font-weight:800}
+.lockedbox b{display:block;font-size:1rem;margin:5px 0;color:#fff6e8}
+.lockedbox span{font-size:.76rem;color:var(--mut)}
+.shake{animation:shake .35s}
+@keyframes shake{25%{transform:translateX(-5px)}75%{transform:translateX(5px)}}
+
+/* Modal Sheets & Reveal Overlays */
+.ov{
+  position:absolute;inset:0;z-index:50;display:none;align-items:center;justify-content:center;
+  padding:12px;background:rgba(15,6,13,.76);-webkit-backdrop-filter:blur(7px);backdrop-filter:blur(7px);
+}
+.ov.show{display:flex;animation:scrIn .22s ease}
+.sheet{
+  width:min(480px,100%);max-height:100%;overflow:auto;
+  background:linear-gradient(180deg,#44273b,#22121e);
+  border:1px solid var(--line-strong);border-radius:24px;
+  padding:clamp(14px,2.2vh,20px);
+  box-shadow:0 8px 0 rgba(10,4,9,.55),0 26px 64px rgba(0,0,0,.68),inset 0 1px 0 rgba(255,255,255,.14);
+}
+.sheet h3{margin:0;font-size:1.22rem;font-weight:800;color:var(--gold-light)}
+.sheet .btns{display:flex;flex-direction:column;gap:8px;margin-top:14px}
+
+#ovCount{background:rgba(16,7,14,.52)}
+.count{
+  font-weight:800;font-size:clamp(2.3rem,11vw,4.1rem);text-align:center;
+  color:var(--gold-light);text-shadow:0 4px 0 #5b2238,0 0 32px rgba(245,196,105,.8);
+}
+.count.a{animation:popA .5s ease both}
+.count.b{animation:popB .45s ease both;color:#fff8e6}
+@keyframes popA{from{transform:scale(.6);opacity:0}to{transform:none;opacity:1}}
+@keyframes popB{0%{transform:scale(.5);opacity:0}60%{transform:scale(1.18);opacity:1}100%{transform:none}}
+
+.rvsub{color:var(--mut);font-size:.77rem;margin:3px 0 9px}
+@keyframes rvIn{from{opacity:0;transform:perspective(400px) rotateX(65deg) translateY(8px)}to{opacity:1;transform:none}}
+.rvgrid{display:grid;grid-template-columns:minmax(0,1fr);gap:6px}
+.rvgrid.two{grid-template-columns:minmax(0,1fr) minmax(0,1fr)}
+.rvr{
+  display:flex;justify-content:space-between;align-items:center;gap:6px;
+  padding:7px 10px;border-radius:13px;background:rgba(14,6,12,.36);border:1px solid rgba(255,255,255,.06);
+  opacity:0;animation:rvIn .4s ease forwards;min-width:0;
+}
+.rvr .nm{font-weight:700;font-size:.84rem;white-space:nowrap;overflow:hidden;text-overflow:ellipsis}
+.rvr .ct{font-size:.68rem;color:var(--mut)}
+.rvr>div:first-child{min-width:0}
+.rvs{display:flex;align-items:flex-end;gap:4px;padding-top:5px;flex:none}
+.ms{
+  display:inline-block;width:8px;height:22px;
+  clip-path:polygon(10% 18%,90% 18%,68% 100%,32% 100%);
+  background:linear-gradient(90deg,#e4ceba,#fff8f0 50%,#cfb59e);
+  position:relative;margin:0 1px;
+}
+.rvr .pip-dot{
+  display:inline-flex;flex-direction:column;align-items:center;margin:0 1px;
+}
+.rvr .pip-dot::before{
+  content:"";width:10px;height:10px;border-radius:50%;background:var(--tc);
+  box-shadow:0 0 6px var(--tc);margin-bottom:-2px;z-index:1;
+}
+.rvr .pip-dot::after{
+  content:"";width:8px;height:15px;
+  clip-path:polygon(10% 0%,90% 0%,68% 100%,32% 100%);
+  background:linear-gradient(90deg,#e4ceba,#fff8f0 50%,#cfb59e);
+}
+.rvr .pip-dot.red{--tc:var(--ruby)}
+.rvr .pip-dot.blue{--tc:var(--berry)}
+.rvgrid.two .rvr{padding:5px 8px}.rvgrid.two .nm{font-size:.74rem}.rvgrid.two .ct{font-size:.6rem}
+.rvgrid.two .pip-dot::before{width:8px;height:8px}.rvgrid.two .pip-dot::after{width:6px;height:11px}
+.rvnone{font-size:.67rem;color:var(--mut)}
+
+.rvt{display:grid;grid-template-columns:72px 1fr auto;gap:10px;align-items:center;margin-top:8px;opacity:0;animation:rvIn .4s ease forwards}
+.rvt .lb{font-weight:800;font-size:.82rem}
+.rvt.red .lb{color:var(--ruby-light)}.rvt.blue .lb{color:var(--berry-light)}
+.bar{position:relative;height:15px;border-radius:8px;background:rgba(255,255,255,.09);overflow:hidden;box-shadow:inset 0 1px 3px rgba(0,0,0,.5)}
+.fill{height:100%;border-radius:8px;transition:width .5s}
+.rvt.red .fill{background:linear-gradient(90deg,#a61c41,#ff658c)}
+.rvt.blue .fill{background:linear-gradient(90deg,#194d99,#5ca4ff)}
+.fill.over{background:repeating-linear-gradient(45deg,#7c5b6d,#7c5b6d 6px,#593d4c 6px,#593d4c 12px)!important}
+.tick{position:absolute;top:0;bottom:0;width:1px;background:rgba(0,0,0,.5)}
+.val{font-weight:800;font-variant-numeric:tabular-nums;min-width:60px;text-align:right;font-size:.9rem}
+.rvt.hit .val{color:var(--gold-light)}
+.rvt.hit .bar{box-shadow:0 0 14px rgba(245,196,105,.78)}
+
+.verdict{margin-top:12px;text-align:center;font-weight:800;font-size:1.15rem;opacity:0;animation:rvIn .45s ease forwards;line-height:1.32}
+.verdict small{display:block;font-family:var(--display);font-size:.72rem;letter-spacing:.22em;font-weight:800;opacity:.9}
+.verdict.ok{color:var(--gold-light);text-shadow:0 0 18px rgba(245,196,105,.65)}
+.verdict.no{color:#c9b8d4}
+.explain{text-align:center;font-size:.82rem;opacity:0;animation:rvIn .45s ease forwards;margin:6px 0 0;line-height:1.46;color:#f5e6ef}
+
+.endjp{
+  font-family:var(--display);font-size:clamp(1.35rem,6vw,1.9rem);font-weight:900;
+  text-align:center;color:var(--gold-light);letter-spacing:.04em;
+  text-shadow:0 3px 0 #592238,0 0 22px rgba(245,196,105,.65);
+}
+#ovEnd:not(.win) .endjp{color:#cbb8c8;text-shadow:none}
+#ovEnd.win .sheet{box-shadow:0 0 70px rgba(245,196,105,.36),0 26px 64px rgba(0,0,0,.68)}
+.endtitle{text-align:center;font-weight:800;font-size:1.08rem;margin:5px 0}
+.endtext{text-align:center;color:var(--mut);font-size:.84rem;margin:4px 0;line-height:1.48}
+.stats{
+  display:grid;grid-template-columns:1fr auto;gap:5px 10px;font-size:.84rem;
+  margin-top:9px;padding:11px 13px;border-radius:14px;background:rgba(14,6,12,.36);
+  border:1px solid rgba(255,255,255,.06);box-shadow:inset 0 2px 6px rgba(0,0,0,.35);
+}
+.stats .k{color:var(--mut)}.stats .v{font-weight:700;text-align:right;color:#fff4e2}
+
+.hist{max-height:38vh;overflow:auto;margin-top:6px}
+.hrow{display:grid;grid-template-columns:36px 66px 1fr 22px;gap:6px;align-items:center;padding:6px 2px;border-bottom:1px dashed var(--line);font-size:.78rem}
+.hrow .o{font-weight:800;text-align:center}
+.hrow.ok .o{color:var(--pistachio)}.hrow.no .o{color:var(--bad)}
+.hrow .pl{grid-column:1/-1;font-size:.66rem;color:var(--mut)}
+
+.how ul{padding-left:18px;margin:8px 0}
+.how li,.how p{font-size:.83rem;line-height:1.52}
+.how li{margin-bottom:4px}
+.ttab{display:grid;grid-template-columns:auto 1fr;gap:4px 12px;font-size:.76rem;padding:9px 11px;border-radius:12px;background:rgba(14,6,12,.36);margin-top:6px}
+.ttab b{color:var(--gold-light)}
+.note{font-size:.72rem;color:var(--mut);border-left:3px solid var(--gold);padding-left:10px;margin:8px 0 0;line-height:1.46}
+
+#toasts{
+  position:absolute;top:calc(14px + env(safe-area-inset-top));left:50%;transform:translateX(-50%);
+  z-index:90;display:flex;flex-direction:column;gap:6px;align-items:center;pointer-events:none;width:min(92%,420px);
+}
+.toast{
+  background:rgba(46,25,40,.97);border:1px solid var(--line-strong);
+  padding:9px 15px;border-radius:13px;font-size:.84rem;
+  box-shadow:0 10px 26px rgba(0,0,0,.55);animation:scrIn .2s;transition:opacity .4s;text-align:center;
+}
+.toast.err{border-color:rgba(255,98,112,.75)}
+.toast.out{opacity:0}
+
+.nbar{
+  position:absolute;left:8px;right:8px;z-index:95;padding:10px 12px;border-radius:13px;
+  display:flex;gap:10px;align-items:center;font-size:.82rem;box-shadow:0 10px 30px rgba(0,0,0,.55);
+}
+.nbar span{flex:1}
+.nbar button{min-height:36px;padding:6px 12px;border-radius:9px;border:1px solid rgba(255,255,255,.32);background:rgba(0,0,0,.28);cursor:pointer;font-weight:700}
+#errBar{bottom:calc(8px + env(safe-area-inset-bottom));background:#5e1828;border:1px solid #ff6d82}
+#netBar{top:calc(12px + env(safe-area-inset-top));background:#5a3b14;border:1px solid #f7be59}
+
+#flyLayer{position:absolute;inset:0;pointer-events:none;z-index:60;overflow:hidden}
+.fly{
+  position:absolute;left:0;top:0;width:12px;height:28px;margin:-14px 0 0 -6px;
+}
+.fly::before{
+  content:"";position:absolute;top:0;left:1px;width:10px;height:10px;border-radius:50%;
+  background:var(--tc);box-shadow:0 0 8px var(--tc);
+}
+.fly::after{
+  content:"";position:absolute;top:8px;left:2px;width:8px;height:18px;
+  clip-path:polygon(10% 0%,90% 0%,68% 100%,32% 100%);
+  background:linear-gradient(90deg,#e4ceba,#fff8f0 50%,#cfb59e);
+}
+.fly.red{--tc:var(--ruby)}.fly.blue{--tc:var(--berry)}
+
+/* Responsive Breakpoints */
+@media (max-width:420px){.players[data-n="4"]{--cols:2}.tb-t small{display:none}.bots{gap:4px}}
+@media (max-width:360px){.tb-t{display:none}.tb{justify-content:space-between}.mc{font-size:.68rem}}
+@media (orientation:portrait) and (max-height:700px){
+  .tgring{width:58px;height:58px}.tgbadge b{font-size:1.6rem}
+  .psticks{height:54px}.mstick{height:44px}.lockbtn{min-height:46px}
+  .lockedbox{min-height:104px}.pc-s{display:none}.feats{display:none}.lasthint{display:none}
+}
+@media (orientation:landscape) and (max-height:560px),(min-width:960px) and (min-height:600px){
+  .game{
+    grid-template-columns:minmax(0,1fr) minmax(320px,42%);
+    grid-template-rows:auto auto minmax(0,1fr);
+    grid-template-areas:"tb tb" "st pl" "st hd";
+  }
+  .game .players[data-n]{--cols:2;align-content:start;padding:4px 12px 4px 0}
+  .game .players.cmp[data-n]{--cols:5}
+  .hand{margin:0 12px 12px 0;align-self:end}
+}
+@media (orientation:landscape) and (max-height:560px){
+  .tb{padding:4px 10px 2px}.tgring{width:52px;height:52px}.tgbadge b{font-size:1.45rem}.tgbadge small{display:none}
+  .psticks{height:46px;padding-top:6px}.mstick{height:38px}.step button{height:28px}
+  .lockbtn{min-height:42px;margin-top:6px}.lockedbox{min-height:90px}.pc-s{display:none}
+  .pips{flex-direction:row;gap:8px}.hhead{margin-bottom:4px}.hand{padding:8px}.hero{max-height:135px}
+  .feats{display:none}.lasthint{display:none}
+}
+@media (prefers-reduced-motion:reduce){
+  .cake-crown,.tok.cur,.mode .ic,.btn.primary::after,.pc.think .av::after{animation:none!important}
+}
+</style>
+</head>
+<body>
+<noscript><p style="color:#fff;padding:20px;font-family:sans-serif">เกมนี้ต้องเปิดใช้งาน JavaScript</p></noscript>
+<div id="app">
+<canvas id="bgfx"></canvas>
+
+<!-- MAIN TITLE SCREEN -->
+<section class="scr active" id="s-menu"><div class="fit">
+ <div class="hero"><div class="pitwrap" id="menuPit"></div><canvas class="fxc" id="menuFx"></canvas></div>
+ <h1 class="logo">
+  <span class="th-title">หอคอยขนมหวานสื่อใจ</span>
+  <span class="en-title">LA GRANDE PATISSERIE</span>
+ </h1>
+ <p class="tagline">เกมร่วมมือของเหล่าเชฟ · อ่านใจบีบครีมให้ตรงสูตร สร้างเค้ก 5 ชั้น · 2–10 คน</p>
+ <div class="feats">
+  <span><b>♥</b>ทีมเชฟร่วมมือกัน</span>
+  <span><b>★</b>ซ่อนสูตร เปิดพร้อมกัน</span>
+  <span><b>♛</b>ประกอบเค้ก 5 ชั้น</span>
+ </div>
+ <div class="stack">
+  <button class="btn primary big" type="button" data-act="go" data-to="mode">เข้าสู่ครัวขนมหวาน</button>
+  <button class="btn" type="button" data-act="continue" id="btnContinue" hidden>อบต่อจากครัวที่บันทึกไว้</button>
+  <div class="row">
+   <button class="btn" type="button" data-act="how">ตำราวิธีเล่น</button>
+   <button class="btn aud" type="button" data-act="music" data-audio="music"><span class="audtx">เพลง</span></button>
+   <button class="btn aud" type="button" data-act="sfx" data-audio="sfx"><span class="audtx">เสียง</span></button>
+  </div>
+ </div>
+ <p class="credit">LA GRANDE PATISSERIE · หอคอยขนมหวานสื่อใจ<br>Cooperative Culinary Telepathy Board Game · รองรับทั้งเล่นเดี่ยวและออนไลน์ P2P</p>
+</div></section>
+
+<!-- MODE SELECT SCREEN -->
+<section class="scr" id="s-mode"><div class="fit">
+ <div class="head"><button class="iconbtn" type="button" data-act="go" data-to="menu" aria-label="ย้อนกลับ">‹</button><h2>เลือกรูปแบบครัว</h2></div>
+ <p class="sub">เชฟทุกคนชนะหรือแพ้ไปด้วยกัน ห้ามส่งซิกบอกจำนวนหรือรสชาติครีมที่จะบีบเด็ดขาด!</p>
+ <button class="mode" type="button" data-act="solo-setup">
+  <span class="ic">
+   <svg viewBox="0 0 32 32" width="32" height="32"><path d="M9 22h14v4H9z" fill="currentColor"/><path d="M8 21c-3-1-4-5-2-8 1-2 4-2 5-1 1-3 4-5 7-4 3 1 5 4 4 7 2 1 2 5-1 6z" fill="currentColor" opacity=".92"/></svg>
+  </span>
+  <span>
+   <span class="pill">SOLO KITCHEN · OFFLINE</span>
+   <b>อบขนมกับแก๊งเชฟบอท</b>
+   <small>คุณ + เชฟผู้ช่วย 1–9 ตัว แต่ละตัวมีสไตล์การแต่งหน้าเค้กเฉพาะตัว เล่นได้แม้ออฟไลน์</small>
+  </span>
+ </button>
+ <button class="mode" type="button" data-act="online-setup">
+  <span class="ic b">
+   <svg viewBox="0 0 32 32" width="32" height="32"><circle cx="11" cy="12" r="4" fill="currentColor"/><circle cx="21" cy="12" r="4" fill="currentColor"/><path d="M4 25c0-4 3-7 7-7s7 3 7 7M15 25c0-4 3-7 7-7s6 3 6 7" fill="none" stroke="currentColor" stroke-width="2.6" stroke-linecap="round"/></svg>
+  </span>
+  <span>
+   <span class="pill b">MULTIPLAYER · WebRTC P2P</span>
+   <b>เปิดครัวออนไลน์กับเพื่อน</b>
+   <small>2–10 คน คนละเครื่อง เชื่อมต่อตรงผ่านรหัสครัว 5 หลัก หัวหน้าเชฟเป็นผู้คุมโต๊ะ</small>
+  </span>
+ </button>
+</div></section>
+
+<!-- SOLO SETUP SCREEN -->
+<section class="scr" id="s-solo"><div class="fit">
+ <div class="head"><button class="iconbtn" type="button" data-act="go" data-to="mode" aria-label="ย้อนกลับ">‹</button><h2>จัดทีมเชฟในครัว</h2></div>
+ <div class="card">
+  <div class="inline"><span class="lbl">ชื่อเชฟของคุณ</span><input class="inp" id="soloName" maxlength="16" autocomplete="off" placeholder="เชฟของคุณ"></div>
+ </div>
+ <div class="card">
+  <div class="lbl">จำนวนเชฟร่วมโต๊ะ (2–10 คน)</div>
+  <div class="cntrow">
+   <button class="rbtn" type="button" data-act="count" data-d="-1" id="cntMinus" aria-label="ลดจำนวนเชฟ">−</button>
+   <div class="cntv"><b id="countVal">3</b><small id="countSub"></small></div>
+   <button class="rbtn" type="button" data-act="count" data-d="1" id="cntPlus" aria-label="เพิ่มจำนวนเชฟ">+</button>
+  </div>
+  <div class="tgts" id="soloTargets"></div>
+ </div>
+ <div class="card">
+  <div class="lbl">ความแม่นยำของเชฟบอท</div>
+  <div class="seg" id="segDiff">
+   <button type="button" data-act="diff" data-v="easy">ฝึกหัด</button>
+   <button type="button" data-act="diff" data-v="normal">มืออาชีพ</button>
+   <button type="button" data-act="diff" data-v="hard">เชฟมิชลิน</button>
+  </div>
+  <p class="hint" id="diffDesc"></p>
+  <div class="bots" id="botList" style="margin-top:8px"></div>
+ </div>
+ <div class="card">
+  <label class="sw"><input type="checkbox" id="soloScale"><i></i><span>ปรับสูตรเป้าหมายตามจำนวนเชฟ<small>มีผลเมื่อ 5 คนขึ้นไป (2–4 คนใช้สูตร 1–5 เสมอ)</small></span></label>
+  <label class="sw"><input type="checkbox" id="soloZero"><i></i><span>อนุญาตให้พักมือ (บีบ 0 หลอด)</span></label>
+  <label class="sw"><input type="checkbox" id="soloNoCap"><i></i><span>ไม่จำกัดเพดาน 3 หลอดต่อรอบ</span></label>
+ </div>
+ <button class="btn primary big" type="button" data-act="solo-start">ผูกผ้ากันเปื้อน · เริ่มอบเค้ก!</button>
+</div></section>
+
+<!-- ONLINE SETUP SCREEN -->
+<section class="scr" id="s-online"><div class="fit">
+ <div class="head"><button class="iconbtn" type="button" data-act="go" data-to="mode" aria-label="ย้อนกลับ">‹</button><h2>ครัวออนไลน์กับเพื่อน</h2></div>
+ <div class="card"><div class="lbl">ชื่อเชฟของคุณ (ใช้ชื่อเดิมเพื่อกลับเข้าที่นั่งเดิม)</div><input class="inp" id="onName" maxlength="16" autocomplete="off" placeholder="ชื่อเชฟ"></div>
+ <div class="card"><div class="lbl">เปิดครัวใหม่ (เป็นหัวหน้าเชฟ)</div>
+  <button class="btn primary w" type="button" data-act="create">เปิดครัวใหม่</button>
+  <button class="btn w" type="button" data-act="resume-host" id="btnResumeHost" style="margin-top:8px" hidden>กลับไปเปิดครัวเดิม</button>
+ </div>
+ <div class="card"><div class="lbl">เข้าร่วมครัวของเพื่อน</div>
+  <div class="row"><input class="inp code" id="joinCode" maxlength="5" autocomplete="off" autocapitalize="characters" placeholder="CODE"><button class="btn primary" type="button" data-act="join" style="flex:0 0 auto">เข้าครัว</button></div>
+  <p class="hint" id="rejoinHint" hidden></p>
+ </div>
+ <p class="status" id="onStatus" role="status"></p>
+ <p class="hint c">เชื่อมต่อตรงแบบ Peer-to-Peer ผ่าน WebRTC (PeerJS) โดยไม่ต้องพึ่งเซิร์ฟเวอร์เก็บข้อมูลเกม ต้องใช้อินเทอร์เน็ตในการจับคู่เครื่อง</p>
+</div></section>
+
+<!-- MULTIPLAYER LOBBY SCREEN -->
+<section class="scr" id="s-lobby"><div class="fit">
+ <div class="head"><button class="iconbtn" type="button" data-act="leave" aria-label="ออกจากครัว">‹</button><h2>ห้องเตรียมวัตถุดิบ</h2></div>
+ <div class="card">
+  <div class="lbl c">รหัสครัว 5 หลัก</div>
+  <div class="codebig" id="lobbyCode">-----</div>
+  <div class="row">
+   <button class="btn sm" type="button" data-act="copy-code">คัดลอกรหัส</button>
+   <button class="btn sm" type="button" data-act="copy-link">คัดลอกลิงก์</button>
+   <button class="btn sm" type="button" data-act="share" id="btnShare" hidden>แชร์</button>
+  </div>
+  <p class="linktx" id="lobbyLink"></p>
+ </div>
+ <div class="card"><div class="lbl" id="lobbyCount">ทีมเชฟ</div><div class="lgrid" id="lobbyList"></div><div class="tgts" id="lobbyTargets"></div></div>
+ <div class="card">
+  <div class="lbl">กติกาประจำครัว (หัวหน้าเชฟเป็นผู้ตั้ง)</div>
+  <label class="sw"><input type="checkbox" id="lobbyScale"><i></i><span>ปรับสูตรเป้าหมายตามจำนวนเชฟ (5 คนขึ้นไป)</span></label>
+  <label class="sw"><input type="checkbox" id="lobbyZero"><i></i><span>อนุญาตให้พักมือ (บีบ 0 หลอด)</span></label>
+  <label class="sw"><input type="checkbox" id="lobbyNoCap"><i></i><span>ไม่จำกัดเพดาน 3 หลอดต่อรอบ</span></label>
+ </div>
+ <p class="hint c" id="lobbyHint"></p>
+ <button class="btn primary big" type="button" data-act="lobby-start" id="btnLobbyStart">เริ่มประกอบหอคอยเค้ก!</button>
+</div></section>
+
+<!-- GAMEPLAY SCREEN -->
+<section class="scr" id="s-game">
+ <div class="game">
+  <header class="tb">
+   <button class="iconbtn" type="button" data-act="game-menu" aria-label="เมนูครัว">☰</button>
+   <div class="tb-t"><b>หอคอยขนมหวานสื่อใจ</b><small id="tbMode">ประกอบเค้ก 5 ชั้น</small></div>
+   <span class="chip" id="tbRound">รอบ 1</span>
+   <span class="chip code" id="tbRoom" hidden></span>
+   <button class="iconbtn aud" type="button" data-act="music" data-audio="music" aria-label="เพลงประกอบ"><svg viewBox="0 0 24 24" width="19" height="19"><path d="M9 18V5l11-2v13" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/><circle cx="6" cy="18" r="3" fill="currentColor"/><circle cx="17" cy="16" r="3" fill="currentColor"/></svg></button>
+   <button class="iconbtn aud" type="button" data-act="sfx" data-audio="sfx" aria-label="เสียงเอฟเฟกต์"><svg viewBox="0 0 24 24" width="19" height="19"><path d="M4 9h4l5-4v14l-5-4H4z" fill="currentColor"/><path d="M16 9a4 4 0 0 1 0 6M18.5 6.5a8 8 0 0 1 0 11" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round"/></svg></button>
+  </header>
+
+  <div class="players" id="players"></div>
+
+  <div class="stage" id="stage">
+   <div class="tgrow">
+    <div class="tgring" id="tgRing"><div class="tgbadge"><small>สูตรเป้าหมาย</small><b id="tgNum">1</b></div></div>
+    <div class="tginfo">
+     <div class="tokens" id="tokens"></div>
+     <div class="mission" id="mission">
+      <span class="mc r"><i></i>สตรอว์เบอร์รี <b id="mRed">1</b></span>
+      <em>หรือ</em>
+      <span class="mc b"><i></i>บลูเบอร์รี <b id="mBlue">1</b></span>
+     </div>
+     <div class="lasthint" id="lastHint"></div>
+    </div>
+   </div>
+   <div class="pitbox"><div class="pitwrap" id="gamePit"></div></div>
+   <div class="sfoot"><span id="progText"></span><div class="prog"><i id="progBar"></i></div><span id="pileInfo"></span></div>
+   <div class="flash" id="flash"></div>
+   <canvas class="fxc" id="gameFx"></canvas>
+  </div>
+
+  <div class="hand" id="hand">
+   <div class="hhead"><b id="handCount">เตรียมบีบ 0 หลอด</b><span id="handRule"></span></div>
+   <div class="piles" id="piles">
+    <div class="pile red">
+     <div class="ptop"><span class="pname">ครีมสตรอว์เบอร์รี</span><span class="pleft" id="leftRed">เหลือ 5</span></div>
+     <div class="psticks" id="pileRed"></div>
+     <div class="step"><button type="button" data-act="step" data-c="red" data-d="-1" aria-label="ลดสตรอว์เบอร์รี">−</button><output id="selRed">0</output><button type="button" data-act="step" data-c="red" data-d="1" aria-label="เพิ่มสตรอว์เบอร์รี">+</button></div>
+    </div>
+    <div class="pile blue">
+     <div class="ptop"><span class="pname">ครีมบลูเบอร์รี</span><span class="pleft" id="leftBlue">เหลือ 5</span></div>
+     <div class="psticks" id="pileBlue"></div>
+     <div class="step"><button type="button" data-act="step" data-c="blue" data-d="-1" aria-label="ลดบลูเบอร์รี">−</button><output id="selBlue">0</output><button type="button" data-act="step" data-c="blue" data-d="1" aria-label="เพิ่มบลูเบอร์รี">+</button></div>
+    </div>
+   </div>
+   <div class="lockedbox" id="lockedBox" hidden>
+    <div class="fist">ครอบฝาโดมเงินไว้ · ปิดเป็นความลับ</div>
+    <b id="lockedText">เตรียมเสิร์ฟแล้ว</b>
+    <span id="lockedWait"></span>
+   </div>
+   <button class="btn primary lockbtn" type="button" data-act="lock" id="btnLock">ซ่อนใต้ฝาโดม</button>
+  </div>
+ </div>
+</section>
+
+<!-- SIMULTANEOUS COUNTDOWN OVERLAY -->
+<div class="ov" id="ovCount"><div class="count" id="countText">หนึ่ง… สอง…</div></div>
+
+<!-- ROUND REVEAL OVERLAY -->
+<div class="ov" id="ovReveal"><div class="sheet">
+ <h3 id="rvTitle"></h3><p class="rvsub" id="rvSub"></p>
+ <div id="rvRows" class="rvgrid"></div><div id="rvTotals"></div>
+ <div class="verdict" id="rvVerdict"></div><p class="explain" id="rvExplain"></p>
+ <div class="btns"><button class="btn primary" type="button" data-act="rv-continue" id="rvBtn">ไปต่อ</button></div>
+</div></div>
+
+<!-- VICTORY / DEFEAT OVERLAY -->
+<div class="ov" id="ovEnd"><div class="sheet">
+ <div class="endjp" id="endJp"></div>
+ <div class="endtitle" id="endTitle"></div>
+ <p class="endtext" id="endText"></p>
+ <div class="stats" id="endStats"></div>
+ <div class="btns">
+  <button class="btn primary" type="button" data-act="end-ext" id="btnEndExt" hidden>ภารกิจชิมเค้กย้อนกลับ (โหมดพิเศษ)</button>
+  <button class="btn" type="button" data-act="end-again" id="btnEndAgain">อบเค้กก้อนใหม่อีกครั้ง</button>
+  <p class="hint c" id="endWait" hidden>รอหัวหน้าเชฟเลือกว่าจะเปิดครัวรอบต่อไปอย่างไร…</p>
+  <button class="btn ghost" type="button" data-act="leave" id="btnEndMenu">กลับหน้าร้าน</button>
+ </div>
+</div></div>
+
+<!-- BONUS TASTING CHALLENGE MODAL -->
+<div class="ov" id="ovExt"><div class="sheet how">
+ <h3>GRAND TASTING · ภารกิจเสิร์ฟชิมเค้ก 5 ชั้น</h3>
+ <p class="note">หลังจากสร้างหอคอยเค้กสำเร็จ ถึงเวลาตัดแบ่งเสิร์ฟแขกกิตติมศักดิ์แบบย้อนลำดับ โหมดนี้เป็น<b>บททดสอบพิเศษประจำครัว</b>สำหรับทีมที่รู้ใจกันสุดขีด!</p>
+ <ul>
+  <li>เชฟทุกคนได้รับหลอดครีมชุดใหม่ สตรอว์เบอร์รี 5 + บลูเบอร์รี 5 หลอด</li>
+  <li>สูตรเป้าหมายจะนับถอยหลังจากชั้นบนสุด (ชั้นที่ 5) ลงมายังฐานชั้นที่ 1</li>
+  <li>กติกาเหมือนเดิม: เปิดฝาโดมพร้อมกัน สำเร็จเมื่อผลรวมสตรอว์เบอร์รี <b>หรือ</b> บลูเบอร์รี เท่ากับสูตรพอดี</li>
+  <li>ผ่านแต่ละขั้นจะเสิร์ฟเค้กออกไปได้ 1 ชั้น หากเชฟคนใดครีมหมดมือก่อน เค้กจะค้างเสิร์ฟไม่ทันเวลา!</li>
+ </ul>
+ <div class="btns"><button class="btn primary" type="button" data-act="ext-start">เริ่มเสิร์ฟชิมเค้ก!</button><button class="btn ghost" type="button" data-act="close" data-ov="ovExt">ไว้คราวหน้า</button></div>
+</div></div>
+
+<!-- IN-GAME MENU & ROUND LOG -->
+<div class="ov" id="ovMenu"><div class="sheet">
+ <h3>สมุดบันทึกประจำครัว</h3>
+ <div class="lbl" style="margin-top:10px">ประวัติการบีบครีมแต่ละรอบ (ข้อมูลเปิดเผยบนโต๊ะ)</div>
+ <div class="hist" id="histList"></div>
+ <div class="btns">
+  <button class="btn primary" type="button" data-act="close" data-ov="ovMenu">กลับไปแต่งหน้าเค้กต่อ</button>
+  <button class="btn" type="button" data-act="how">ตำราวิธีเล่น</button>
+  <button class="btn" type="button" data-act="restart" id="btnMRestart">เริ่มอบใหม่ตั้งแต่ชั้นแรก</button>
+  <button class="btn ghost" type="button" data-act="leave" id="btnMLeave">บันทึกและกลับหน้าร้าน</button>
+ </div>
+</div></div>
+
+<!-- HOW TO PLAY MODAL -->
+<div class="ov" id="ovHow"><div class="sheet how">
+ <h3>ตำราวิธีเล่น · LA GRANDE PATISSERIE</h3>
+ <p><b>ภารกิจของทีม:</b> ร่วมมือกันประกอบหอคอยเค้กฝรั่งเศสให้ครบทั้ง 5 ชั้น</p>
+ <ul>
+  <li>เชฟทุกคนเริ่มต้นด้วยหลอดครีม<b>สตรอว์เบอร์รี 5</b> และ<b>บลูเบอร์รี 5</b> หลอด</li>
+  <li>ในแต่ละรอบ แอบเลือกหลอดครีมที่จะบีบ (ปกติ 1–3 หลอด ผสมรสได้) แล้วกดซ่อนใต้ฝาโดม <b>ห้ามนัดแนะจำนวนหรือรสชาติ!</b></li>
+  <li>เมื่อทุกคนพร้อม "หนึ่ง… สอง… เสิร์ฟเลย!" จะเปิดฝาโดมพร้อมกันทั้งโต๊ะ</li>
+  <li><b>สำเร็จตามสูตร:</b> ผลรวม<b>สตรอว์เบอร์รี</b>ทั้งโต๊ะเท่ากับเป้าหมายพอดี <b>หรือ</b>ผลรวม<b>บลูเบอร์รี</b>เท่ากับเป้าหมายพอดี (ตรงแค่รสเดียวก็ผ่าน!) เค้กชั้นใหม่จะวางขึ้นแท่นทันที</li>
+  <li><b>ยังไม่ตรงสูตร:</b> เป้าหมายคงเดิมและต้องลองใหม่ · ครีมที่บีบไปแล้ว<b>ใช้แล้วหมดไปทุกรอบ</b></li>
+  <li><b>พ่ายแพ้:</b> หากมีเชฟคนใดหลอดครีมหมดเกลี้ยงมือก่อนครบ 5 ชั้น (ยกเว้นรอบที่วางชั้นที่ 5 สำเร็จพอดี ทีมจะชนะทันที!)</li>
+ </ul>
+ <div class="lbl" style="margin-top:8px">ตารางสูตรเป้าหมาย 5 ชั้นตามจำนวนเชฟ</div>
+ <div class="ttab" id="howTargets"></div>
+ <p class="note">สำหรับ 2–4 คนใช้สูตร 1–5 มาตรฐาน ส่วน 5–10 คนจะปรับสเกลด้วยสูตร ปัดเศษ(ชั้น × จำนวนเชฟ ÷ 4) เพื่อให้สมดุลกับการที่ทุกคนต้องบีบอย่างน้อย 1 หลอด (สามารถเปิด/ปิดได้ก่อนเริ่ม)</p>
+ <div class="btns"><button class="btn primary" type="button" data-act="close" data-ov="ovHow">พร้อมเข้าครัวแล้ว!</button></div>
+</div></div>
+
+<!-- CONFIRMATION DIALOG -->
+<div class="ov" id="ovConfirm"><div class="sheet"><p id="cfText" style="font-size:.98rem;line-height:1.5;margin:0"></p>
+ <div class="btns"><button class="btn primary" type="button" data-act="cf-yes" id="cfYes">ตกลง</button><button class="btn ghost" type="button" data-act="cf-no">ยกเลิก</button></div>
+</div></div>
+
+<div id="flyLayer"></div>
+<div id="toasts" aria-live="polite"></div>
+<div class="nbar" id="netBar" hidden><span id="netText"></span><button type="button" data-act="leave" id="btnNetLeave">ออก</button></div>
+<div class="nbar" id="errBar" hidden><span id="errText"></span><button type="button" data-act="err-close">ปิด</button></div>
+</div>
+
+<script>
+(function(){
+'use strict';
+/* ================= UTILITIES ================= */
+var PROTO = 4, MAXP = 10;
+function E(id){ var e = document.getElementById(id); if (e && e.nodeType === 1) return e; return document.createElement('div'); }
+function qsa(sel, root){ try { return Array.prototype.slice.call((root || document).querySelectorAll(sel)); } catch (e) { return []; } }
+function isEl(x){ return !!(x && x.nodeType === 1 && typeof x.appendChild === 'function'); }
+function sleep(ms){ return new Promise(function(r){ setTimeout(r, ms); }); }
+function hueOf(i){ return (340 + i * 47) % 360; }
+function mk(tag, cls, text){ var e = document.createElement(tag); if (cls) e.className = cls; if (text !== undefined && text !== null) e.textContent = String(text); return e; }
+function clamp(v, a, b){ return Math.max(a, Math.min(b, v)); }
+function clone(o){ return o == null ? o : JSON.parse(JSON.stringify(o)); }
+var ALPH = 'ABCDEFGHJKLMNPQRSTUVWXYZ23456789';
+var CODE_RE = /^[A-HJ-NP-Z2-9]{5}$/;
+function randId(n){
+  var a = new Uint32Array(n), s = '', i;
+  try { window.crypto.getRandomValues(a); } catch (e) { for (i = 0; i < n; i++) a[i] = Math.floor(Math.random() * 4294967295); }
+  for (i = 0; i < n; i++) s += ALPH[a[i] % ALPH.length]; return s;
+}
+function cleanName(s){ return String(s == null ? '' : s).replace(/[\u0000-\u001f\u007f<>]/g, '').replace(/\s+/g, ' ').trim().slice(0, 16); }
+var Store = {
+  get: function(k, d){ try { var v = window.localStorage.getItem('gp4_' + k); return v == null ? d : JSON.parse(v); } catch (e) { return d; } },
+  set: function(k, v){ try { window.localStorage.setItem('gp4_' + k, JSON.stringify(v)); } catch (e) {} },
+  del: function(k){ try { window.localStorage.removeItem('gp4_' + k); } catch (e) {} }
+};
+var reducedMotion = false;
+try { reducedMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches; } catch (e) {}
+function showError(err){
+  try {
+    if (err === 0) return;
+    var m = (err && err.message) || String(err); if (window.console) console.error(err);
+    var b = document.getElementById('errBar'); if (!b) return;
+    E('errText').textContent = 'เกิดข้อผิดพลาด: ' + m.slice(0, 160) + ' (เกมยังเล่นต่อได้)';
+    b.hidden = false;
+  } catch (e) {}
+}
+function safe(fn){ try { fn(); } catch (e) { showError(e); } }
+window.addEventListener('error', function(e){ if (!e || !e.message || e.message === 'Script error.' || /ResizeObserver/.test(e.message)) return; showError(e.error || e.message); });
+window.addEventListener('unhandledrejection', function(e){ showError(e && e.reason); });
+
+/* ================= EXPRESSIVE CHEF SVG AVATARS ================= */
+function chefAvatarSVG(kind, letter){
+  var hat = '<path d="M9 11c-2.2-.4-3.2-2.8-1.8-4.5 1-1.2 2.7-1.2 3.6-.4.8-1.8 3-2.6 4.8-1.8 1.6.7 2.4 2.4 2 4 1.8.6 2.1 3 .2 3.8H9z" fill="#fffdf9" stroke="#5b3248" stroke-width="1.1"/><rect x="9" y="10.5" width="10" height="2.2" rx=".8" fill="#f5c469"/>';
+  var faces = {
+    cat: '<path d="M8 14l-1.5-4 4 2M20 14l1.5-4-4 2" fill="#ffd7ba"/><circle cx="14" cy="18.5" r="6.2" fill="#ffe4cc"/><circle cx="11.8" cy="17.8" r="1" fill="#361826"/><circle cx="16.2" cy="17.8" r="1" fill="#361826"/><path d="M13.2 19.6h1.6l-.8 1z" fill="#e84874"/>',
+    bear: '<circle cx="8.8" cy="14.2" r="2.3" fill="#d99b6c"/><circle cx="19.2" cy="14.2" r="2.3" fill="#d99b6c"/><circle cx="14" cy="18.6" r="6.2" fill="#eab386"/><ellipse cx="14" cy="20.2" rx="2.5" ry="1.8" fill="#fff3e6"/><circle cx="11.8" cy="17.5" r="1" fill="#361826"/><circle cx="16.2" cy="17.5" r="1" fill="#361826"/><circle cx="14" cy="19.6" r="1" fill="#5c2e1e"/>',
+    bunny: '<ellipse cx="11" cy="11" rx="1.7" ry="4.2" fill="#fff0f5"/><ellipse cx="17" cy="11" rx="1.7" ry="4.2" fill="#fff0f5"/><circle cx="14" cy="18.8" r="6" fill="#fff5f8"/><circle cx="11.8" cy="18" r="1" fill="#361826"/><circle cx="16.2" cy="18" r="1" fill="#361826"/><circle cx="14" cy="19.8" r=".9" fill="#ff6b98"/>',
+    fox: '<path d="M7.5 14.5l1-5 4.2 3M20.5 14.5l-1-5-4.2 3" fill="#f28444"/><circle cx="14" cy="18.8" r="6.1" fill="#f79c5e"/><path d="M9 19.5c2 2.8 8 2.8 10 0-1.5-.8-3-1-5-1s-3.5.2-5 1z" fill="#fff6ee"/><circle cx="11.8" cy="17.6" r="1" fill="#361826"/><circle cx="16.2" cy="17.6" r="1" fill="#361826"/>',
+    owl: '<circle cx="14" cy="18.5" r="6.3" fill="#b993d6"/><circle cx="11.6" cy="17.8" r="2.1" fill="#fff"/><circle cx="16.4" cy="17.8" r="2.1" fill="#fff"/><circle cx="11.6" cy="17.8" r="1" fill="#2c1635"/><circle cx="16.4" cy="17.8" r="1" fill="#2c1635"/><path d="M13 19.6l1 1.7 1-1.7z" fill="#f5b841"/>',
+    panda: '<circle cx="8.8" cy="14" r="2.2" fill="#2c1e2a"/><circle cx="19.2" cy="14" r="2.2" fill="#2c1e2a"/><circle cx="14" cy="18.6" r="6.1" fill="#fff9f5"/><ellipse cx="11.5" cy="17.8" rx="1.7" ry="1.4" fill="#2c1e2a"/><ellipse cx="16.5" cy="17.8" rx="1.7" ry="1.4" fill="#2c1e2a"/><circle cx="11.6" cy="17.6" r=".6" fill="#fff"/><circle cx="16.4" cy="17.6" r=".6" fill="#fff"/>',
+    otter: '<circle cx="8.8" cy="15.5" r="1.9" fill="#a87554"/><circle cx="19.2" cy="15.5" r="1.9" fill="#a87554"/><circle cx="14" cy="18.6" r="6.1" fill="#c48f6c"/><ellipse cx="14" cy="20" rx="3.2" ry="2" fill="#f7e4d4"/><circle cx="11.8" cy="17.4" r="1" fill="#2c1620"/><circle cx="16.2" cy="17.4" r="1" fill="#2c1620"/>',
+    lamb: '<circle cx="8.5" cy="16" r="2.2" fill="#fff4eb"/><circle cx="19.5" cy="16" r="2.2" fill="#fff4eb"/><circle cx="14" cy="18.8" r="5.8" fill="#ffe2cf"/><circle cx="11.8" cy="18" r="1" fill="#361826"/><circle cx="16.2" cy="18" r="1" fill="#361826"/><path d="M12.8 20.4q1.2 1 2.4 0" fill="none" stroke="#8c485c" stroke-width="1.1" stroke-linecap="round"/>',
+    hedgehog: '<path d="M7.5 17c1-5 12-5 13 0" fill="#8f5d46"/><circle cx="14" cy="18.8" r="5.8" fill="#f3ccb0"/><circle cx="11.8" cy="17.8" r="1" fill="#361826"/><circle cx="16.2" cy="17.8" r="1" fill="#361826"/><circle cx="14" cy="19.6" r="1.1" fill="#e84874"/>'
+  };
+  var ns = 'http://www.w3.org/2000/svg';
+  var svg = document.createElementNS(ns, 'svg');
+  svg.setAttribute('viewBox', '0 0 28 28');
+  if (faces[kind]) {
+    svg.innerHTML = faces[kind] + hat;
+  } else {
+    var ch = String(letter || 'C').slice(0, 1).toUpperCase().replace(/[<>&"]/g, '');
+    svg.innerHTML = hat + '<text x="14" y="22.5" text-anchor="middle" fill="#ffffff" font-size="10.5" font-weight="800" font-family="Prompt,sans-serif">' + ch + '</text>';
+  }
+  return svg;
+}
+
+/* ================= RULES ================= */
+var Rules = (function(){
+  function targetsFor(n, scale){
+    if (n <= 4 || scale === false) return [1, 2, 3, 4, 5];
+    var out = [], prev = 0;
+    for (var k = 1; k <= 5; k++) { var t = Math.round(k * n / 4); if (t <= prev) t = prev + 1; out.push(t); prev = t; }
+    return out;
+  }
+  function norm(r){ r = r || {}; var z = !!r.allowZero, nc = !!r.noCap; return { allowZero: z, noCap: nc, scale: r.scale !== false, min: z ? 0 : 1, max: nc ? 10 : 3 }; }
+  function createGame(o){
+    var mode = o.mode === 'extinguish' ? 'extinguish' : 'build';
+    if (!Array.isArray(o.players) || o.players.length < 2 || o.players.length > MAXP) throw new Error('ต้องมีเชฟ 2–' + MAXP + ' คน');
+    var R = norm(o.rules), bt = targetsFor(o.players.length, R.scale);
+    return { v: 4, gameId: randId(8), mode: mode, buildTargets: bt.slice(), targets: mode === 'build' ? bt.slice() : bt.slice().reverse(), stage: 0, round: 1, roundId: 1, rules: R,
+      carry: { red: (o.carry && o.carry.red) | 0, blue: (o.carry && o.carry.blue) | 0 },
+      players: o.players.map(function(p, i){ return { seat: i, name: cleanName(p.name) || ('เชฟ ' + (i + 1)), bot: !!p.bot, persona: p.persona || null, red: 5, blue: 5, usedRed: 0, usedBlue: 0 }; }),
+      locked: o.players.map(function(){ return false; }), history: [], result: null, phase: 'select' };
+  }
+  function target(s){ return (s && s.stage < s.targets.length) ? s.targets[s.stage] : null; }
+  function legalOptions(p, R){ var out = [], r, b; for (r = 0; r <= p.red; r++) for (b = 0; b <= p.blue; b++) { var t = r + b; if (t >= R.min && t <= R.max) out.push({ red: r, blue: b }); } return out; }
+  function validate(s, seat, sel){
+    if (!s || s.phase !== 'select') return 'ตอนนี้ยังรับการเลือกไม่ได้';
+    if (!Number.isInteger(seat) || seat < 0 || seat >= s.players.length) return 'ที่นั่งไม่ถูกต้อง';
+    if (!sel || typeof sel !== 'object') return 'ข้อมูลไม่ถูกต้อง';
+    var r = sel.red, b = sel.blue;
+    if (!Number.isInteger(r) || !Number.isInteger(b) || r < 0 || b < 0) return 'จำนวนต้องเป็นจำนวนเต็ม';
+    var p = s.players[seat];
+    if (r > p.red) return 'ครีมสตรอว์เบอร์รีไม่พอ';
+    if (b > p.blue) return 'ครีมบลูเบอร์รีไม่พอ';
+    var t = r + b;
+    if (t < s.rules.min) return 'เลือกอย่างน้อย ' + s.rules.min + ' หลอด';
+    if (t > s.rules.max) return 'เลือกได้ไม่เกิน ' + s.rules.max + ' หลอดต่อรอบ';
+    return null;
+  }
+  function resolve(s, picks){
+    if (!s || s.phase !== 'select') throw new Error('รอบนี้ปิดไปแล้ว');
+    if (!Array.isArray(picks) || picks.length !== s.players.length) throw new Error('ยังได้ข้อมูลไม่ครบทุกคน');
+    for (var i = 0; i < picks.length; i++) { var e = validate(s, i, picks[i]); if (e) throw new Error('ที่นั่ง ' + (i + 1) + ': ' + e); }
+    var n = clone(s), T = target(n), tr = 0, tb = 0, plays = [];
+    n.players.forEach(function(p, i){ var k = picks[i]; p.red -= k.red; p.blue -= k.blue; p.usedRed += k.red; p.usedBlue += k.blue; tr += k.red; tb += k.blue; plays.push({ seat: i, red: k.red, blue: k.blue }); });
+    var hitRed = tr === T, hitBlue = tb === T, success = hitRed || hitBlue;
+    var res = { gameId: n.gameId, roundId: n.roundId, round: n.round, stage: n.stage, target: T, mode: n.mode, plays: plays, totalRed: tr, totalBlue: tb, hitRed: hitRed, hitBlue: hitBlue, success: success, outcome: 'retry', emptied: [] };
+    if (success) n.stage += 1;
+    var emptied = n.players.filter(function(p){ return p.red + p.blue === 0; }).map(function(p){ return p.seat; });
+    if (success && n.stage >= n.targets.length) { n.phase = 'won'; res.outcome = 'won'; }
+    else if (emptied.length) { n.phase = 'lost'; res.outcome = 'lost'; res.emptied = emptied; }
+    else { n.phase = 'select'; res.outcome = success ? 'advance' : 'retry'; }
+    n.history.push(res); if (n.history.length > 150) n.history.splice(0, n.history.length - 150);
+    n.result = res; n.roundId += 1; n.round += 1; n.locked = n.players.map(function(){ return false; });
+    return n;
+  }
+  function towerLevel(s){ if (!s) return 0; return s.mode === 'build' ? s.stage : (s.targets.length - s.stage); }
+  function sanityCheck(s){
+    return !!(s && typeof s === 'object' && Array.isArray(s.players) && s.players.length >= 2 && s.players.length <= MAXP && Array.isArray(s.targets) && s.targets.length === 5 &&
+      Array.isArray(s.buildTargets) && s.buildTargets.length === 5 &&
+      Number.isInteger(s.stage) && typeof s.phase === 'string' && Array.isArray(s.history) && s.rules && Number.isInteger(s.roundId) && Array.isArray(s.locked) &&
+      s.locked.length === s.players.length && s.players.every(function(p){ return p && typeof p.name === 'string' && Number.isInteger(p.red) && Number.isInteger(p.blue); }));
+  }
+  return { createGame: createGame, target: target, targetsFor: targetsFor, legalOptions: legalOptions, validate: validate, resolve: resolve, fireLevel: towerLevel, sanityCheck: sanityCheck, norm: norm };
+})();
+
+/* ================= AI (public info only, animal pastry chef personas) ================= */
+var AI = (function(){
+  var PERSONAS = [
+    { key: 'croissant', name: 'Croissant', avatar: 'fox', desc: 'รสมือจัดจ้าน บีบเยอะ ถนัดสตรอว์เบอร์รี', size: 0.7, color: 0.6, conserve: 0.7, follow: 0.4 },
+    { key: 'macaron', name: 'Macaron', avatar: 'bunny', desc: 'ละเมียดละไม ประหยัดครีม รักบลูเบอร์รี', size: -0.7, color: -0.6, conserve: 1.4, follow: 0.5 },
+    { key: 'eclair', name: 'Éclair', avatar: 'cat', desc: 'นักชิมอ่านโต๊ะ ไหลตามรสที่ใกล้เป้า', size: 0, color: 0, conserve: 1.0, follow: 1.4 },
+    { key: 'souffle', name: 'Soufflé', avatar: 'owl', desc: 'สมดุลแม่นยำ เอนบลูเบอร์รีนิด ๆ', size: 0.2, color: -0.3, conserve: 1.0, follow: 0.8 },
+    { key: 'brioche', name: 'Brioche', avatar: 'bear', desc: 'ใจกว้างประสานทีม ไหลตามจังหวะครัว', size: 0.4, color: 0, conserve: 0.8, follow: 1.1 },
+    { key: 'tartine', name: 'Tartine', avatar: 'hedgehog', desc: 'รอบคอบระวังมือ ชอบสตรอว์เบอร์รี', size: -0.3, color: 0.4, conserve: 1.2, follow: 0.6 },
+    { key: 'praline', name: 'Praline', avatar: 'otter', desc: 'กล้าลุยเต็มสูตร ถนัดบลูเบอร์รี', size: 0.5, color: -0.7, conserve: 0.9, follow: 0.3 },
+    { key: 'meringue', name: 'Meringue', avatar: 'lamb', desc: 'ประหยัดครีมสุดขีด หยอดทีละนิด', size: -0.9, color: 0, conserve: 1.6, follow: 0.9 },
+    { key: 'ganache', name: 'Ganache', avatar: 'panda', desc: 'อ่านใจเฉียบคม เอนสตรอว์เบอร์รีเบา ๆ', size: 0, color: 0.2, conserve: 1.0, follow: 1.2 }
+  ];
+  function binom(n, k){ var r = 1; for (var i = 1; i <= k; i++) r = r * (n - k + i) / i; return r; }
+  function lastAtTarget(s){ var hs = s.history; if (!hs.length) return null; var l = hs[hs.length - 1]; return (l.gameId === s.gameId && l.stage === s.stage) ? l : null; }
+  function colorLean(s){ var l = lastAtTarget(s); if (!l) return 0; var T = l.target, dr = Math.abs(l.totalRed - T), db = Math.abs(l.totalBlue - T); if (dr === db) return 0; return dr < db ? 1 : -1; }
+  function modelPlayer(s, j, diff){
+    var p = s.players[j], R = s.rules, T = Rules.target(s), n = s.players.length;
+    var opts = Rules.legalOptions(p, R);
+    if (!opts.length) return [{ red: 0, blue: 0, w: 1 }];
+    if (diff === 'easy') return opts.map(function(o){ return { red: o.red, blue: o.blue, w: 1 / opts.length }; });
+    var mu = clamp(1.5 * T / n, R.min, R.max) + (diff === 'hard' ? 0.15 : 0);
+    var sig = diff === 'hard' ? 0.75 : 1.1;
+    var pr = (p.usedRed + 1) / (p.usedRed + p.usedBlue + 2);
+    if (diff === 'hard') pr = clamp(0.65 * pr + 0.35 * (0.5 + 0.3 * colorLean(s)), 0.08, 0.92);
+    var supplyR = (p.red + 0.5) / (p.red + p.blue + 1);
+    pr = clamp(0.5 * pr + 0.5 * supplyR, 0.05, 0.95);
+    var fin = s.stage === s.targets.length - 1, W = 0;
+    var out = opts.map(function(o){
+      var t = o.red + o.blue, w = Math.exp(-((t - mu) * (t - mu)) / (2 * sig * sig));
+      if (t > 0) w *= binom(t, o.red) * Math.pow(pr, o.red) * Math.pow(1 - pr, o.blue);
+      if (t === p.red + p.blue && !fin) w *= 0.05;
+      W += w; return { red: o.red, blue: o.blue, w: w };
+    });
+    out.forEach(function(o){ o.w /= (W || 1); });
+    return out;
+  }
+  function convolve(dist, opts, cap){
+    var m = new Map();
+    dist.forEach(function(pv, key){
+      var r = key >> 8, b = key & 255;
+      for (var i = 0; i < opts.length; i++) { var o = opts[i], nr = Math.min(cap, r + o.red), nb = Math.min(cap, b + o.blue), k = (nr << 8) | nb; m.set(k, (m.get(k) || 0) + pv * o.w); }
+    });
+    return m;
+  }
+  function fv(rem, left){ if (left <= 0) return 1; if (rem <= 0) return -2; return 0.7 * (1 - Math.exp(-rem / (left * 0.9))); }
+  function decide(s, seat, persona, diff){
+    var R = s.rules, T = Rules.target(s), me = s.players[seat], cap = T + 1;
+    var opts = Rules.legalOptions(me, R);
+    if (!opts.length) return { red: 0, blue: 0 };
+    var dist = new Map([[0, 1]]);
+    s.players.forEach(function(p, j){ if (j !== seat) dist = convolve(dist, modelPlayer(s, j, diff), cap); });
+    var entries = []; dist.forEach(function(v, k){ entries.push([k >> 8, k & 255, v]); });
+    var left = s.targets.length - s.stage, fin = left === 1, lean = colorLean(s), myTot = me.red + me.blue;
+    var mu = clamp(1.5 * T / s.players.length, R.min, R.max);
+    var P = persona || { size: 0, color: 0, conserve: 1, follow: 0.5 };
+    var scored = opts.map(function(o){
+      var p = 0; for (var q = 0; q < entries.length; q++) { var e = entries[q]; if (e[0] + o.red === T || e[1] + o.blue === T) p += e[2]; }
+      var t = o.red + o.blue, rem = myTot - t, u;
+      if (fin) u = p * 3 + (1 - p) * fv(rem, 1) * P.conserve;
+      else u = p * (1 + fv(rem, left - 1) * P.conserve) + (1 - p) * fv(rem, left) * P.conserve;
+      if (rem > 0 && (me.red - o.red === 0 || me.blue - o.blue === 0)) u -= 0.03 * P.conserve;
+      u += 0.035 * P.size * (t - mu);
+      if (t > 0) u += 0.035 * P.color * (o.red - o.blue) / t;
+      if (lean && t > 0) u += 0.04 * P.follow * lean * (o.red - o.blue) / t;
+      return { o: o, u: u };
+    });
+    if (diff === 'easy' && Math.random() < 0.3) {
+      var so = scored.filter(function(x){ return fin || x.o.red + x.o.blue < myTot; }); var pool = so.length ? so : scored;
+      var c = pool[Math.floor(Math.random() * pool.length)].o; return { red: c.red, blue: c.blue };
+    }
+    var temp = diff === 'easy' ? 0.22 : diff === 'hard' ? 0.03 : 0.08;
+    var mx = Math.max.apply(null, scored.map(function(x){ return x.u; }));
+    var ws = scored.map(function(x){ return Math.exp((x.u - mx) / temp); }), sum = ws.reduce(function(a, b){ return a + b; }, 0);
+    var r = Math.random() * sum;
+    for (var i = 0; i < ws.length; i++) { r -= ws[i]; if (r <= 0) return { red: scored[i].o.red, blue: scored[i].o.blue }; }
+    return { red: scored[0].o.red, blue: scored[0].o.blue };
+  }
+  return { PERSONAS: PERSONAS, decide: decide };
+})();
+
+/* ================= SOUND (French Patisserie Waltz & Porcelain Chimes) ================= */
+var Sound = (function(){
+  var ctx = null, master, sfxBus, musicBus, ambBus, noise;
+  var sfxOn = Store.get('sfx', true) !== false, musicOn = Store.get('music', true) !== false;
+  var musicTimer = null, nextNote = 0, stepN = 0, idx = 5, ambTimer = null, level = 1, pad = [];
+  /* Warm F-major / Lydian French music-box scale */
+  var SCALE = [174.61, 196.00, 220.00, 261.63, 293.66, 349.23, 392.00, 440.00, 523.25, 587.33, 659.25, 698.46];
+  function ensure(){
+    if (!ctx) {
+      var AC = window.AudioContext || window.webkitAudioContext; if (!AC) return null;
+      try { ctx = new AC(); } catch (e) { return null; }
+      master = ctx.createGain(); master.gain.value = 0.78; master.connect(ctx.destination);
+      sfxBus = ctx.createGain(); sfxBus.gain.value = sfxOn ? 1 : 0; sfxBus.connect(master);
+      ambBus = ctx.createGain(); ambBus.gain.value = sfxOn ? 1 : 0; ambBus.connect(master);
+      musicBus = ctx.createGain(); musicBus.gain.value = 0; musicBus.connect(master);
+      var len = ctx.sampleRate * 2; noise = ctx.createBuffer(1, len, ctx.sampleRate);
+      var d = noise.getChannelData(0); for (var i = 0; i < len; i++) d[i] = Math.random() * 2 - 1;
+    }
+    if (ctx.state === 'suspended') { try { var p = ctx.resume(); if (p && p.catch) p.catch(function(){}); } catch (e) {} }
+    return ctx;
+  }
+  function env(g, t, a, peak, dec){ g.gain.setValueAtTime(0.0001, t); g.gain.exponentialRampToValueAtTime(Math.max(0.0002, peak), t + a); g.gain.exponentialRampToValueAtTime(0.0001, t + a + dec); }
+  function tone(f, type, t, a, peak, dec, bus){ var o = ctx.createOscillator(); o.type = type; o.frequency.value = f; var g = ctx.createGain(); env(g, t, a, peak, dec); o.connect(g); g.connect(bus || sfxBus); o.start(t); o.stop(t + a + dec + 0.05); return o; }
+  function burst(t, dur, ft, freq, q, peak, bus){ var s = ctx.createBufferSource(); s.buffer = noise; s.loop = true; var f = ctx.createBiquadFilter(); f.type = ft; f.frequency.value = freq; f.Q.value = q || 1; var g = ctx.createGain(); env(g, t, 0.003, peak, dur); s.connect(f); f.connect(g); g.connect(bus || sfxBus); s.start(t, Math.random() * 1.5); s.stop(t + dur + 0.06); return { s: s, f: f, g: g }; }
+  var SND = {
+    tick: function(t){ tone(1318.5, 'sine', t, 0.002, 0.08, 0.06); tone(1975.5, 'sine', t + 0.01, 0.002, 0.04, 0.05); },
+    untick: function(t){ tone(987.77, 'sine', t, 0.002, 0.06, 0.06); },
+    wood: function(t){ tone(1046.5, 'triangle', t, 0.003, 0.11, 0.14); burst(t, 0.04, 'bandpass', 1800, 3, 0.12); },
+    lock: function(t){ tone(783.99, 'triangle', t, 0.004, 0.14, 0.16); tone(1174.66, 'sine', t + 0.07, 0.004, 0.13, 0.24); },
+    count: function(t){ tone(659.25, 'triangle', t, 0.005, 0.14, 0.28); },
+    reveal: function(t){ tone(1046.5, 'triangle', t, 0.004, 0.15, 0.38); tone(1567.98, 'sine', t + 0.03, 0.004, 0.1, 0.45); },
+    whoosh: function(t){ var n = burst(t, 0.26, 'bandpass', 900, 1.4, 0.1); n.f.frequency.setValueAtTime(700, t); n.f.frequency.exponentialRampToValueAtTime(2400, t + 0.26); },
+    ignite: function(t){
+      [523.25, 659.25, 783.99, 1046.5].forEach(function(f, i){ tone(f, 'triangle', t + i * 0.06, 0.008, 0.13, 0.65); });
+      burst(t, 0.35, 'highpass', 3200, 0.9, 0.09);
+    },
+    douse: function(t){
+      [783.99, 659.25, 523.25].forEach(function(f, i){ tone(f, 'sine', t + i * 0.07, 0.008, 0.12, 0.55); });
+    },
+    fail: function(t){ tone(440, 'triangle', t, 0.01, 0.12, 0.32); tone(370, 'triangle', t + 0.18, 0.01, 0.1, 0.45); },
+    victory: function(t){
+      [349.23, 440, 523.25, 659.25, 698.46, 880, 1046.5].forEach(function(f, i){ tone(f, 'triangle', t + i * 0.085, 0.01, 0.15, 0.9); tone(f / 2, 'sine', t + i * 0.085, 0.01, 0.05, 1.1); });
+      [349.23, 523.25, 698.46].forEach(function(f){ tone(f, 'sine', t + 0.72, 0.25, 0.07, 2.0); });
+    },
+    defeat: function(t){ [440, 392, 349.23, 293.66].forEach(function(f, i){ tone(f, 'triangle', t + i * 0.22, 0.01, 0.09, 0.65); }); }
+  };
+  function play(name){ try { if (!ctx || !sfxOn || ctx.state !== 'running') return; var f = SND[name]; if (f) f(ctx.currentTime + 0.01); } catch (e) {} }
+  function celesta(f, t, peak, dec){
+    dec = dec || 1.1; var o = ctx.createOscillator(); o.type = 'sine'; o.frequency.value = f;
+    var o2 = ctx.createOscillator(); o2.type = 'triangle'; o2.frequency.value = f * 2;
+    var g = ctx.createGain(); env(g, t, 0.005, peak, dec); var g2 = ctx.createGain(); g2.gain.value = 0.22;
+    o.connect(g); o2.connect(g2); g2.connect(g); g.connect(musicBus);
+    o.start(t); o2.start(t); o.stop(t + dec + 0.08); o2.stop(t + dec + 0.08);
+  }
+  /* 3/4 Patisserie Waltz rhythm */
+  function schedule(){
+    try {
+      if (!ctx || ctx.state !== 'running') return; var spb = 60 / 108;
+      if (nextNote < ctx.currentTime - 1) nextNote = ctx.currentTime + 0.05;
+      while (nextNote < ctx.currentTime + 0.45) {
+        var bar = Math.floor(stepN / 3), beat = stepN % 3;
+        var roots = [0, 3, 1, 2];
+        var rootIdx = roots[bar % 4];
+        if (beat === 0) celesta(SCALE[rootIdx], nextNote, 0.07, 1.5);
+        else celesta(SCALE[rootIdx + 2] * 1.0, nextNote, 0.04, 0.55);
+        if (Math.random() < 0.72) {
+          idx = clamp(idx + [-2, -1, 0, 1, 1, 2][Math.floor(Math.random() * 6)], 5, SCALE.length - 1);
+          celesta(SCALE[idx], nextNote, 0.065, 0.9);
+        }
+        nextNote += spb; stepN++;
+      }
+    } catch (e) {}
+  }
+  function startMusic(){
+    if (!ensure() || musicTimer) return;
+    musicBus.gain.cancelScheduledValues(ctx.currentTime); musicBus.gain.setTargetAtTime(0.55, ctx.currentTime, 0.5);
+    nextNote = ctx.currentTime + 0.12;
+    musicTimer = setInterval(schedule, 120);
+  }
+  function stopMusic(){
+    if (musicTimer) { clearInterval(musicTimer); musicTimer = null; }
+    if (ctx) { try { musicBus.gain.setTargetAtTime(0, ctx.currentTime, 0.25); } catch (e) {} }
+    var old = pad; pad = []; setTimeout(function(){ old.forEach(function(o){ try { o.stop(); } catch (e) {} }); }, 500);
+  }
+  function startAmbience(){
+    if (!ctx || ambTimer) return;
+    ambTimer = setInterval(function(){
+      try {
+        if (!sfxOn || document.hidden || !ctx || ctx.state !== 'running') return;
+        if (Math.random() < 0.03 + level * 0.015) {
+          var t = ctx.currentTime + 0.03;
+          tone(SCALE[7 + Math.floor(Math.random() * 4)] * 2, 'sine', t, 0.005, 0.012, 0.35, ambBus);
+        }
+      } catch (e) {}
+    }, 450);
+  }
+  function setLevel(l){ level = l; }
+  function unlock(){ try { if (!ensure()) return; startAmbience(); if (musicOn) startMusic(); } catch (e) {} }
+  function setSfx(on){ sfxOn = on; Store.set('sfx', on); if (ctx) { sfxBus.gain.value = on ? 1 : 0; ambBus.gain.value = on ? 1 : 0; } if (on) unlock(); }
+  function setMusic(on){ musicOn = on; Store.set('music', on); if (on) { unlock(); startMusic(); } else stopMusic(); }
+  return { unlock: unlock, play: play, setLevel: setLevel, setSfx: setSfx, setMusic: setMusic, isSfx: function(){ return sfxOn; }, isMusic: function(){ return musicOn; } };
+})();
+
+/* ================= SUGAR SPARKLE & CONFETTI FX ================= */
+function canvasCtx(c){ try { return (c && typeof c.getContext === 'function') ? c.getContext('2d') : null; } catch (e) { return null; } }
+function makeFX(canvas, anchorFn){
+  var cx = canvasCtx(canvas), W = 0, H = 0, parts = [], level = 0, raf = 0, on = false;
+  var HUES = [342, 42, 208, 154, 28];
+  function resize(){ if (!cx) return; var r = canvas.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1); W = r.width; H = r.height; canvas.width = Math.max(1, Math.round(W * d)); canvas.height = Math.max(1, Math.round(H * d)); cx.setTransform(d, 0, 0, d, 0, 0); }
+  function origin(){ var a = anchorFn(); if (!isEl(a)) return { x: W / 2, y: H * 0.58, w: 60 }; var ar = a.getBoundingClientRect(), cr = canvas.getBoundingClientRect(); return { x: ar.left + ar.width / 2 - cr.left, y: ar.top + ar.height * 0.45 - cr.top, w: Math.max(28, ar.width * 0.65) }; }
+  function sparkle(o, pw, hue){
+    var h = hue != null ? hue + (Math.random() - 0.5) * 24 : HUES[Math.floor(Math.random() * HUES.length)];
+    parts.push({ k: 0, x: o.x + (Math.random() - 0.5) * o.w, y: o.y + (Math.random() - 0.5) * o.w * 0.5, vx: (Math.random() - 0.5) * 1.2 * pw, vy: -(0.4 + Math.random() * 1.3) * pw, life: 1, dec: 0.01 + Math.random() * 0.014, r: 1.4 + Math.random() * 2.4, h: h, rot: Math.random() * 6.28 });
+  }
+  function puff(o, cool){ parts.push({ k: 1, cool: cool, x: o.x + (Math.random() - 0.5) * o.w, y: o.y, vx: (Math.random() - 0.5) * 0.6, vy: -(0.3 + Math.random() * 0.5), life: 1, dec: 0.008 + Math.random() * 0.007, r: 6 + Math.random() * 9 }); }
+  function frame(){
+    raf = 0; if (!on || !cx) return; raf = requestAnimationFrame(frame);
+    try {
+      if (!W || !H) { resize(); if (!W) return; }
+      cx.clearRect(0, 0, W, H);
+      var o = origin();
+      if (!reducedMotion && level > 0 && Math.random() < 0.05 + level * 0.06) sparkle(o, 0.55 + level * 0.1);
+      if (parts.length > 280) parts.splice(0, parts.length - 280);
+      for (var i = parts.length - 1; i >= 0; i--) {
+        var p = parts[i]; p.x += p.vx; p.y += p.vy; p.life -= p.dec;
+        if (p.k === 0) { p.vy += 0.012; p.rot += 0.08; } else { p.r += 0.22; p.vx *= 0.99; }
+        if (p.life <= 0) { parts.splice(i, 1); continue; }
+        if (p.k === 0) {
+          cx.save(); cx.translate(p.x, p.y); cx.rotate(p.rot);
+          cx.fillStyle = 'hsla(' + p.h + ',92%,' + (66 + p.life * 20) + '%,' + p.life + ')';
+          cx.beginPath();
+          cx.moveTo(0, -p.r * 1.4); cx.lineTo(p.r * 0.6, 0); cx.lineTo(0, p.r * 1.4); cx.lineTo(-p.r * 0.6, 0);
+          cx.closePath(); cx.fill(); cx.restore();
+        } else {
+          cx.fillStyle = (p.cool ? 'rgba(185,228,255,' : 'rgba(255,242,232,') + (p.life * 0.25) + ')';
+          cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.283); cx.fill();
+        }
+      }
+    } catch (e) {}
+  }
+  function start(){ if (on || !cx) return; on = true; resize(); setTimeout(function(){ if (on) resize(); }, 420); if (!raf) raf = requestAnimationFrame(frame); }
+  function stop(){ on = false; if (raf) cancelAnimationFrame(raf); raf = 0; parts = []; if (cx) cx.clearRect(0, 0, W, H); }
+  window.addEventListener('resize', function(){ if (on) resize(); });
+  return {
+    start: start, stop: stop, setLevel: function(l){ level = l; },
+    ignite: function(n, hue){ if (!on) return; var o = origin(); for (var i = 0; i < (n || 65); i++) sparkle(o, 2.1 + Math.random() * 1.5, hue); },
+    smoke: function(cool){ if (!on) return; var o = origin(); for (var i = 0; i < 14; i++) puff(o, cool); }
+  };
+}
+function makeAmbient(canvas){
+  var cx = canvasCtx(canvas), W = 0, H = 0, parts = [], cool = false;
+  var HUES = [342, 42, 205, 155];
+  function resize(){ if (!cx) return; var r = canvas.getBoundingClientRect(), d = Math.min(2, window.devicePixelRatio || 1); W = r.width; H = r.height; canvas.width = Math.max(1, Math.round(W * d)); canvas.height = Math.max(1, Math.round(H * d)); cx.setTransform(d, 0, 0, d, 0, 0); }
+  function spawn(big, hue){
+    var h = hue != null ? hue + Math.random() * 40 : HUES[Math.floor(Math.random() * HUES.length)];
+    parts.push(big ? { x: W * (0.2 + Math.random() * 0.6), y: H * (0.45 + Math.random() * 0.3), vx: (Math.random() - 0.5) * 5.5, vy: -(3.2 + Math.random() * 5), g: 0.08, life: 1, dec: 0.007 + Math.random() * 0.008, r: 2 + Math.random() * 3, h: h }
+      : { x: Math.random() * W, y: H + 6, vx: (Math.random() - 0.5) * 0.25, vy: -(0.2 + Math.random() * 0.45), g: 0, life: 1, dec: 0.0018 + Math.random() * 0.0025, r: 0.9 + Math.random() * 1.5, h: cool ? 200 + Math.random() * 25 : 35 + Math.random() * 25 });
+  }
+  function frame(){
+    requestAnimationFrame(frame);
+    try {
+      if (document.hidden) return;
+      if (!W) { resize(); if (!W) return; }
+      cx.clearRect(0, 0, W, H);
+      if (!reducedMotion && parts.length < 48 && Math.random() < 0.16) spawn(false);
+      for (var i = parts.length - 1; i >= 0; i--) {
+        var p = parts[i]; p.x += p.vx + Math.sin((p.y + i * 7) * 0.02) * 0.18; p.y += p.vy; p.vy += p.g; p.life -= p.dec;
+        if (p.life <= 0 || p.y < -12 || p.y > H + 20) { parts.splice(i, 1); continue; }
+        cx.fillStyle = 'hsla(' + p.h + ',90%,' + (70 + p.life * 18) + '%,' + (p.life * 0.55) + ')';
+        cx.beginPath(); cx.arc(p.x, p.y, p.r, 0, 6.283); cx.fill();
+      }
+    } catch (e) {}
+  }
+  if (cx) { resize(); window.addEventListener('resize', resize); requestAnimationFrame(frame); }
+  return { celebrate: function(isCool){ if (!cx || reducedMotion) return; for (var i = 0; i < 140; i++) spawn(true, isCool ? 195 : 340); }, setCool: function(v){ cool = !!v; } };
+}
+
+/* ================= 5-TIER ROYAL CAKE STAND ================= */
+function makeCakeStand(container){
+  var stand = mk('div', 'stand'), aura = mk('div', 'aura');
+  var foot = mk('div', 'ped-foot'), stem = mk('div', 'ped-stem'), platter = mk('div', 'platter');
+  var doily = mk('div', 'platter-doily'), piped = mk('div', 'piped-ring');
+  platter.appendChild(doily); platter.appendChild(piped);
+  var stack = mk('div', 'cake-stack');
+  stack.appendChild(mk('div', 'cake-ghost', 'แท่นวางเค้ก'));
+  var tiers = [];
+  for (var i = 1; i <= 5; i++) {
+    var t = mk('div', 'tier t' + i);
+    stack.appendChild(t); tiers.push(t);
+  }
+  var crown = mk('div', 'cake-crown');
+  crown.innerHTML = '<svg viewBox="0 0 40 44" width="100%" height="100%"><path d="M14 14c2-6 10-6 12 0" fill="none" stroke="#4ad695" stroke-width="3" stroke-linecap="round"/><path d="M20 11c8 0 13 8 11 17-2 8-7 13-11 13S11 36 9 28c-2-9 3-17 11-17z" fill="#e83e68"/><circle cx="16" cy="21" r="1.4" fill="#ffe8a3"/><circle cx="23" cy="23" r="1.4" fill="#ffe8a3"/><circle cx="19" cy="29" r="1.4" fill="#ffe8a3"/><path d="M20 1l2.2 4.5 5 .7-3.6 3.5.9 5L20 12.3 15.5 14.7l.9-5-3.6-3.5 5-.7z" fill="#ffe380" stroke="#b87c24" stroke-width="1"/></svg>';
+  stack.appendChild(crown);
+  stand.appendChild(aura); stand.appendChild(foot); stand.appendChild(stem); stand.appendChild(platter); stand.appendChild(stack);
+  if (isEl(container)) container.appendChild(stand);
+  return { stand: stand, stack: stack, tiers: tiers, crown: crown, sticks: piped, key: '' };
+}
+function cakeLevel(P, lv){
+  if (!P) return; lv = clamp(lv | 0, 0, 5);
+  P.stand.style.setProperty('--lv', lv);
+  P.stand.setAttribute('data-lv', String(lv));
+  P.tiers.forEach(function(t, idx){ t.classList.toggle('on', idx < lv); });
+  P.crown.classList.toggle('on', lv >= 5);
+}
+function cakePipings(P, red, blue){
+  if (!P) return;
+  var key = red + ':' + blue; if (P.key === key) return; P.key = key;
+  var box = P.sticks; box.textContent = '';
+  var total = Math.min(64, red + blue), rr = red + blue > 0 ? Math.round(total * red / (red + blue)) : 0;
+  for (var i = 0; i < total; i++) {
+    var isRed = Math.floor((i + 1) * rr / total) > Math.floor(i * rr / total);
+    var s = mk('div', 'pdot ' + (isRed ? 'r' : 'b'));
+    s.style.setProperty('--a', ((i * 137.508) % 360).toFixed(1) + 'deg');
+    s.style.setProperty('--o', (320 + ((i * 29) % 3) * 45) + '%');
+    box.appendChild(s);
+  }
+}
+
+/* ================= SESSION ================= */
+var S = { kind: null, state: null, mySeat: 0, code: null, myPick: null, locking: false, diff: 'normal', botPicks: [], botTimers: [], botKey: '', humanPick: null, lobby: null };
+function clearBots(){ S.botTimers.forEach(function(t){ clearTimeout(t); }); S.botTimers = []; }
+function resetS(){ clearBots(); S.kind = null; S.state = null; S.mySeat = 0; S.code = null; S.myPick = null; S.locking = false; S.botPicks = []; S.botKey = ''; S.humanPick = null; S.lobby = null; }
+
+/* ================= UI ================= */
+var UI = (function(){
+  var cur = 'menu';
+  var sel = { red: 0, blue: 0, key: '' };
+  var gamePit = null, menuPit = null;
+  var noFX = { start: function(){}, stop: function(){}, setLevel: function(){}, ignite: function(){}, smoke: function(){} };
+  var gameFX = noFX, menuFX = noFX, amb = { celebrate: function(){}, setCool: function(){} };
+  var seen = { g: null, r: 0 }, baselineNext = true;
+  var revealQ = [], revealing = false, epoch = 0, contResolve = null, cfResolve = null;
+  var raw = Store.get('settings', {});
+  var settings = { name: '', count: 3, diff: 'normal', allowZero: false, noCap: false, scale: true };
+  if (raw && typeof raw === 'object') Object.keys(settings).forEach(function(k){ if (raw[k] !== undefined) settings[k] = raw[k]; });
+  settings.count = clamp(parseInt(settings.count, 10) || 3, 2, MAXP);
+  if (['easy', 'normal', 'hard'].indexOf(settings.diff) < 0) settings.diff = 'normal';
+  settings.name = cleanName(settings.name); settings.allowZero = !!settings.allowZero; settings.noCap = !!settings.noCap; settings.scale = settings.scale !== false;
+  function saveSettings(){ Store.set('settings', settings); }
+
+  function show(name){
+    cur = name;
+    qsa('.scr').forEach(function(s){ s.classList.toggle('active', s.id === 's-' + name); });
+    safe(function(){ if (name === 'game') gameFX.start(); else gameFX.stop(); });
+    safe(function(){ if (name === 'menu') menuFX.start(); else menuFX.stop(); });
+    if (name === 'menu') { refreshMenu(); Sound.setLevel(3); amb.setCool(false); }
+  }
+  function toast(msg, kind){
+    var box = E('toasts'), t = mk('div', 'toast' + (kind ? ' ' + kind : ''), msg); box.appendChild(t);
+    while (box.children.length > 3) box.removeChild(box.firstChild);
+    setTimeout(function(){ t.classList.add('out'); setTimeout(function(){ if (t.parentNode) t.parentNode.removeChild(t); }, 400); }, 2600);
+  }
+  function netBar(msg, showLeave){ var b = E('netBar'); if (!msg) { b.hidden = true; return; } E('netText').textContent = msg; E('btnNetLeave').hidden = !showLeave; b.hidden = false; }
+  function openOv(id){ E(id).classList.add('show'); }
+  function closeOv(id){ E(id).classList.remove('show'); }
+  function confirmBox(text, yes){
+    return new Promise(function(res){ if (cfResolve) cfResolve(false); cfResolve = res; E('cfText').textContent = text; E('cfYes').textContent = yes || 'ตกลง'; openOv('ovConfirm'); });
+  }
+  function cfDone(v){ closeOv('ovConfirm'); var f = cfResolve; cfResolve = null; if (f) f(v); }
+  function refreshMenu(){ var sv = Store.get('solo', null); E('btnContinue').hidden = !(sv && sv.state && Rules.sanityCheck(sv.state) && sv.state.phase === 'select'); }
+  function syncAudio(){
+    qsa('[data-audio]').forEach(function(b){
+      var isM = b.getAttribute('data-audio') === 'music', on = isM ? Sound.isMusic() : Sound.isSfx();
+      b.classList.toggle('off', !on); b.setAttribute('aria-pressed', on ? 'true' : 'false');
+      var tx = b.querySelector('.audtx'); if (tx) tx.textContent = (isM ? 'เพลง: ' : 'เสียง: ') + (on ? 'เปิด' : 'ปิด');
+    });
+  }
+  function targetChips(box, n, scale){
+    box.textContent = '';
+    var arr = Rules.targetsFor(n, scale);
+    box.appendChild(mk('span', 'tl', 'สูตร 5 ชั้น'));
+    arr.forEach(function(t){ var c = mk('span', 'tchip'); c.appendChild(mk('span', null, t)); box.appendChild(c); });
+    box.appendChild(mk('span', 'sc', n <= 4 ? 'สูตรคลาสสิก (เชฟ 2–4 คน)' : (scale ? 'ปรับสเกลสำหรับเชฟ ' + n + ' คน' : 'ใช้สูตร 1–5 ดั้งเดิม (ท้าทายมากเมื่อคนเยอะ)')));
+  }
+
+  /* ---- solo setup ---- */
+  var DIFF_DESC = {
+    easy: 'ฝึกหัด: เชฟบอทกะปริมาณคร่าว ๆ บางรอบบีบตามอารมณ์ศิลปิน',
+    normal: 'มืออาชีพ: เชฟบอทสังเกตสถิติรอบก่อน ๆ และคำนวณครีมที่เหลือของเพื่อนร่วมทีม',
+    hard: 'เชฟมิชลิน: คำนวณความน่าจะเป็นทั้งโต๊ะ อ่านแนวโน้มรสชาติ และออมครีมไว้อย่างเฉียบคม'
+  };
+  function refreshSolo(){
+    E('countVal').textContent = settings.count;
+    E('countSub').textContent = 'คุณ + เชฟผู้ช่วย ' + (settings.count - 1) + ' ตัว';
+    E('cntMinus').disabled = settings.count <= 2; E('cntPlus').disabled = settings.count >= MAXP;
+    targetChips(E('soloTargets'), settings.count, settings.scale);
+    qsa('#segDiff button').forEach(function(b){ b.classList.toggle('on', b.getAttribute('data-v') === settings.diff); });
+    E('diffDesc').textContent = DIFF_DESC[settings.diff] || '';
+    var box = E('botList'); box.textContent = '';
+    for (var i = 1; i < settings.count; i++) {
+      var P = AI.PERSONAS[i - 1], row = mk('div', 'bot'); row.title = 'เชฟ ' + P.name + ': ' + P.desc;
+      var av = mk('div', 'av sm'); av.style.setProperty('--hue', hueOf(i));
+      av.appendChild(chefAvatarSVG(P.avatar, P.name));
+      row.appendChild(av); row.appendChild(mk('b', null, P.name)); box.appendChild(row);
+    }
+  }
+  function openSolo(){ E('soloName').value = settings.name || ''; E('soloZero').checked = settings.allowZero; E('soloNoCap').checked = settings.noCap; E('soloScale').checked = settings.scale; refreshSolo(); show('solo'); }
+
+  /* ---- online ---- */
+  function onlineStatus(msg, kind){ var e = E('onStatus'); e.textContent = msg || ''; e.className = 'status' + (kind ? ' ' + kind : ''); }
+  function openOnline(pre){
+    E('onName').value = settings.name || '';
+    var cs = Store.get('clientSave', null);
+    E('joinCode').value = pre || (cs && cs.code) || '';
+    var rh = E('rejoinHint');
+    if (cs && cs.code && cs.name) { rh.hidden = false; rh.textContent = 'ครัวล่าสุด: ' + cs.code + ' ในชื่อ "' + cs.name + '" ใช้ชื่อเดิมเพื่อกลับเข้าที่นั่งเดิม'; } else rh.hidden = true;
+    var hs = Store.get('hostSave', null), rb = E('btnResumeHost');
+    if (hs && hs.code && Date.now() - (hs.savedAt || 0) < 12 * 3600 * 1000) { rb.hidden = false; rb.textContent = 'กลับไปเปิดครัวเดิม ' + hs.code; } else rb.hidden = true;
+    onlineStatus(''); show('online');
+  }
+  function enterLobby(){ show('lobby'); renderLobby(); }
+  function renderLobby(){
+    var L = Net.lobbyInfo();
+    E('lobbyCode').textContent = L.code || '-----'; E('lobbyLink').textContent = Net.shareLink();
+    E('btnShare').hidden = !navigator.share;
+    var list = E('lobbyList'); list.textContent = '';
+    L.players.forEach(function(p, i){
+      var row = mk('div', 'lrow'), av = mk('div', 'av sm'); av.style.setProperty('--hue', hueOf(i));
+      av.appendChild(chefAvatarSVG(null, p.name));
+      var nm = mk('div', 'lname', p.name + (i === L.me ? ' (คุณ)' : ''));
+      var tag = mk('span', 'tag ' + (p.isHost ? 'host' : (p.connected ? 'on' : 'off')), p.isHost ? 'หัวหน้าเชฟ' : (p.connected ? 'พร้อม' : 'หลุด'));
+      row.appendChild(av); row.appendChild(nm); row.appendChild(tag); list.appendChild(row);
+    });
+    var conn = L.players.filter(function(p){ return p.connected; }).length;
+    E('lobbyCount').textContent = 'ทีมเชฟ ' + L.players.length + '/' + MAXP;
+    targetChips(E('lobbyTargets'), Math.max(2, conn), L.rules.scale !== false);
+    E('lobbyZero').checked = !!L.rules.allowZero; E('lobbyNoCap').checked = !!L.rules.noCap; E('lobbyScale').checked = L.rules.scale !== false;
+    E('lobbyZero').disabled = !L.isHost; E('lobbyNoCap').disabled = !L.isHost; E('lobbyScale').disabled = !L.isHost;
+    E('btnLobbyStart').hidden = !L.isHost; E('btnLobbyStart').disabled = conn < 2 || conn > MAXP;
+    E('lobbyHint').textContent = L.isHost ? (conn < 2 ? 'ส่งรหัสครัวให้เพื่อน ต้องมีเชฟอย่างน้อย 2 คนจึงเปิดเตาได้' : 'เชฟพร้อมหน้า ' + conn + ' คน เริ่มอบเค้กได้เลย!') : 'รอหัวหน้าเชฟกดเริ่มประกอบเค้ก…';
+  }
+
+  /* ---- game ---- */
+  function enterGame(){
+    show('game'); var c = App.ctx(); if (!c) return;
+    checkReveal(c.state); renderGame(c);
+    if (c.state.phase !== 'select' && !revealing) setTimeout(showEnd, 300);
+  }
+  function render(){
+    if (cur === 'lobby') renderLobby();
+    if (cur !== 'game') return;
+    var c = App.ctx(); if (!c) return;
+    checkReveal(c.state); renderGame(c);
+  }
+  function renderGame(c){
+    c = c || App.ctx(); if (!c) return; var s = c.state;
+    E('tbMode').textContent = (s.mode === 'build' ? 'ประกอบเค้ก 5 ชั้น' : 'เสิร์ฟชิมเค้ก · โหมดพิเศษ') + ' · เชฟ ' + s.players.length + ' คน';
+    E('tbRound').textContent = 'รอบ ' + s.round;
+    var room = E('tbRoom'); room.hidden = !c.code; if (c.code) room.textContent = c.code;
+    renderPlayers(c); renderHand(c);
+    if (!revealing) renderStage(c);
+    if (s.phase === 'select') closeOv('ovEnd');
+  }
+  function usedTotals(s){ return s.players.reduce(function(a, p){ return { r: a.r + p.usedRed, b: a.b + p.usedBlue }; }, { r: 0, b: 0 }); }
+  function renderStage(c, popK){
+    var s = c.state, T = Rules.target(s), lv = Rules.fireLevel(s), ext = s.mode === 'extinguish';
+    cakeLevel(gamePit, lv); gameFX.setLevel(lv); Sound.setLevel(lv); amb.setCool(ext);
+    E('s-game').classList.toggle('ext', ext);
+    var tot = usedTotals(s);
+    cakePipings(gamePit, tot.r + ((s.carry && s.carry.red) || 0), tot.b + ((s.carry && s.carry.blue) || 0));
+    E('tgNum').textContent = T == null ? '♛' : String(T);
+    E('tgRing').style.setProperty('--p', String(Math.round(s.stage / 5 * 100)));
+    E('mission').hidden = s.phase !== 'select';
+    E('mRed').textContent = T == null ? '-' : T; E('mBlue').textContent = T == null ? '-' : T;
+    var last = s.history.length ? s.history[s.history.length - 1] : null, lh = E('lastHint');
+    if (s.phase !== 'select') lh.textContent = s.phase === 'won' ? (ext ? 'เสิร์ฟชิมครบทุกชั้นอย่างงดงาม!' : 'ประกอบหอคอยเค้กครบทั้ง 5 ชั้นแล้ว!') : 'มีเชฟหลอดครีมหมดมือเสียก่อน';
+    else if (last && last.gameId === s.gameId && last.stage === s.stage && !last.success) lh.textContent = 'รอบก่อน: สตรอว์เบอร์รี ' + last.totalRed + ' · บลูเบอร์รี ' + last.totalBlue + ' (สูตร ' + last.target + ')';
+    else lh.textContent = 'เค้กชั้นที่ ' + (s.stage + 1) + '/5 · รวมรสใดรสหนึ่งให้ตรงสูตรพอดี';
+    renderTokens(s, popK);
+    E('pileInfo').textContent = 'บีบแล้ว ' + tot.r + ' แดง · ' + tot.b + ' น้ำเงิน';
+    E('progBar').style.width = (s.stage / 5 * 100) + '%';
+    E('progText').textContent = (ext ? 'เสิร์ฟแล้ว ' : 'วางเค้กแล้ว ') + s.stage + '/5';
+    if (popK) { var bd = E('tgRing'); bd.classList.remove('bump'); void bd.offsetWidth; bd.classList.add('bump'); }
+  }
+  function renderTokens(s, popK){
+    var box = E('tokens'); box.textContent = '';
+    var bt = s.buildTargets || [1, 2, 3, 4, 5];
+    for (var k = 1; k <= 5; k++) {
+      var lit, curr, out = false;
+      if (s.mode === 'build') { lit = s.stage >= k; curr = s.phase === 'select' && s.stage + 1 === k; }
+      else { var pos = 5 - k; out = s.stage > pos; lit = !out; curr = s.phase === 'select' && s.stage === pos; }
+      var t = mk('div', 'tok' + (lit ? ' lit' : '') + (curr ? ' cur' : '') + (out ? ' out' : '') + (popK === k ? ' pop' : ''));
+      t.style.setProperty('--sz', (16 + k * 2.6) + 'px'); t.title = 'ชั้นที่ ' + k + ' · สูตร ' + bt[k - 1]; t.appendChild(mk('span', null, bt[k - 1])); box.appendChild(t);
+    }
+  }
+  function renderPlayers(c){
+    var s = c.state, n = s.players.length, box = E('players'); box.textContent = '';
+    box.className = 'players' + (n > 4 ? ' cmp' : ''); box.setAttribute('data-n', String(n));
+    s.players.forEach(function(p, i){
+      var st = c.status(i), locked = !!s.locked[i];
+      var thinking = s.phase === 'select' && !locked && st !== 'offline' && st !== 'reconnecting';
+      var card = mk('div', 'pc' + (i === c.mySeat ? ' me' : '') + (locked ? ' locked' : '') + (st === 'offline' ? ' off' : '') + (thinking ? ' think' : ''));
+      card.setAttribute('data-seat', String(i));
+      card.appendChild(mk('span', 'lk', '✓'));
+      var P = null; if (p.bot) AI.PERSONAS.forEach(function(x){ if (x.key === p.persona) P = x; });
+      var top = mk('div', 'pc-top');
+      var av = mk('div', 'av'); av.style.setProperty('--hue', hueOf(i));
+      av.appendChild(chefAvatarSVG(P ? P.avatar : null, p.name));
+      av.appendChild(mk('span', 'dot ' + st));
+      top.appendChild(av); top.appendChild(mk('div', 'pc-n', p.name + (i === c.mySeat ? ' (คุณ)' : '')));
+      var pips = mk('div', 'pips');
+      [['r', p.red, p.usedRed], ['b', p.blue, p.usedBlue]].forEach(function(a){
+        var row = mk('div', 'prow ' + a[0]), tt = Math.max(5, a[1] + a[2]);
+        for (var k = 0; k < tt; k++) row.appendChild(mk('i', k < a[1] ? '' : 'u'));
+        row.appendChild(mk('em', null, a[1])); pips.appendChild(row);
+      });
+      var cn = mk('div', 'cnts'); cn.appendChild(mk('span', 'r', p.red)); cn.appendChild(mk('span', 'b', p.blue));
+      var txt;
+      if (s.phase !== 'select') txt = st === 'offline' ? 'ออฟไลน์' : (p.red + p.blue === 0 ? 'ครีมหมด' : 'จบรอบ');
+      else if (locked) txt = 'พร้อมเสิร์ฟ ✓';
+      else if (st === 'offline') txt = 'ออฟไลน์ · กันที่ไว้';
+      else if (st === 'reconnecting') txt = 'กำลังเชื่อมใหม่…';
+      else txt = p.bot ? 'กำลังชั่งตวง…' : (i === c.mySeat ? 'ตาคุณเลือกสูตร' : 'กำลังเลือก…');
+      card.title = p.name + ': เหลือสตรอว์เบอร์รี ' + p.red + ' บลูเบอร์รี ' + p.blue + ' · ใช้ไป ' + p.usedRed + '/' + p.usedBlue + ' · ' + txt;
+      card.setAttribute('aria-label', card.title);
+      card.appendChild(top); card.appendChild(pips); card.appendChild(cn); card.appendChild(mk('div', 'pc-s' + (locked ? ' ok' : ''), (st === 'host' ? 'หัวหน้า · ' : '') + txt));
+      box.appendChild(card);
+    });
+  }
+  function renderHand(c){
+    var s = c.state, seat = c.mySeat, me = s.players[seat]; if (!me) return;
+    var key = s.gameId + ':' + s.roundId; if (sel.key !== key) { sel.key = key; sel.red = 0; sel.blue = 0; }
+    sel.red = Math.min(sel.red, me.red); sel.blue = Math.min(sel.blue, me.blue);
+    var open = s.phase === 'select', locked = !!s.locked[seat] || !!c.locking, R = s.rules;
+    E('handRule').textContent = 'บีบได้ ' + R.min + '–' + (R.noCap ? 'ไม่จำกัด' : R.max) + ' หลอด · ผสมรสได้';
+    var showPiles = open && !locked;
+    E('piles').hidden = !showPiles; E('lockedBox').hidden = showPiles;
+    if (!open) { E('lockedText').textContent = s.phase === 'won' ? 'ภารกิจเสร็จสมบูรณ์ · ยอดเยี่ยม!' : 'ปิดเตาแล้ว'; E('lockedWait').textContent = ''; }
+    else if (locked) {
+      var pk = c.myPick;
+      E('lockedText').textContent = c.locking ? 'กำลังครอบฝาโดม…' : pk ? ('จานลับของคุณ: สตรอว์เบอร์รี ' + pk.red + ' · บลูเบอร์รี ' + pk.blue) : 'ครอบฝาโดมแล้ว';
+      var waiting = s.players.filter(function(p, i){ return !s.locked[i]; }).map(function(p){ return p.name; });
+      E('lockedWait').textContent = waiting.length ? 'รอเชฟอีก ' + waiting.length + ' คน: ' + waiting.slice(0, 4).join(', ') + (waiting.length > 4 ? '…' : '') : 'กำลังเปิดฝาโดมพร้อมกัน…';
+    } else { buildPile('red', me.red, sel.red); buildPile('blue', me.blue, sel.blue); }
+    E('selRed').textContent = sel.red; E('selBlue').textContent = sel.blue;
+    E('leftRed').textContent = 'เหลือ ' + me.red; E('leftBlue').textContent = 'เหลือ ' + me.blue;
+    var tot = sel.red + sel.blue;
+    E('handCount').textContent = showPiles ? ('เตรียมบีบ ' + tot + ' หลอด') : (open ? 'ซ่อนใต้ฝาโดมแล้ว' : 'จบรอบแล้ว');
+    var err = showPiles ? Rules.validate(s, seat, sel) : 'closed';
+    var btn = E('btnLock'); btn.hidden = !showPiles; btn.disabled = !!err;
+    btn.textContent = err ? (tot < R.min ? ('เลือกอย่างน้อย ' + R.min + ' หลอด') : err) : ('ครอบฝาโดม ' + tot + ' หลอด · พร้อมเสิร์ฟ!');
+    qsa('[data-act="step"]').forEach(function(b){ var col = b.getAttribute('data-c'), d = +b.getAttribute('data-d'); b.disabled = d < 0 ? sel[col] <= 0 : (sel[col] >= me[col] || tot >= R.max); });
+  }
+  function buildPile(color, count, selected){
+    var box = E(color === 'red' ? 'pileRed' : 'pileBlue'); box.textContent = '';
+    if (count === 0) { box.appendChild(mk('div', 'pempty', 'หมดถาดแล้ว')); return; }
+    for (var i = 0; i < count; i++) {
+      var b = mk('button', 'mstick ' + color + (i < selected ? ' sel' : '')); b.type = 'button';
+      b.setAttribute('data-act', 'stick'); b.setAttribute('data-c', color); b.setAttribute('data-i', String(i));
+      b.setAttribute('aria-label', (color === 'red' ? 'หลอดสตรอว์เบอร์รี ' : 'หลอดบลูเบอร์รี ') + (i + 1) + (i < selected ? ' (เลือกแล้ว)' : ''));
+      box.appendChild(b);
+    }
+  }
+  function setSel(color, nv){
+    if (color !== 'red' && color !== 'blue') return;
+    var c = App.ctx(); if (!c) return; var s = c.state;
+    if (s.phase !== 'select' || s.locked[c.mySeat] || c.locking || revealing) return;
+    var me = s.players[c.mySeat], R = s.rules;
+    if (nv < 0 || nv === sel[color]) return;
+    if (nv > me[color]) { toast('ครีม' + (color === 'red' ? 'สตรอว์เบอร์รี' : 'บลูเบอร์รี') + 'ในถาดไม่พอ'); return; }
+    var other = color === 'red' ? sel.blue : sel.red;
+    if (nv + other > R.max) { toast('บีบได้สูงสุด ' + R.max + ' หลอดต่อรอบ'); var hd = E('hand'); hd.classList.remove('shake'); void hd.offsetWidth; hd.classList.add('shake'); return; }
+    var up = nv > sel[color]; sel[color] = nv; Sound.play(up ? 'tick' : 'untick'); renderHand(c);
+  }
+  function lockIn(){ var c = App.ctx(); if (!c || revealing) return; App.submit({ red: sel.red, blue: sel.blue }); }
+
+  /* ---- reveal ---- */
+  function baseline(){ baselineNext = true; }
+  function checkReveal(s){
+    if (!s) return;
+    if (baselineNext) { baselineNext = false; seen = { g: s.gameId, r: s.result ? s.result.roundId : 0 }; return; }
+    var r = s.result;
+    if (!r) { if (seen.g !== s.gameId) seen = { g: s.gameId, r: 0 }; return; }
+    if (r.gameId === seen.g && r.roundId <= seen.r) return;
+    seen = { g: r.gameId, r: r.roundId };
+    revealQ.push(r); if (!revealing) runQueue();
+  }
+  function runQueue(){
+    revealing = true; var my = epoch;
+    function loop(){
+      if (my !== epoch || !revealQ.length) return Promise.resolve();
+      var r = revealQ.shift();
+      return runReveal(r, my).catch(showError).then(loop);
+    }
+    loop().then(function(){
+      if (my !== epoch) return;
+      revealing = false;
+      var c = App.ctx();
+      if (c && cur === 'game') {
+        renderGame(c);
+        if (c.state.phase !== 'select') return sleep(800).then(function(){ if (my === epoch) showEnd(); });
+      }
+    }).then(function(){ if (my === epoch) App.afterReveal(); }).catch(showError);
+  }
+  function runReveal(r, my){
+    var c = App.ctx(); if (!c) return Promise.resolve();
+    closeOv('ovMenu'); closeOv('ovEnd'); closeOv('ovHow');
+    var tx = E('countText');
+    openOv('ovCount'); tx.textContent = 'หนึ่ง… สอง…'; tx.className = 'count a'; Sound.play('count');
+    return sleep(560).then(function(){
+      if (my !== epoch) throw 0;
+      tx.textContent = 'เสิร์ฟเลย!'; tx.className = 'count b'; Sound.play('reveal');
+      return sleep(480);
+    }).then(function(){
+      closeOv('ovCount'); if (my !== epoch) throw 0;
+      fillReveal(r, c.state); openOv('ovReveal');
+      return new Promise(function(res){ contResolve = res; });
+    }).then(function(){
+      contResolve = null; closeOv('ovReveal'); if (my !== epoch) throw 0;
+      return flyPipings(r);
+    }).then(function(){
+      if (my !== epoch) throw 0;
+      var c2 = App.ctx(); if (!c2) throw 0;
+      var popK = 0;
+      if (r.success) popK = r.mode === 'build' ? r.stage + 1 : 5 - r.stage;
+      renderStage(c2, popK);
+      var fl = E('flash'); fl.classList.remove('go', 'cool'); void fl.offsetWidth;
+      if (r.success) {
+        if (r.mode === 'build') { gameFX.ignite(80); Sound.play('ignite'); }
+        else { gameFX.smoke(true); gameFX.ignite(35, 198); Sound.play('douse'); fl.classList.add('cool'); }
+        fl.classList.add('go');
+      } else { gameFX.smoke(false); Sound.play('fail'); }
+      if (r.outcome === 'won') return sleep(450).then(function(){ Sound.play('victory'); gameFX.ignite(120); amb.celebrate(r.mode === 'extinguish'); });
+      if (r.outcome === 'lost') return sleep(400).then(function(){ Sound.play('defeat'); });
+    }).catch(function(e){ if (e !== 0) throw e; });
+  }
+  function explain(r){
+    var T = r.target;
+    function d(x){ return x === T ? 'ตรงสูตรพอดี' : x < T ? 'ขาดอีก ' + (T - x) : 'ล้นไป ' + (x - T); }
+    if (r.success) {
+      var col = r.hitRed && r.hitBlue ? 'ทั้งสตรอว์เบอร์รีและบลูเบอร์รี' : r.hitRed ? 'ครีมสตรอว์เบอร์รี' : 'ครีมบลูเบอร์รี';
+      return col + 'รวมได้ ' + T + ' หลอดตรงสูตรเป๊ะ! ' + (r.mode === 'build' ? 'เค้กชั้นใหม่อบเสร็จวางขึ้นแท่นสง่างาม' : 'ตัดแบ่งเสิร์ฟเค้กได้สำเร็จ 1 ชั้น');
+    }
+    return 'สตรอว์เบอร์รีได้ ' + r.totalRed + ' (' + d(r.totalRed) + ') · บลูเบอร์รีได้ ' + r.totalBlue + ' (' + d(r.totalBlue) + ') ต้องมีรสใดรสหนึ่งรวมได้ ' + T + ' พอดี';
+  }
+  function fillReveal(r, s){
+    E('rvTitle').textContent = 'เปิดฝาโดมรอบ ' + r.round + ' · สูตรเป้าหมาย ' + r.target;
+    E('rvSub').textContent = r.mode === 'build' ? ('กำลังประกอบเค้กชั้นที่ ' + (r.stage + 1) + ' จาก 5') : ('เสิร์ฟชิมเค้ก · ลำดับที่ ' + (r.stage + 1) + ' จาก 5');
+    var rows = E('rvRows'); rows.textContent = ''; rows.className = 'rvgrid' + (r.plays.length > 4 ? ' two' : '');
+    r.plays.forEach(function(pl, i){
+      var p = s.players[pl.seat] || { name: 'เชฟ' };
+      var row = mk('div', 'rvr'); row.style.animationDelay = (Math.min(i, 9) * 0.07) + 's';
+      var left = mk('div'); left.appendChild(mk('div', 'nm', p.name)); left.appendChild(mk('div', 'ct', 'สตรอว์เบอร์รี ' + pl.red + ' · บลูเบอร์รี ' + pl.blue));
+      var st = mk('div', 'rvs'), k;
+      for (k = 0; k < Math.min(pl.red, 6); k++) st.appendChild(mk('span', 'pip-dot red'));
+      for (k = 0; k < Math.min(pl.blue, 6); k++) st.appendChild(mk('span', 'pip-dot blue'));
+      if (pl.red + pl.blue === 0) st.appendChild(mk('span', 'rvnone', 'พักมือ'));
+      row.appendChild(left); row.appendChild(st); rows.appendChild(row);
+    });
+    var tots = E('rvTotals'); tots.textContent = ''; var base = Math.min(r.plays.length, 10) * 0.07 + 0.2;
+    [['red', 'สตรอว์เบอร์รี', r.totalRed, r.hitRed], ['blue', 'บลูเบอร์รี', r.totalBlue, r.hitBlue]].forEach(function(a, j){
+      var row = mk('div', 'rvt ' + a[0] + (a[3] ? ' hit' : '')); row.style.animationDelay = (base + j * 0.15) + 's';
+      row.appendChild(mk('div', 'lb', a[1]));
+      var bar = mk('div', 'bar'), f = mk('div', 'fill'); f.style.width = Math.min(100, r.target ? a[2] / r.target * 100 : 0) + '%';
+      if (a[2] > r.target) f.classList.add('over'); bar.appendChild(f);
+      if (r.target <= 15) for (var m = 1; m < r.target; m++) { var tk = mk('span', 'tick'); tk.style.left = (m / r.target * 100) + '%'; bar.appendChild(tk); }
+      row.appendChild(bar); row.appendChild(mk('div', 'val', a[2] + ' / ' + r.target + (a[3] ? ' ✓' : ''))); tots.appendChild(row);
+    });
+    var vd = E('rvVerdict'); vd.className = 'verdict ' + (r.success ? 'ok' : 'no'); vd.style.animationDelay = (base + 0.4) + 's'; vd.textContent = '';
+    vd.appendChild(mk('small', null, r.success ? 'CHEF\'S KISS · MAGNIFIQUE!' : 'RECIPE MISMATCH'));
+    vd.appendChild(document.createTextNode(r.success ? (r.mode === 'build' ? 'ตรงสูตรเป๊ะ! วางเค้กชั้นใหม่สำเร็จ' : 'กลมกล่อม! เสิร์ฟเค้กสำเร็จ 1 ชั้น') : 'รสชาติยังไม่ลงตัว ลองชั่งตวงกันใหม่!'));
+    var ex = explain(r);
+    if (r.outcome === 'won') ex += r.mode === 'build' ? ' หอคอยเค้กครบ 5 ชั้นสมบูรณ์แบบ ทีมเชฟชนะร่วมกัน!' : ' เสิร์ฟเค้กชั้นสุดท้ายเรียบร้อย ภารกิจเสร็จสมบูรณ์!';
+    if (r.outcome === 'lost') { var names = r.emptied.map(function(i){ return (s.players[i] || {}).name || '?'; }).join(' และ '); ex += ' แต่ ' + names + ' ครีมหมดถาดเสียก่อน จึงต้องปิดเตา'; }
+    var ee = E('rvExplain'); ee.textContent = ex; ee.style.animationDelay = (base + 0.5) + 's';
+    E('rvBtn').textContent = (r.outcome === 'won' || r.outcome === 'lost') ? 'สรุปผลงานครัว' : 'ลุยชั้นต่อไป';
+  }
+  function flyPipings(r){
+    return new Promise(function(res){
+      try {
+        if (reducedMotion || !gamePit) { res(); return; }
+        var layer = E('flyLayer'), ar = E('app').getBoundingClientRect(), fr = gamePit.stack.getBoundingClientRect();
+        var tx = fr.left + fr.width / 2 - ar.left, ty = fr.top + fr.height * 0.55 - ar.top, n = 0, maxT = 0;
+        r.plays.forEach(function(pl, i){
+          var card = document.querySelector('.pc[data-seat="' + i + '"]');
+          var cr = card ? card.getBoundingClientRect() : { left: ar.left + ar.width / 2, top: ar.top + ar.height - 80, width: 0, height: 0 };
+          var list = [], k; for (k = 0; k < pl.red; k++) list.push('red'); for (k = 0; k < pl.blue; k++) list.push('blue');
+          list.forEach(function(col){
+            if (n > 36) return;
+            var st = mk('div', 'fly ' + col); layer.appendChild(st);
+            var sx = cr.left + cr.width / 2 - ar.left + (Math.random() - 0.5) * 16, sy = cr.top + cr.height / 2 - ar.top;
+            var delay = Math.min(n, 20) * 30, dur = 480; n++;
+            st.style.transform = 'translate(' + sx + 'px,' + sy + 'px)';
+            if (st.animate) {
+              st.animate([
+                { transform: 'translate(' + sx + 'px,' + sy + 'px) rotate(' + Math.round(Math.random() * 60 - 30) + 'deg)', opacity: 1 },
+                { transform: 'translate(' + (tx + (Math.random() - 0.5) * 34) + 'px,' + ty + 'px) rotate(' + Math.round(Math.random() * 360) + 'deg) scale(.65)', opacity: 0.1 }
+              ], { duration: dur, delay: delay, easing: 'cubic-bezier(.5,0,.3,1)', fill: 'forwards' });
+            }
+            maxT = Math.max(maxT, delay + dur); setTimeout(function(){ if (st.parentNode) st.parentNode.removeChild(st); }, delay + dur + 40);
+          });
+        });
+        if (n) Sound.play('whoosh');
+        setTimeout(function(){ if (n) Sound.play('wood'); res(); }, Math.min(maxT, 1300) + 20);
+      } catch (e) { res(); }
+    });
+  }
+  function abortReveal(){
+    epoch++; revealQ = []; revealing = false;
+    if (contResolve) { var f = contResolve; contResolve = null; f(); }
+    ['ovCount', 'ovReveal', 'ovEnd', 'ovMenu', 'ovExt'].forEach(closeOv);
+  }
+  function showEnd(){
+    var c = App.ctx(); if (!c || cur !== 'game') return; var s = c.state; if (s.phase === 'select') return;
+    var won = s.phase === 'won', build = s.mode === 'build';
+    E('ovEnd').classList.toggle('win', won);
+    E('endJp').textContent = won ? (build ? 'GRANDE VICTOIRE!' : 'DÉGUSTATION PARFAITE!') : (build ? 'CUISINE FERMÉE…' : 'SERVICE INTERROMPU…');
+    E('endTitle').textContent = won ? (build ? 'ยอดเยี่ยม! หอคอยเค้ก 5 ชั้นเสร็จสมบูรณ์' : 'สมบูรณ์แบบ! เสิร์ฟชิมเค้กครบทุกชั้น') : (build ? 'น่าเสียดาย… ครีมหมดถาดก่อนเค้กเสร็จ' : 'น่าเสียดาย… เสิร์ฟเค้กไม่ทันครบทุกชั้น');
+    var r = s.result, rounds = s.history.filter(function(x){ return x.gameId === s.gameId; }).length, txt;
+    if (won) txt = build ? ('ทีมเชฟ ' + s.players.length + ' คนสื่อใจประกอบเค้กครบ 5 ชั้นภายใน ' + rounds + ' รอบ ระดับดาวมิชลิน!') : ('ตัดแบ่งเสิร์ฟเค้กครบ 5 ชั้นภายใน ' + rounds + ' รอบอย่างไร้ที่ติ');
+    else { var names = ((r && r.emptied) || []).map(function(i){ return (s.players[i] || {}).name; }).filter(Boolean).join(' และ ') || 'เชฟคนหนึ่ง'; txt = names + ' ครีมหมดมือก่อนขณะปรุงสูตรเป้าหมาย ' + (r ? r.target : '?') + ' · ' + (build ? 'วางได้ ' : 'เสิร์ฟได้ ') + s.stage + '/5 ชั้น ลองตั้งสติอ่านใจกันใหม่นะ!'; }
+    E('endText').textContent = txt;
+    var st = E('endStats'); st.textContent = '';
+    function add(k, v){ st.appendChild(mk('div', 'k', k)); st.appendChild(mk('div', 'v', v)); }
+    var tot = usedTotals(s);
+    add('ผลการประเมินครัว', won ? 'ชนะเลิศ ♛' : 'ไม่สำเร็จ'); add('จำนวนเชฟ', s.players.length + ' คน'); add('สูตรทั้ง 5 ชั้น', (s.buildTargets || []).join(' · ')); add('จำนวนรอบที่ใช้', rounds + ' รอบ');
+    add('ครีมที่บีบไปทั้งหมด', 'สตรอว์เบอร์รี ' + tot.r + ' · บลูเบอร์รี ' + tot.b);
+    add('หลอดครีมคงเหลือรวม', s.players.reduce(function(a, p){ return a + p.red + p.blue; }, 0) + ' หลอด');
+    var control = !!c.isHost;
+    E('btnEndAgain').hidden = !control; E('btnEndExt').hidden = !(control && won && build); E('endWait').hidden = control;
+    E('btnEndMenu').textContent = c.kind === 'local' ? 'กลับหน้าร้าน' : 'ออกจากครัว';
+    openOv('ovEnd');
+  }
+  function renderHistory(){
+    var c = App.ctx(), box = E('histList'); box.textContent = '';
+    if (!c) { box.appendChild(mk('p', 'hint', 'ยังไม่มีบันทึกครัว')); return; }
+    var s = c.state, hs = s.history.filter(function(r){ return r.gameId === s.gameId; }).slice().reverse();
+    if (!hs.length) { box.appendChild(mk('p', 'hint', 'ยังไม่มีรอบที่เสิร์ฟ')); return; }
+    hs.forEach(function(r){
+      var row = mk('div', 'hrow ' + (r.success ? 'ok' : 'no'));
+      row.appendChild(mk('span', null, 'R' + r.round)); row.appendChild(mk('span', null, 'สูตร ' + r.target));
+      row.appendChild(mk('span', null, 'แดง ' + r.totalRed + ' · น้ำเงิน ' + r.totalBlue)); row.appendChild(mk('span', 'o', r.success ? '✓' : '✗'));
+      row.appendChild(mk('div', 'pl', r.plays.map(function(p){ return ((s.players[p.seat] || {}).name || '?') + ' ' + p.red + 'ส/' + p.blue + 'บ'; }).join(' · ')));
+      box.appendChild(row);
+    });
+  }
+  function fillHowTable(){
+    var box = E('howTargets'); box.textContent = '';
+    box.appendChild(mk('b', null, '2–4 คน')); box.appendChild(mk('span', null, '1 · 2 · 3 · 4 · 5 (สูตรมาตรฐาน)'));
+    for (var n = 5; n <= MAXP; n++) { box.appendChild(mk('b', null, n + ' คน')); box.appendChild(mk('span', null, Rules.targetsFor(n, true).join(' · '))); }
+  }
+  function copy(t){
+    if (!t) return;
+    function fallback(){ var ta = document.createElement('textarea'); ta.value = t; ta.style.position = 'fixed'; ta.style.opacity = '0'; document.body.appendChild(ta); ta.select(); try { document.execCommand('copy'); toast('คัดลอกเรียบร้อย!'); } catch (e) { toast('คัดลอกไม่สำเร็จ กรุณาเลือกข้อความเอง', 'err'); } document.body.removeChild(ta); }
+    try { navigator.clipboard.writeText(t).then(function(){ toast('คัดลอกเรียบร้อย!'); }, fallback); } catch (e) { fallback(); }
+  }
+  function nameFrom(id){ var n = cleanName(E(id).value); if (n) { settings.name = n; saveSettings(); } return n; }
+  var busy = false;
+  function runNet(fn){
+    if (busy) return; busy = true; qsa('#s-online button').forEach(function(b){ b.disabled = true; });
+    function done(){ busy = false; qsa('#s-online button').forEach(function(b){ b.disabled = false; }); }
+    Promise.resolve().then(fn).then(function(){ onlineStatus(''); done(); }, function(e){ onlineStatus(Net.friendly(e), 'err'); done(); });
+  }
+  function doJoin(){
+    var n = nameFrom('onName'); if (!n) { onlineStatus('กรุณาใส่ชื่อเชฟก่อน', 'err'); return; }
+    var code = String(E('joinCode').value || '').toUpperCase().replace(/[^A-Z0-9]/g, '');
+    if (!CODE_RE.test(code)) { onlineStatus('รหัสครัวต้องมี 5 ตัวอักษร/ตัวเลข (ไม่มี 0, O, 1, I)', 'err'); return; }
+    runNet(function(){ onlineStatus('กำลังเชื่อมต่อเข้าสู่ครัว ' + code + '…'); return App.joinRoom(n, code); });
+  }
+  var ACT = {
+    'go': function(b){ show(b.getAttribute('data-to')); },
+    'continue': function(){ App.continueSolo(); },
+    'how': function(){ openOv('ovHow'); },
+    'close': function(b){ closeOv(b.getAttribute('data-ov')); },
+    'music': function(){ Sound.setMusic(!Sound.isMusic()); syncAudio(); },
+    'sfx': function(){ Sound.setSfx(!Sound.isSfx()); syncAudio(); },
+    'solo-setup': function(){ openSolo(); },
+    'online-setup': function(){ openOnline(); },
+    'count': function(b){ settings.count = clamp(settings.count + (+b.getAttribute('data-d') || 0), 2, MAXP); saveSettings(); refreshSolo(); Sound.play('tick'); },
+    'diff': function(b){ settings.diff = b.getAttribute('data-v'); saveSettings(); refreshSolo(); },
+    'solo-start': function(){ settings.name = cleanName(E('soloName').value) || 'เชฟของคุณ'; settings.allowZero = !!E('soloZero').checked; settings.noCap = !!E('soloNoCap').checked; settings.scale = !!E('soloScale').checked; saveSettings(); App.startSolo(settings); },
+    'create': function(){ var n = nameFrom('onName'); if (!n) { onlineStatus('กรุณาใส่ชื่อเชฟก่อน', 'err'); return; } runNet(function(){ onlineStatus('กำลังเตรียมเปิดครัวออนไลน์…'); return App.hostRoom(n, false); }); },
+    'resume-host': function(){ var n = nameFrom('onName') || 'HeadChef'; runNet(function(){ onlineStatus('กำลังเปิดครัวเดิม…'); return App.hostRoom(n, true); }); },
+    'join': doJoin,
+    'copy-code': function(){ copy(Net.lobbyInfo().code || ''); },
+    'copy-link': function(){ copy(Net.shareLink()); },
+    'share': function(){ try { navigator.share({ title: 'หอคอยขนมหวานสื่อใจ · LA GRANDE PATISSERIE', text: 'มาช่วยกันทำเค้กใน หอคอยขนมหวานสื่อใจ! รหัสครัว ' + Net.lobbyInfo().code, url: Net.shareLink() }).catch(function(){}); } catch (e) {} },
+    'lobby-start': function(){ Net.startGame(); },
+    'stick': function(b){ var col = b.getAttribute('data-c'), i = +b.getAttribute('data-i'); setSel(col, i < sel[col] ? i : i + 1); },
+    'step': function(b){ var col = b.getAttribute('data-c'); setSel(col, sel[col] + (+b.getAttribute('data-d'))); },
+    'lock': lockIn,
+    'rv-continue': function(){ if (contResolve) contResolve(); },
+    'game-menu': function(){ var c = App.ctx(); renderHistory(); E('btnMRestart').hidden = !(c && c.isHost); E('btnMLeave').textContent = c && c.kind === 'local' ? 'บันทึกและกลับหน้าร้าน' : 'ออกจากครัว'; openOv('ovMenu'); },
+    'restart': function(){ closeOv('ovMenu'); return confirmBox('เริ่มอบเค้กก้อนใหม่ตั้งแต่ชั้นที่ 1 และแจกหลอดครีมชุดใหม่ให้เชฟทุกคน?', 'เริ่มอบใหม่').then(function(ok){ if (ok) App.playAgain(); }); },
+    'leave': function(){ closeOv('ovMenu'); return App.exit(); },
+    'end-again': function(){ App.playAgain(); },
+    'end-ext': function(){ openOv('ovExt'); },
+    'ext-start': function(){ closeOv('ovExt'); App.startExtinguish(); },
+    'err-close': function(){ E('errBar').hidden = true; },
+    'cf-yes': function(){ cfDone(true); },
+    'cf-no': function(){ cfDone(false); }
+  };
+  function onClick(e){
+    Sound.unlock();
+    var t = e.target; if (t && t.nodeType !== 1) t = t.parentNode;
+    var b = t && t.closest ? t.closest('[data-act]') : null;
+    if (!b || b.disabled) return;
+    var fn = ACT[b.getAttribute('data-act')]; if (!fn) return;
+    try { var r = fn(b, e); if (r && typeof r.then === 'function') r.then(null, showError); } catch (err) { showError(err); }
+  }
+  function init(){
+    document.addEventListener('click', onClick);
+    ['pointerdown', 'touchend', 'keydown'].forEach(function(ev){ document.addEventListener(ev, function(){ Sound.unlock(); }, { passive: true }); });
+    document.addEventListener('keydown', function(e){ if (e.key === 'Escape') ['ovHow', 'ovMenu', 'ovExt'].forEach(closeOv); });
+    safe(function(){
+      E('soloZero').addEventListener('change', function(e){ settings.allowZero = !!e.target.checked; saveSettings(); });
+      E('soloNoCap').addEventListener('change', function(e){ settings.noCap = !!e.target.checked; saveSettings(); });
+      E('soloScale').addEventListener('change', function(e){ settings.scale = !!e.target.checked; saveSettings(); refreshSolo(); });
+      var lr = function(){ Net.setRules({ allowZero: !!E('lobbyZero').checked, noCap: !!E('lobbyNoCap').checked, scale: !!E('lobbyScale').checked }); };
+      E('lobbyZero').addEventListener('change', lr); E('lobbyNoCap').addEventListener('change', lr); E('lobbyScale').addEventListener('change', lr);
+      E('joinCode').addEventListener('input', function(e){ var v = String(e.target.value || '').toUpperCase().replace(/[^A-Z0-9]/g, '').slice(0, 5); if (v !== e.target.value) e.target.value = v; });
+      E('joinCode').addEventListener('keydown', function(e){ if (e.key === 'Enter') doJoin(); });
+    });
+    safe(function(){ gamePit = makeCakeStand(E('gamePit')); });
+    safe(function(){ menuPit = makeCakeStand(E('menuPit')); cakeLevel(menuPit, 5); cakePipings(menuPit, 10, 10); });
+    safe(function(){ gameFX = makeFX(E('gameFx'), function(){ return gamePit && gamePit.stack; }); });
+    safe(function(){ menuFX = makeFX(E('menuFx'), function(){ return menuPit && menuPit.stack; }); menuFX.setLevel(4); });
+    safe(function(){ amb = makeAmbient(E('bgfx')); });
+    safe(fillHowTable);
+    safe(function(){ syncAudio(); show('menu'); });
+    safe(function(){
+      var code = null, q = null;
+      try { q = new URLSearchParams(location.search).get('room'); } catch (e) {}
+      if (!q) { var m = (location.hash || '').match(/room=([A-Za-z0-9]{5})/); if (m) q = m[1]; }
+      if (q && CODE_RE.test(q.toUpperCase())) code = q.toUpperCase();
+      if (code) openOnline(code);
+    });
+  }
+  return { init: init, show: show, toast: toast, netBar: netBar, render: render, enterGame: enterGame, enterLobby: enterLobby, baseline: baseline, abortReveal: abortReveal, onlineStatus: onlineStatus, confirmBox: confirmBox, current: function(){ return cur; } };
+})();
+
+/* ================= NETWORK (PeerJS, host-authoritative) ================= */
+var Net = (function(){
+  var PREFIX = 'grandpatisserie-p2p-v4-';
+  var sess = 0, peer = null, role = null, code = null, lobby = null, picks = [], hb = null;
+  var hostConn = null, hostLost = false, lastHostMsg = 0, retryT = null, retries = 0, myName = '', myToken = '';
+  var pending = new Map();
+  function PeerCls(){ return window.Peer || (window.peerjs && window.peerjs.Peer) || null; }
+  function loadPeer(){
+    if (PeerCls()) return Promise.resolve();
+    return new Promise(function(res, rej){
+      var urls = ['https://unpkg.com/peerjs@1.5.4/dist/peerjs.min.js', 'https://cdn.jsdelivr.net/npm/peerjs@1.5.4/dist/peerjs.min.js'], i = 0;
+      function next(){
+        if (i >= urls.length) { rej(new Error('โหลดระบบเชื่อมต่อ PeerJS ไม่ได้ อาจไม่มีอินเทอร์เน็ตหรือเครือข่ายบล็อก (โหมดเล่นกับเชฟบอทยังเล่นได้ปกติ)')); return; }
+        var s = document.createElement('script'); s.src = urls[i++]; s.async = true;
+        s.onload = function(){ if (PeerCls()) res(); else next(); };
+        s.onerror = function(){ if (s.parentNode) s.parentNode.removeChild(s); next(); };
+        document.head.appendChild(s);
+      }
+      next();
+    });
+  }
+  function openPeer(id){
+    return new Promise(function(res, rej){
+      var P = PeerCls(); if (!P) { rej(new Error('PeerJS ไม่พร้อมใช้งาน')); return; }
+      var p; try { p = id ? new P(id, { debug: 1 }) : new P({ debug: 1 }); } catch (e) { rej(e); return; }
+      var t = setTimeout(function(){ cleanup(); try { p.destroy(); } catch (e) {} rej(new Error('เซิร์ฟเวอร์จับคู่ไม่ตอบสนอง (หมดเวลา)')); }, 15000);
+      function onOpen(){ clearTimeout(t); cleanup(); res(p); }
+      function onErr(e){ clearTimeout(t); cleanup(); try { p.destroy(); } catch (_) {} rej(e); }
+      function cleanup(){ try { p.off('open', onOpen); p.off('error', onErr); } catch (e) {} }
+      p.on('open', onOpen); p.on('error', onErr);
+    });
+  }
+  function friendly(e){
+    var t = e && e.type;
+    if (t === 'browser-incompatible') return 'เบราว์เซอร์นี้ไม่รองรับ WebRTC';
+    if (t === 'network' || t === 'server-error' || t === 'socket-error' || t === 'socket-closed') return 'ติดต่อเซิร์ฟเวอร์จับคู่ไม่ได้ กรุณาตรวจอินเทอร์เน็ตแล้วลองใหม่';
+    if (t === 'peer-unavailable') return 'ไม่พบครัวรหัสนี้ กรุณาตรวจรหัสอีกครั้ง หรือหัวหน้าเชฟอาจปิดครัวไปแล้ว';
+    if (t === 'unavailable-id') return 'รหัสครัวนี้ยังไม่ว่าง รอสักครู่แล้วลองใหม่';
+    return (e && e.message) || String(e);
+  }
+  function send(conn, o){ try { if (conn && conn.open) conn.send(o); } catch (e) {} }
+  function teardown(){
+    sess++; clearInterval(hb); hb = null; clearTimeout(retryT); retryT = null; pending.clear();
+    var old = peer; peer = null; hostConn = null; hostLost = false;
+    lobby = null; picks = []; role = null; code = null;
+    if (old) setTimeout(function(){ try { old.destroy(); } catch (e) {} }, 400);
+    UI.netBar(null);
+  }
+  function pubLobby(){ return { players: lobby.players.map(function(p){ return { name: p.name, connected: !!p.connected, isHost: !!p.isHost }; }), rules: { allowZero: !!lobby.rules.allowZero, noCap: !!lobby.rules.noCap, scale: lobby.rules.scale !== false } }; }
+  function saveHost(){
+    if (role !== 'host' || !lobby) return;
+    Store.set('hostSave', { code: code, lobby: { players: lobby.players.map(function(p){ return { name: p.name, token: p.token, isHost: p.isHost }; }), rules: lobby.rules }, state: S.state, picks: picks, savedAt: Date.now() });
+  }
+  function newP(name, token, isHost, conn){ return { name: name, token: token || '', isHost: !!isHost, connected: !!isHost || !!conn, conn: conn || null, lastSeen: Date.now(), nonces: [] }; }
+  function host(name, resume){
+    return loadPeer().then(function(){
+      teardown(); var my = sess; role = 'host';
+      var hs = resume ? Store.get('hostSave', null) : null;
+      if (resume && !(hs && CODE_RE.test(hs.code || '') && hs.lobby && Array.isArray(hs.lobby.players))) { role = null; throw new Error('ไม่พบข้อมูลครัวที่บันทึกไว้'); }
+      code = hs ? hs.code : randId(5);
+      var attempt = 0;
+      function tryOpen(){
+        return openPeer(PREFIX + code).catch(function(e){
+          if (my !== sess) throw new Error('ยกเลิกแล้ว');
+          attempt++;
+          if (e && e.type === 'unavailable-id' && attempt < 6) {
+            if (resume) { UI.onlineStatus('รหัส ' + code + ' ยังค้างจากรอบก่อน กำลังลองใหม่ใน 5 วินาที (' + attempt + '/6)…'); return sleep(5000).then(tryOpen); }
+            code = randId(5); return tryOpen();
+          }
+          throw e;
+        });
+      }
+      return tryOpen().then(function(p){
+        if (my !== sess) { try { p.destroy(); } catch (e) {} throw new Error('ยกเลิกแล้ว'); }
+        peer = p;
+        peer.on('connection', function(conn){ if (my === sess) onConn(conn, my); });
+        peer.on('disconnected', function(){ if (my !== sess || !peer || peer.destroyed) return; UI.netBar('หลุดจากเซิร์ฟเวอร์จับคู่ เชฟที่อยู่ในครัวแล้วยังเล่นต่อได้ กำลังเชื่อมใหม่…'); setTimeout(function(){ try { if (my === sess && peer && !peer.destroyed) peer.reconnect(); } catch (e) {} }, 1500); });
+        peer.on('open', function(){ if (my === sess) UI.netBar(null); });
+        peer.on('error', function(e){ if (my !== sess || (e && e.type === 'peer-unavailable')) return; UI.toast(friendly(e), 'err'); });
+        var st = Store.get('settings', {}) || {};
+        if (hs) {
+          lobby = { players: hs.lobby.players.map(function(x){ return newP(cleanName(x.name) || 'Chef', String(x.token || ''), !!x.isHost, null); }), rules: Rules.norm(hs.lobby.rules) };
+          if (!lobby.players.length || !lobby.players[0].isHost) lobby.players.unshift(newP(cleanName(name) || 'HeadChef', 'host', true, null));
+          S.state = hs.state && Rules.sanityCheck(hs.state) && hs.state.players.length === lobby.players.length ? hs.state : null;
+          if (!S.state) lobby.players = lobby.players.filter(function(x){ return x.isHost; });
+          picks = Array.isArray(hs.picks) ? hs.picks : [];
+          if (S.state) S.state.locked = S.state.locked.map(function(l, i){ return !!(l && picks[i] && !Rules.validate(S.state, i, picks[i])); });
+        } else {
+          lobby = { players: [newP(name, 'host', true, null)], rules: Rules.norm({ allowZero: !!st.allowZero, noCap: !!st.noCap, scale: st.scale !== false }) };
+          S.state = null; picks = [];
+        }
+        S.kind = 'host'; S.code = code; S.mySeat = 0; S.locking = false; S.myPick = (S.state && S.state.locked[0] && picks[0]) ? picks[0] : null;
+        hb = setInterval(function(){ if (my === sess) hostBeat(); }, 4000);
+        saveHost();
+        if (S.state) { UI.baseline(); UI.enterGame(); } else UI.enterLobby();
+      });
+    });
+  }
+  function onConn(conn, my){
+    var helloT = setTimeout(function(){ if (seatOf(conn) < 0) { try { conn.close(); } catch (e) {} } }, 15000);
+    conn.on('data', function(d){ if (my !== sess) return; try { hostMsg(conn, d); } catch (e) { if (window.console) console.error(e); } });
+    conn.on('close', function(){ clearTimeout(helloT); if (my === sess) hostDrop(conn); });
+    conn.on('error', function(){ if (my === sess) hostDrop(conn); });
+  }
+  function seatOf(conn){ if (!lobby) return -1; for (var i = 0; i < lobby.players.length; i++) if (lobby.players[i].conn === conn) return i; return -1; }
+  function reject(conn, msg){ send(conn, { t: 'reject', msg: msg }); setTimeout(function(){ try { conn.close(); } catch (e) {} }, 600); }
+  function hostMsg(conn, d){
+    if (!d || typeof d !== 'object' || typeof d.t !== 'string') return;
+    var i = seatOf(conn); if (i >= 0) lobby.players[i].lastSeen = Date.now();
+    if (d.t === 'hello') return hello(conn, d);
+    if (i < 0) return;
+    if (d.t === 'pick') return pickIn(i, conn, d);
+    if (d.t === 'leave') { hostDrop(conn); try { conn.close(); } catch (e) {} }
+  }
+  function hello(conn, d){
+    if (d.proto !== PROTO) return reject(conn, 'เวอร์ชันเกมไม่ตรงกัน กรุณารีเฟรชหน้าเว็บทุกเครื่อง');
+    var name = cleanName(d.name), token = typeof d.token === 'string' ? d.token.slice(0, 40) : '';
+    if (!name) return reject(conn, 'กรุณาใส่ชื่อเชฟ');
+    var i = -1, k;
+    if (token) for (k = 0; k < lobby.players.length; k++) if (!lobby.players[k].isHost && lobby.players[k].token === token) { i = k; break; }
+    if (i < 0) for (k = 0; k < lobby.players.length; k++) { var q = lobby.players[k]; if (!q.isHost && q.name.toLowerCase() === name.toLowerCase() && (S.state || !q.connected)) { i = k; break; } }
+    if (i >= 0) {
+      var p = lobby.players[i];
+      if (p.conn && p.conn !== conn) { var oc = p.conn; p.conn = null; try { oc.close(); } catch (e) {} }
+      p.conn = conn; p.connected = true; p.lastSeen = Date.now(); if (token) p.token = token; if (!S.state) p.name = name;
+      UI.toast('เชฟ ' + p.name + (S.state ? ' กลับเข้าประจำโต๊ะแล้ว' : ' เข้าสู่ครัวแล้ว'));
+    } else {
+      if (S.state) return reject(conn, 'เริ่มอบเค้กไปแล้ว เฉพาะเชฟเดิมในโต๊ะเท่านั้นที่กลับเข้าได้ (ใช้ชื่อเดิม)');
+      if (lobby.players.some(function(x){ return x.name.toLowerCase() === name.toLowerCase(); })) return reject(conn, 'มีเชฟใช้ชื่อนี้แล้วในครัว');
+      if (lobby.players.length >= MAXP) return reject(conn, 'ครัวเต็มแล้ว (' + MAXP + ' คน)');
+      lobby.players.push(newP(name, token, false, conn));
+      i = lobby.players.length - 1; UI.toast('เชฟ ' + name + ' เข้าสู่ครัวแล้ว');
+    }
+    send(conn, { t: 'welcome', seat: i, code: code });
+    broadcast(); saveHost(); UI.render();
+  }
+  function pickIn(i, conn, d){
+    function ack(ok, err){ send(conn, { t: 'ack', nonce: d.nonce, ok: ok, err: err || null }); }
+    if (typeof d.nonce !== 'string' || !d.nonce || d.nonce.length > 40) return ack(false, 'ข้อมูลไม่ถูกต้อง');
+    var p = lobby.players[i];
+    if (p.nonces.indexOf(d.nonce) >= 0) return ack(false, 'ส่งซ้ำ ระบบไม่นับ');
+    p.nonces.push(d.nonce); if (p.nonces.length > 60) p.nonces.shift();
+    var s = S.state; if (!s) return ack(false, 'ยังไม่ได้เริ่มเกม');
+    if (d.gameId !== s.gameId || d.roundId !== s.roundId) return ack(false, 'เป็นการเลือกของรอบเก่า');
+    if (s.locked[i]) return ack(false, 'คุณครอบฝาโดมรอบนี้ไปแล้ว');
+    var selc = { red: d.red, blue: d.blue }, e = Rules.validate(s, i, selc); if (e) return ack(false, e);
+    picks[i] = { red: selc.red, blue: selc.blue }; s.locked[i] = true; ack(true); afterLock();
+  }
+  function hostPick(selc){
+    var s = S.state; if (!s) return;
+    if (s.locked[0]) { UI.toast('คุณครอบฝาโดมไปแล้ว'); return; }
+    var e = Rules.validate(s, 0, selc); if (e) { UI.toast(e, 'err'); return; }
+    picks[0] = { red: selc.red, blue: selc.blue }; S.myPick = picks[0]; s.locked[0] = true; Sound.play('lock'); afterLock();
+  }
+  function afterLock(){
+    var s = S.state;
+    if (s && s.phase === 'select' && s.locked.every(Boolean)) {
+      var all = s.players.map(function(p, i){ return picks[i]; });
+      try { S.state = Rules.resolve(s, all); picks = []; S.myPick = null; }
+      catch (e) { s.locked = s.players.map(function(){ return false; }); picks = []; S.myPick = null; UI.toast('รีเซ็ตรอบ: ' + e.message, 'err'); }
+    }
+    saveHost(); broadcast(); UI.render();
+  }
+  function hostDrop(conn){
+    if (!lobby) return; var i = seatOf(conn); if (i < 0) return;
+    var p = lobby.players[i]; p.conn = null; p.connected = false;
+    if (!S.state) lobby.players.splice(i, 1);
+    UI.toast('เชฟ ' + p.name + ' ขาดการเชื่อมต่อ' + (S.state ? ' (เก็บที่นั่งไว้ให้)' : ''));
+    broadcast(); saveHost(); UI.render();
+  }
+  function hostBeat(){
+    if (!lobby) return; var now = Date.now();
+    lobby.players.slice().forEach(function(p){
+      if (p.isHost || !p.conn) return;
+      if (now - p.lastSeen > 16000) { var c = p.conn; hostDrop(c); try { c.close(); } catch (e) {} }
+      else send(p.conn, { t: 'ping' });
+    });
+  }
+  function broadcast(){
+    if (role !== 'host' || !lobby) return; var L = pubLobby();
+    lobby.players.forEach(function(p, i){
+      if (p.isHost || !p.conn || !p.connected) return;
+      send(p.conn, { t: 'state', lobby: L, state: S.state, seat: i, myPick: (S.state && S.state.locked[i] && picks[i]) ? picks[i] : null });
+    });
+  }
+  function startGame(){
+    if (role !== 'host' || S.state || !lobby) return;
+    lobby.players = lobby.players.filter(function(p){ return p.connected; });
+    if (lobby.players.length < 2) { UI.toast('ต้องมีเชฟเชื่อมต่ออย่างน้อย 2 คน', 'err'); UI.render(); return; }
+    S.state = Rules.createGame({ mode: 'build', players: lobby.players.map(function(p){ return { name: p.name }; }), rules: lobby.rules });
+    picks = []; S.myPick = null; UI.baseline(); UI.enterGame(); broadcast(); saveHost();
+  }
+  function newGame(mode){
+    if (role !== 'host' || !S.state) return; var old = S.state, carry = null;
+    if (mode === 'extinguish') carry = { red: old.players.reduce(function(a, p){ return a + p.usedRed; }, 0) + ((old.carry && old.carry.red) || 0), blue: old.players.reduce(function(a, p){ return a + p.usedBlue; }, 0) + ((old.carry && old.carry.blue) || 0) };
+    UI.abortReveal(); picks = []; S.myPick = null;
+    S.state = Rules.createGame({ mode: mode, players: old.players.map(function(p){ return { name: p.name }; }), rules: old.rules, carry: carry });
+    UI.baseline(); UI.enterGame(); broadcast(); saveHost();
+  }
+  function setRules(r){ if (role !== 'host' || S.state || !lobby) return; lobby.rules = Rules.norm(r); broadcast(); saveHost(); UI.render(); }
+  function hostSeatOnline(i){ return !!(lobby && lobby.players[i] && lobby.players[i].connected); }
+  function join(name, c){
+    return loadPeer().then(function(){
+      teardown(); var my = sess; role = 'client'; code = c; myName = name;
+      var cs = Store.get('clientSave', null);
+      myToken = (cs && cs.code === c && typeof cs.token === 'string') ? cs.token : randId(12);
+      Store.set('clientSave', { code: c, name: name, token: myToken });
+      S.kind = 'client'; S.code = c; S.state = null; S.lobby = null; S.mySeat = 0;
+      return openPeer(null).then(function(p){
+        if (my !== sess) { try { p.destroy(); } catch (e) {} throw new Error('ยกเลิกแล้ว'); }
+        peer = p; wireClientPeer(my);
+        return connectHost(my);
+      }).then(function(){
+        lastHostMsg = Date.now();
+        hb = setInterval(function(){ if (my === sess) clientBeat(my); }, 4000);
+        if (!S.state && UI.current() !== 'lobby') UI.enterLobby();
+      });
+    });
+  }
+  function wireClientPeer(my){
+    peer.on('disconnected', function(){ if (my !== sess || !peer || peer.destroyed) return; setTimeout(function(){ try { if (my === sess && peer && !peer.destroyed && peer.disconnected) peer.reconnect(); } catch (e) {} }, 1500); });
+    peer.on('error', function(){});
+  }
+  function connectHost(my){
+    return new Promise(function(res, rej){
+      if (!peer || peer.destroyed) { rej(new Error('ยังไม่ได้เชื่อมต่อเซิร์ฟเวอร์')); return; }
+      var done = false, conn;
+      function pe(e){ if (e && e.type === 'peer-unavailable') fin(new Error('ไม่พบครัวรหัส ' + code + ' กรุณาตรวจรหัสอีกครั้ง')); }
+      function fin(err){
+        if (done) return; done = true; clearTimeout(t); try { if (peer) peer.off('error', pe); } catch (e) {}
+        if (err) { try { if (conn) conn.close(); } catch (e) {} rej(err); } else res();
+      }
+      var t = setTimeout(function(){ fin(new Error('ติดต่อครัว ' + code + ' ไม่ได้ (หมดเวลา) หัวหน้าเชฟอาจออฟไลน์ หรือเครือข่ายบล็อก P2P')); }, 14000);
+      peer.on('error', pe);
+      try { conn = peer.connect(PREFIX + code, { reliable: true, serialization: 'json' }); } catch (e) { fin(e); return; }
+      if (!conn) { fin(new Error('เปิดการเชื่อมต่อไม่ได้')); return; }
+      conn.on('open', function(){ send(conn, { t: 'hello', proto: PROTO, name: myName, token: myToken }); });
+      conn.on('data', function(d){
+        if (my !== sess) return;
+        if (d && d.t === 'reject') { fin(new Error(String(d.msg || 'หัวหน้าเชฟปฏิเสธ'))); return; }
+        if (d && d.t === 'welcome' && !done) { hostConn = conn; hostLost = false; fin(null); }
+        try { clientMsg(conn, d); } catch (e) { showError(e); }
+      });
+      conn.on('close', function(){ if (!done) fin(new Error('หัวหน้าเชฟปิดการเชื่อมต่อ')); else if (my === sess && conn === hostConn) onHostLost(my); });
+      conn.on('error', function(){});
+    });
+  }
+  function clientMsg(conn, d){
+    if (conn !== hostConn || !d || typeof d !== 'object') return;
+    lastHostMsg = Date.now();
+    if (d.t === 'welcome') { if (Number.isInteger(d.seat)) S.mySeat = d.seat; return; }
+    if (d.t === 'ping') { send(conn, { t: 'pong' }); return; }
+    if (d.t === 'ack') { var f = pending.get(d.nonce); if (f) { pending.delete(d.nonce); f(d); } return; }
+    if (d.t === 'state') { onState(d); return; }
+    if (d.t === 'closed') { UI.toast('หัวหน้าเชฟปิดครัวแล้ว'); App.forceMenu(); }
+  }
+  function onState(d){
+    S.lobby = d.lobby && Array.isArray(d.lobby.players) ? d.lobby : { players: [], rules: {} };
+    if (Number.isInteger(d.seat)) S.mySeat = d.seat;
+    var st = d.state && Rules.sanityCheck(d.state) ? d.state : null;
+    S.state = st;
+    S.myPick = d.myPick && Number.isInteger(d.myPick.red) && Number.isInteger(d.myPick.blue) ? { red: d.myPick.red, blue: d.myPick.blue } : null;
+    if (st) { if (UI.current() !== 'game') { UI.baseline(); UI.enterGame(); } else UI.render(); }
+    else { if (UI.current() !== 'lobby') UI.enterLobby(); else UI.render(); }
+  }
+  function clientBeat(my){ if (hostConn && Date.now() - lastHostMsg > 16000) { var c = hostConn; hostConn = null; try { c.close(); } catch (e) {} onHostLost(my); } }
+  function onHostLost(my){
+    if (my !== sess || retryT) return;
+    hostConn = null; hostLost = true; retries = 0;
+    UI.netBar('ขาดการเชื่อมต่อกับหัวหน้าเชฟ กำลังต่อเข้าครัว ' + code + ' ใหม่…', true); UI.render();
+    retryT = setTimeout(function(){ retry(my); }, 2000);
+  }
+  function retry(my){
+    retryT = null; if (my !== sess || role !== 'client') return; retries++;
+    var stepP = Promise.resolve();
+    if (!peer || peer.destroyed) stepP = openPeer(null).then(function(p){ if (my !== sess) { try { p.destroy(); } catch (e) {} throw new Error('x'); } peer = p; wireClientPeer(my); });
+    else if (peer.disconnected) { try { peer.reconnect(); } catch (e) {} stepP = sleep(1500); }
+    stepP.then(function(){ return connectHost(my); }).then(function(){
+      if (my !== sess) return;
+      hostLost = false; lastHostMsg = Date.now(); UI.netBar(null); UI.toast('กลับเข้าสู่ครัวเรียบร้อยแล้ว'); UI.render();
+    }, function(){
+      if (my !== sess) return;
+      if (retries >= 30) { UI.netBar('ติดต่อหัวหน้าเชฟไม่ได้ หากหัวหน้าเชฟเปิดครัวเดิมอีกครั้ง ให้เข้าใหม่ด้วยรหัสและชื่อเดิม', true); return; }
+      UI.netBar('ติดต่อหัวหน้าเชฟไม่ได้ กำลังลองใหม่ (' + retries + '/30)…', true);
+      retryT = setTimeout(function(){ retry(my); }, 4000);
+    });
+  }
+  function clientPick(selc){
+    var s = S.state; if (!s) return;
+    if (!hostConn || hostLost) { UI.toast('ตอนนี้ไม่ได้เชื่อมต่อกับหัวหน้าเชฟ', 'err'); return; }
+    var e = Rules.validate(s, S.mySeat, selc); if (e) { UI.toast(e, 'err'); return; }
+    if (S.locking) return;
+    var nonce = randId(12), pk = { red: selc.red, blue: selc.blue };
+    S.locking = true; Sound.play('lock'); UI.render();
+    var t = setTimeout(function(){ if (pending.has(nonce)) { pending.delete(nonce); S.locking = false; UI.toast('หัวหน้าเชฟไม่ตอบรับ ลองใหม่อีกครั้ง', 'err'); UI.render(); } }, 8000);
+    pending.set(nonce, function(a){ clearTimeout(t); S.locking = false; if (!a.ok) UI.toast(a.err || 'ถูกปฏิเสธ', 'err'); else S.myPick = pk; UI.render(); });
+    send(hostConn, { t: 'pick', gameId: s.gameId, roundId: s.roundId, nonce: nonce, red: pk.red, blue: pk.blue });
+  }
+  function leave(){
+    if (role === 'host' && lobby) { lobby.players.forEach(function(p){ if (p.conn) send(p.conn, { t: 'closed' }); }); Store.del('hostSave'); }
+    else if (role === 'client' && hostConn) send(hostConn, { t: 'leave' });
+    teardown();
+  }
+  function lobbyInfo(){
+    if (role === 'host' && lobby) { var L = pubLobby(); return { code: code, players: L.players, me: 0, isHost: true, rules: L.rules }; }
+    var M = S.lobby || { players: [], rules: {} };
+    return { code: code, players: M.players || [], me: S.mySeat, isHost: false, rules: M.rules || {} };
+  }
+  function shareLink(){ if (!code) return ''; var base = String(location.href).split('#')[0].split('?')[0]; return base + '?room=' + code; }
+  return { host: host, join: join, leave: leave, teardown: teardown, startGame: startGame, newGame: newGame, setRules: setRules, hostPick: hostPick, clientPick: clientPick, lobbyInfo: lobbyInfo, shareLink: shareLink, friendly: friendly, hostSeatOnline: hostSeatOnline, isHostLost: function(){ return hostLost; } };
+})();
+
+/* ================= APP CONTROLLER ================= */
+var App = (function(){
+  function statusOf(i){
+    if (S.kind === 'local') return i === 0 ? 'local' : 'bot';
+    if (S.kind === 'host') return i === 0 ? 'host' : (Net.hostSeatOnline(i) ? 'online' : 'offline');
+    var L = S.lobby, p = L && L.players && L.players[i];
+    if (!p) return 'offline';
+    if (Net.isHostLost() && (p.isHost || i === S.mySeat)) return 'reconnecting';
+    if (p.isHost) return 'host';
+    return p.connected ? 'online' : 'offline';
+  }
+  function ctx(){
+    if (!S.state) return null;
+    return { kind: S.kind, state: S.state, mySeat: S.mySeat, code: S.kind === 'local' ? null : S.code, isHost: S.kind === 'local' || S.kind === 'host',
+      myPick: S.state.locked[S.mySeat] ? S.myPick : null, locking: S.locking, status: statusOf };
+  }
+  function saveSolo(){ if (S.kind !== 'local' || !S.state) return; var c = clone(S.state); c.locked = c.players.map(function(){ return false; }); Store.set('solo', { state: c, diff: S.diff }); }
+  function startBots(){
+    var s = S.state; if (S.kind !== 'local' || !s || s.phase !== 'select') return;
+    var key = s.gameId + ':' + s.roundId; if (S.botKey === key) return; S.botKey = key; clearBots(); S.botPicks = [];
+    var snap = clone(s);
+    s.players.forEach(function(p, i){
+      if (!p.bot) return;
+      var P = null; AI.PERSONAS.forEach(function(x){ if (x.key === p.persona) P = x; });
+      var pick = null; try { pick = AI.decide(snap, i, P, S.diff); } catch (e) {}
+      if (!pick || Rules.validate(s, i, pick)) { var o = Rules.legalOptions(p, s.rules); pick = o[Math.floor(Math.random() * o.length)] || { red: 0, blue: 0 }; }
+      S.botPicks[i] = pick;
+      var delay = 600 + Math.random() * 1450 + (S.diff === 'hard' ? 400 : 0) + i * 120;
+      S.botTimers.push(setTimeout(function(){
+        if (S.state !== s || s.phase !== 'select') return;
+        s.locked[i] = true; Sound.play('wood'); UI.render(); tryResolveLocal();
+      }, delay));
+    });
+  }
+  function tryResolveLocal(){
+    var s = S.state; if (S.kind !== 'local' || !s || s.phase !== 'select' || !s.locked.every(Boolean)) return;
+    var picks = s.players.map(function(p, i){ return i === S.mySeat ? S.humanPick : S.botPicks[i]; });
+    if (picks.some(function(x){ return !x; })) return;
+    try { S.state = Rules.resolve(s, picks); }
+    catch (e) { UI.toast('รีเซ็ตรอบ: ' + e.message, 'err'); s.locked = s.players.map(function(){ return false; }); S.botKey = ''; S.humanPick = null; S.myPick = null; UI.render(); startBots(); return; }
+    S.humanPick = null; S.myPick = null; S.botPicks = []; saveSolo(); UI.render();
+  }
+  function newLocal(mode, players, rules, carry){
+    UI.abortReveal(); clearBots();
+    S.state = Rules.createGame({ mode: mode, players: players, rules: rules, carry: carry });
+    S.botKey = ''; S.humanPick = null; S.myPick = null; S.botPicks = [];
+    UI.baseline(); UI.enterGame(); saveSolo(); startBots();
+  }
+  function startSolo(o){
+    resetS(); S.kind = 'local'; S.mySeat = 0; S.diff = o.diff || 'normal';
+    var players = [{ name: o.name || 'เชฟของคุณ' }];
+    for (var i = 1; i < o.count; i++) { var P = AI.PERSONAS[(i - 1) % AI.PERSONAS.length]; players.push({ name: P.name, bot: true, persona: P.key }); }
+    newLocal('build', players, { allowZero: o.allowZero, noCap: o.noCap, scale: o.scale }, null);
+  }
+  function continueSolo(){
+    var sv = Store.get('solo', null);
+    if (!sv || !Rules.sanityCheck(sv.state) || sv.state.phase !== 'select') { UI.toast('ไม่พบครัวที่บันทึกไว้'); UI.show('menu'); return; }
+    resetS(); S.kind = 'local'; S.mySeat = 0; S.diff = ['easy', 'normal', 'hard'].indexOf(sv.diff) >= 0 ? sv.diff : 'normal';
+    S.state = sv.state; S.state.locked = S.state.players.map(function(){ return false; });
+    UI.baseline(); UI.enterGame(); startBots();
+  }
+  function localPlayers(){ return S.state.players.map(function(p){ return { name: p.name, bot: p.bot, persona: p.persona }; }); }
+  function playAgain(){
+    if (S.kind === 'local' && S.state) newLocal('build', localPlayers(), S.state.rules, null);
+    else if (S.kind === 'host') Net.newGame('build');
+  }
+  function startExtinguish(){
+    if (S.kind === 'local' && S.state) {
+      var o = S.state;
+      var carry = { red: o.players.reduce(function(a, p){ return a + p.usedRed; }, 0) + ((o.carry && o.carry.red) || 0), blue: o.players.reduce(function(a, p){ return a + p.usedBlue; }, 0) + ((o.carry && o.carry.blue) || 0) };
+      newLocal('extinguish', localPlayers(), o.rules, carry);
+    } else if (S.kind === 'host') Net.newGame('extinguish');
+  }
+  function submit(selc){
+    var s = S.state; if (!s || s.phase !== 'select') return;
+    if (S.kind === 'local') {
+      if (s.locked[S.mySeat]) return;
+      var e = Rules.validate(s, S.mySeat, selc); if (e) { UI.toast(e, 'err'); return; }
+      S.humanPick = { red: selc.red, blue: selc.blue }; S.myPick = S.humanPick; s.locked[S.mySeat] = true;
+      Sound.play('lock'); UI.render(); setTimeout(tryResolveLocal, 350);
+    } else if (S.kind === 'host') Net.hostPick(selc);
+    else if (S.kind === 'client') Net.clientPick(selc);
+  }
+  function afterReveal(){ if (S.kind === 'local') { saveSolo(); startBots(); } }
+  function exit(){
+    if (S.kind === 'local') { saveSolo(); clearBots(); UI.abortReveal(); resetS(); UI.show('menu'); return Promise.resolve(); }
+    if (S.kind === 'host' || S.kind === 'client') {
+      return UI.confirmBox(S.kind === 'host' ? 'ปิดครัวสำหรับทุกคน? เชฟคนอื่นจะเล่นต่อไม่ได้ถ้าไม่มีหัวหน้าเชฟ' : 'ออกจากครัว? คุณสามารถกลับเข้าที่นั่งเดิมภายหลังด้วยรหัสและชื่อเดิม', 'ออกจากครัว').then(function(ok){
+        if (!ok) return; UI.abortReveal(); Net.leave(); resetS(); UI.show('menu');
+      });
+    }
+    UI.abortReveal(); Net.teardown(); resetS(); UI.show('menu'); return Promise.resolve();
+  }
+  function forceMenu(){ UI.abortReveal(); Net.teardown(); resetS(); UI.show('menu'); }
+  function hostRoom(name, resume){ return Net.host(name, resume).catch(function(e){ Net.teardown(); resetS(); throw e; }); }
+  function joinRoom(name, code){ return Net.join(name, code).catch(function(e){ Net.teardown(); resetS(); throw e; }); }
+  return { ctx: ctx, submit: submit, afterReveal: afterReveal, startSolo: startSolo, continueSolo: continueSolo, playAgain: playAgain, startExtinguish: startExtinguish, exit: exit, forceMenu: forceMenu, hostRoom: hostRoom, joinRoom: joinRoom };
+})();
+
+/* ================= BOOT ================= */
+function boot(){ try { UI.init(); } catch (e) { showError(e); } }
+if (document.readyState === 'loading') document.addEventListener('DOMContentLoaded', boot); else boot();
+function persistSolo(){ try { if (S.kind === 'local' && S.state) { var c = clone(S.state); c.locked = c.players.map(function(){ return false; }); Store.set('solo', { state: c, diff: S.diff }); } } catch (e) {} }
+window.addEventListener('pagehide', persistSolo);
+window.addEventListener('beforeunload', persistSolo);
+})();
+</script>
+</body>
+</html>
